@@ -14,16 +14,16 @@ import { Pharma } from '../admin/dashboard/pharma/pharma';
 import { Manufacture } from '../admin/dashboard/manufacturer/manufacture';
 import { Transporter } from '../admin/dashboard/transporter/transporter';
 import { Transection } from '../admin/medicine/medicine-list/transection';
-
+import { environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  uri = 'http://localhost:8080';
-  apiuri = "http://localhost:10000";
-  batchUrl = "http://localhost:8008";
+   uri = environment.uri;
+  apiuri = environment.apiuri;
+  batchUrl = environment.batchUrl;
   usereamil;
   logout: string;
   publickey:string;
