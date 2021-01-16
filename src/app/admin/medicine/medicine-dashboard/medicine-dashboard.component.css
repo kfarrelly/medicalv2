@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+    background-color: white;
+  }
+
+ 
+#heading{
+    background-color: rgb(18, 50, 190); 
+    color:white;
+}
+.pd{
+  background: navy;
+}
+
+a{
+  color: #3d6d79;
+}
+
+td {
+    width: 100%;
+    border-bottom-color: #b5b3b3;
+    border-color: #454d55 !important;
+    color: #13343c;
+}
+
+ 
+th{
+  border: none !important;
+  background-color: #3d6d79; 
+  color:White;
+  font-family: Muli,Helvetica Neue,Arial,sans-serif;
+  font-weight: 600;
+}

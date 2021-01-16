@@ -1,0 +1,29 @@
+.container{
+    margin-top:50px;
+}
+table{
+    width: 100%;
+    background-color: white;
+}
+
+td {
+    /* width: 100%; */
+    /* background: white; */
+    border-bottom-color: #b5b3b3;
+    border-color: #454d55 !important;
+    color: #13343c;
+}
+
+ 
+th{
+  border: none !important;
+  background-color: #2a6371; 
+  color:White;
+  font-family: Muli,Helvetica Neue,Arial,sans-serif;
+  font-weight: 600;
+}
+
+button:hover{
+    border: 1.5px solid #454d55;
+    
+}

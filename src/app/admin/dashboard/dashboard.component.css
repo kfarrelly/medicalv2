@@ -1,0 +1,119 @@
+.navbar {
+    background-color: #4a858b !important;
+    /* background-image: url(../../../assets/overview-seafood-bg.jpg); */
+    /* background-size: cover; */
+    color: white;
+}
+.name{
+    font-weight: 800;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navBarSec{
+    padding-top: 3vh;
+    padding-left: 35%;
+}
+
+/* body{
+    background-color: rgb(206, 223, 255) !important;
+} */
+
+.notiBadge{
+    background-color: red;
+    color: white;
+    border-radius: 100%;
+    font-size: 70%;
+    padding: 2px 3px 2px 3px;
+    bottom: 34px;
+
+}
+
+/* .nav-item:hover{
+    border-bottom: solid;
+    border-color: #f4a018;
+} */
+
+a{
+    height: 40px;
+}
+
+a:hover{
+    border-bottom: solid;
+    border-color: #f4a018;
+}
+
+.logoutBtn{
+    background-color: #F4A018;
+    color: white;
+    height: 35px;
+    width: 80px;
+    margin: 5px;
+}
+
+button:hover{
+    border: 1.5px solid white;
+}
+
+
+.navItemNew{
+    color: white !important;
+    font-weight: 500;
+    font-family: system-ui;
+    margin-left: 5px;
+
+}
+
+
+.profileForm{
+    margin-top: 0px !important;
+    margin-left: 2vh;
+}
+
+
+.navSelectItem{
+    color: white ;
+    font-weight: 500;
+    font-family: system-ui;
+    background: rgba(0,0,0, 0.0);
+    border: none;
+    padding: 0%;
+    width: 70px;
+}
+
+
+option{
+    background-color:#17586a ;
+    font-size: 12px;
+}
+
+select:hover{
+    border:  solid;
+    border-color: #f4a018;
+}
+
+
+
+
+
+
+/* .navbar-dark .navbar-nav .nav-link.bellicon{
+ font-size: 0px;
+    background-image: url(notification-icon.png);
+    background-repeat: no-repeat;
+    background-size: 29px;
+    padding: 18px 25px;
+    background-position: center;
+    position: relative;
+}
+.navbar-dark .navbar-nav .nav-link.bellicon span {
+    position: absolute;
+    font-size: 10px;
+    background-color: #930e07;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 19px;
+    border-radius: 100%;
+    border: 1px solid #fff;
+    top: 0;
+} */
