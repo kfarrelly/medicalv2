@@ -30,7 +30,8 @@ apiURL: any = this.http.uri;
 
 
   ngOnInit() {
-  
+    console.log('profile init');
+    
     this.token =localStorage.getItem("id_token");      
      this.myprofile(this.token);
   }

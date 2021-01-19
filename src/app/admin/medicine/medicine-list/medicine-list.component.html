@@ -16,6 +16,14 @@
         </tr>
       </thead>
       <tbody>
+        <ng-container *ngIf=" list && list.length===0">
+          <tr>
+            <td colspan="7"> 
+              Data not found
+            </td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf=" list && list.length > 0">
         <tr *ngFor="let x of list; let i = index">
 		      <ng-container *ngIf="((x.parent==0 || !x.parent) && x.serial)">
             <td><a [routerLink]="['/medicine/details',x.serial]" style="color:white">{{x.serial}}</a></td>
@@ -28,6 +36,7 @@
               data-target="#exampleModalCenter" *ngIf="myrole>1">Send to Wholesaler</button></td>
 		      </ng-container>
         </tr>
+        </ng-container>
       </tbody>
       <tfoot >
         <tr>

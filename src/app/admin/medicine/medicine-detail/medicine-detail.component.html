@@ -3,7 +3,7 @@
 <div class="container">
 <div class="row" *ngFor="let distdata  of list"> 
   <div class="col">
-    <div class="card" style="padding:18px;">
+    <div class="card custom-card" style="padding:18px;">
       <p style="text-align:center"><b>Medicine Id: </b> {{list[0].MedicineId}}</p>
       <div class="row">
 	  <div class="col" ><b>Product Name: </b> {{distdata.serial}}</div>
@@ -107,15 +107,15 @@
                           <div class="col"><b>Manufacturing License: </b> {{distdata.amanufacturinglicense}}</div>
                           <div class="col"><b> </b></div>
                           </div><br>
-    <div class="row">
+    <div class="row  mb-3">
       <div class="col"  style="margin-left:25%; text-align: left">
         <b style="color:blue;text-align: center">Medicine Owner </b>
-        <span id="styleStatus">{{distdata.status}}</span>
+        <div id="styleStatus">{{distdata.status}}</div>
       </div>
     </div>
 	  <div class="row">
 		<div class="col" style="text-align:center;">
-    <button class="form-control btn-defult" *ngIf="myrole>1" (click)="editMedicine(distdata._id)" data-toggle="modal" data-target="#exampleModalCenter"> <b>Update Status</b> </button>
+    <button class="form-control btn-defult m-auto" *ngIf="myrole>1" (click)="editMedicine(distdata._id)" data-toggle="modal" data-target="#exampleModalCenter"> <b>Update Status</b> </button>
     
     
 		</div>

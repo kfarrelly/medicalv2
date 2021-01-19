@@ -5,6 +5,7 @@ import { QrCodeReader } from 'src/app/qr-code-reader.service';
 import { Subscription } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-medicine-create',
@@ -49,7 +50,14 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
   Location: string;
   Weight: string;
   ExpiryDate: string;
-
+  basicLogisticInformation: FormGroup
+  additionalLogisticInformation: FormGroup
+  packagingInformation: FormGroup
+  requirementInformation: FormGroup
+  basicSubmit = false;
+  additionalSubmit = false;
+  packagingSubmit = false;
+  requirementSubmit = false;
   constructor(private httpuser: AuthService, private qrReader: QrCodeReader, private http: HttpClient, private formBuilder: FormBuilder) {
     console.log('AppComponent running');
     this.qrdata = ' ';
@@ -70,15 +78,12 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
     this.firstname = localStorage.getItem("firstName");
     this.lastname = localStorage.getItem("lastName");
     console.log("User name", this.firstname, this.lastname);
-    //this.medicineid = '92516006ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b5';
-    this.registerForm = this.formBuilder.group({
+    this.basicLogisticInformation = this.formBuilder.group({
       SerialNumber: ['', Validators.required],
       Medicine: ['', Validators.required],
       MedicineCurrentTempurature: ['', Validators.required],
       Location: ['', Validators.required],
       Weight: ['', Validators.required],
-      
-
       customern: ['', Validators.required],
       customername: ['', Validators.required],
       shipton: ['', Validators.required],
@@ -89,34 +94,88 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
       purchaseorderendcustomer: ['', Validators.required],
       shippedquantity: ['', Validators.required],
       unit: ['', Validators.required],
+    })
+
+    this.additionalLogisticInformation = this.formBuilder.group({
       aproductname: ['', Validators.required],
       dosageform: ['', Validators.required],
       packagetype: ['', Validators.required],
       packagesize: [''],
       globelmaterialno: ['', Validators.required],
-      plocalmaterialno:[''],
       batchn: ['', Validators.required],
       dateofmanufecture: ['', Validators.required],
       releasedate: ['', Validators.required],
       expirydate: ['', Validators.required],
       productionqty: ['', Validators.required],
+    });
+
+    this.packagingInformation = this.formBuilder.group({
       pproductname: ['', Validators.required],
       pglobelmaterialno: ['', Validators.required],
+      plocalmaterialno: [''],
       apackagingsite: ['', Validators.required],
       manufacturinglicense: ['', Validators.required],
       gmvcertificateno: ['', Validators.required],
+    });
+
+    this.requirementInformation = this.formBuilder.group({
       certificateno: ['', Validators.required],
       productn: ['', Validators.required],
       globalmaterialn: ['', Validators.required],
       localmaterialn: ['', Validators.required],
-       
       areleasedate: ['', Validators.required],
       abatchn: ['', Validators.required],
       amanufacturingsite: ['', Validators.required],
       amanufacturinglicense: ['', Validators.required],
       ManufacturedDate: ['', Validators.required],
-      ExpiryDate: [''],
-      localmaterialno: ['', Validators.required],
+    })
+    //this.medicineid = '92516006ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b5';
+    this.registerForm = this.formBuilder.group({
+      // SerialNumber: ['', Validators.required],
+      // Medicine: ['', Validators.required],
+      // MedicineCurrentTempurature: ['', Validators.required],
+      // Location: ['', Validators.required],
+      // Weight: ['', Validators.required],
+
+
+      // customern: ['', Validators.required],
+      // customername: ['', Validators.required],
+      // shipton: ['', Validators.required],
+      // countrycode: ['', Validators.required],
+      // shiptoparty: ['', Validators.required],
+      // pharmadeliveryno: ['', Validators.required],
+      // salesorderendcustomer: ['', Validators.required],
+      // purchaseorderendcustomer: ['', Validators.required],
+      // shippedquantity: ['', Validators.required],
+      // unit: ['', Validators.required],
+      // aproductname: ['', Validators.required],
+      // dosageform: ['', Validators.required],
+      // packagetype: ['', Validators.required],
+      // packagesize: [''],
+      // globelmaterialno: ['', Validators.required],
+      // plocalmaterialno:[''],
+      // batchn: ['', Validators.required],
+      // dateofmanufecture: ['', Validators.required],
+      // releasedate: ['', Validators.required],
+      // expirydate: ['', Validators.required],
+      // productionqty: ['', Validators.required],
+      // pproductname: ['', Validators.required],
+      // pglobelmaterialno: ['', Validators.required],
+      // apackagingsite: ['', Validators.required],
+      // manufacturinglicense: ['', Validators.required],
+      // gmvcertificateno: ['', Validators.required],
+      // certificateno: ['', Validators.required],
+      // productn: ['', Validators.required],
+      // globalmaterialn: ['', Validators.required],
+      // localmaterialn: ['', Validators.required],
+
+      // areleasedate: ['', Validators.required],
+      // abatchn: ['', Validators.required],
+      // amanufacturingsite: ['', Validators.required],
+      // amanufacturinglicense: ['', Validators.required],
+      // ManufacturedDate: ['', Validators.required],
+      // ExpiryDate: [''],
+      // localmaterialno: ['', Validators.required],
       // AuthorizeReporters: ['', Validators.required],
       // Selectfield: ['', Validators.required],
 
@@ -187,8 +246,8 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
 
-  onSubmit(serialNo: string,medicine : string,location : string,MedicineCurrentTempurature: string,weight: string,customern : string,customername : string,shipton : string,countrycode: string,shiptoparty: string,pharmadeliveryno: string,salesorderendcustomer: string,purchaseorderendcustomer: string,shippedquantity : string,unit : string,aproductname : string,dosageform : string,packagetype : string,packagesize: string,globelmaterialno: string,batchn: string,dateofmanufecture : string,releasedate : string,expirydate: string,productionqty : string,pproductname : string,pglobelmaterialno : string,plocalmaterialno: string,apackagingsite : string,manufacturinglicense : string,gmvcertificateno: string,certificateno : string,productn : string,globalmaterialn : string,localmaterialn : string,areleasedate : string,abatchn : string,amanufacturingsite : string,amanufacturinglicense : string,mdate: string, edate: string,
-    localmaterialno: string,barcode: string,
+  onSubmit(serialNo: string, medicine: string, location: string, MedicineCurrentTempurature: string, weight: string, customern: string, customername: string, shipton: string, countrycode: string, shiptoparty: string, pharmadeliveryno: string, salesorderendcustomer: string, purchaseorderendcustomer: string, shippedquantity: string, unit: string, aproductname: string, dosageform: string, packagetype: string, packagesize: string, globelmaterialno: string, batchn: string, dateofmanufecture: string, releasedate: string, expirydate: string, productionqty: string, pproductname: string, pglobelmaterialno: string, plocalmaterialno: string, apackagingsite: string, manufacturinglicense: string, gmvcertificateno: string, certificateno: string, productn: string, globalmaterialn: string, localmaterialn: string, areleasedate: string, abatchn: string, amanufacturingsite: string, amanufacturinglicense: string, mdate: string, edate: string,
+    localmaterialno: string, barcode: string,
   ) {
 
     if (serialNo == '' || typeof serialNo == 'undefined') {
@@ -360,7 +419,7 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
            alert("wrong");
            return;
          } */
-   
+
     //CREATE MEDICINE CODE
     this.medicineStatus = this.firstname + " " + this.lastname + " " + "[Manufacturer]";
     console.log(this.medicineStatus);
@@ -370,7 +429,7 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
     console.log("Private Key", this.privateKey);
 
 
-    this.createmedicne = new Medicine(serialNo,medicine,MedicineCurrentTempurature,location,weight,'',this.medicineStatus,this.userId,customern,customername,shipton,countrycode,shiptoparty,pharmadeliveryno,salesorderendcustomer,purchaseorderendcustomer,shippedquantity,unit,aproductname,dosageform,packagetype,packagesize,globelmaterialno,plocalmaterialno,batchn,dateofmanufecture,releasedate,expirydate,productionqty,pproductname,pglobelmaterialno,apackagingsite,manufacturinglicense,gmvcertificateno,certificateno,productn,globalmaterialn,localmaterialn,areleasedate,abatchn,amanufacturingsite,amanufacturinglicense,mdate,edate,localmaterialno,barcode
+    this.createmedicne = new Medicine(serialNo, medicine, MedicineCurrentTempurature, location, weight, '', this.medicineStatus, this.userId, customern, customername, shipton, countrycode, shiptoparty, pharmadeliveryno, salesorderendcustomer, purchaseorderendcustomer, shippedquantity, unit, aproductname, dosageform, packagetype, packagesize, globelmaterialno, plocalmaterialno, batchn, dateofmanufecture, releasedate, expirydate, productionqty, pproductname, pglobelmaterialno, apackagingsite, manufacturinglicense, gmvcertificateno, certificateno, productn, globalmaterialn, localmaterialn, areleasedate, abatchn, amanufacturingsite, amanufacturinglicense, mdate, edate, localmaterialno, barcode
     );
     console.log('createmedicne object => console of data', JSON.stringify(this.createmedicne));
     //blockcahin
@@ -428,7 +487,7 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
           }
         } else {
 
-          that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+          that.http.get(this.httpuser.batchUrl + "/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
             this.blockchain2 = val
             if (that.httpuser.IsJsonString(this.blockchain2.body)) {
               this.status = JSON.parse(this.blockchain2.body);
@@ -454,6 +513,47 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
         // }).catch(function (err) {
         //   console.log(err.message);
       });
+  }
+  // convenience getter for easy access to form fields
+  get basicInfoFormControl() { return this.basicLogisticInformation.controls; }
+
+  onBasicInfoSubmit(stepper: MatStepper) {
+    this.basicSubmit = true
+    if (this.basicLogisticInformation.invalid) {
+      return;
+    }
+    console.log('basic value', this.basicInfoFormControl);
+    stepper.next();
+  }
+  get additionalInfoFormControl() { return this.additionalLogisticInformation.controls; }
+
+  onAdditionalInfoSubmit(stepper: MatStepper) {
+    this.additionalSubmit = true
+    if (this.additionalLogisticInformation.invalid) {
+      return;
+    }
+    console.log('additional value', this.additionalInfoFormControl);
+    stepper.next();
+  }
+
+  get packagingInfoFormControl() { return this.packagingInformation.controls; }
+
+  onPackagingInfoSubmit(stepper: MatStepper) {
+    this.packagingSubmit = true
+    if (this.packagingInformation.invalid) {
+      return;
+    }
+    console.log('packaging value', this.packagingInfoFormControl);
+    stepper.next();
+  }
+  get requirementInfoFormControl() { return this.requirementInformation.controls; }
+
+  onRequirementInfoSubmit(stepper: MatStepper) {
+    this.requirementSubmit = true
+    if (this.requirementInformation.invalid) {
+      return;
+    }
+    console.log('packaging value', this.requirementInfoFormControl);
   }
 }
 

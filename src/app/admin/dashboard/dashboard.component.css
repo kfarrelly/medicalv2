@@ -10,7 +10,9 @@
 }
 
 .navBarSec{
-    padding-top: 3vh;
+    /* padding-top: 3vh; */
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
     padding-left: 35%;
 }
 

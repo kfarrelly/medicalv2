@@ -11,7 +11,7 @@ export class NotificationComponent implements OnInit {
 
   selectedWId: string = '';
   selectedTId: string = '';
-  base; 
+  base;
   call;
   serialvalue: any = " ";
   wlist: any = [];
@@ -19,7 +19,7 @@ export class NotificationComponent implements OnInit {
   wid1: any = '';
   tid1: any = '';
   list: any = [];
-  
+
   blockchain: any = [];
   blockchain2: any = [];
   status: any = [];
@@ -29,23 +29,24 @@ export class NotificationComponent implements OnInit {
   privateKey: any;
   myrole;
   userId;
-  user:any=[]; 
-  
-  
+  user: any = [];
+
+
   @ViewChild('completeModal') completeModal: ElementRef;
   apiURL: any = this.http.uri;
+  loading:boolean;
   constructor(private http: AuthService, private http1: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.notification();
-  
+
     this.mypublickey = localStorage.getItem("publicKey");
 
     this.privateKey = localStorage.getItem("privateKey");
-    this.myrole= localStorage.getItem("role");
+    this.myrole = localStorage.getItem("role");
     this.userId = localStorage.getItem("userId");
     console.log("User Idhhhhhhh", this.userId);
-    
+
     console.log(this.myrole);
   }
 
@@ -64,32 +65,33 @@ export class NotificationComponent implements OnInit {
     this.serialvalue = serialId;
   }
 
- 
+
 
   notification() {
-    this.myrole= localStorage.getItem("role");
-   
-    if(this.myrole == 1){      
-	
-	this.http.getvalidUser().subscribe((data)=>{
-      this.user=data;          
-    });
+    this.myrole = localStorage.getItem("role");
+    this.loading = true;
+    if (this.myrole == 1) {
+      this.loading = false;
+      this.http.getvalidUser().subscribe((data) => {
+        this.user = data;
+      });
       return this.http.getNotification().subscribe((data) => {
         this.list = data;
-        console.log("All Notification",this.list);
+        console.log("All Notification", this.list);
       });
-	  
-	  
 
-    }else{
+
+
+    } else {
+      this.loading = false;
       return this.http.getNotificationUserId().subscribe((data) => {
         console.log(data);
         this.list = data;
-        console.log("user Notification",this.list);
+        console.log("user Notification", this.list);
       });
 
     }
-    
+
   }
 
   deleteNotification(id) {
