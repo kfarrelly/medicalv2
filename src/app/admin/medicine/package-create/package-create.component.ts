@@ -239,90 +239,90 @@ export class PackageCreateComponent implements OnInit, OnDestroy {
     this.createpackage = new Package(this.serialnum, this.level, this.medicines, this.packages, this.location,this.userId);
     console.log('console of data',this.createpackage);
     //blockcahin
-	if(this.level > 0)
-		var inbounds = this.medicines;
-	else
-		var inbounds = this.packages;
+	// if(this.level > 0)
+	// 	var inbounds = this.medicines;
+	// else
+	// 	var inbounds = this.packages;
 	
-    const Metadata = {
+  //   const Metadata = {
 
-      "action": "createPackages", 
-      "payloaddata": {
-        "serialNumber": this.serialnum,
-        "description": this.serialnum+ this.level,
-        "location": {
-          "type": 1,
-          "body": {
-            "address": this.location
-          }
-        },
-        "level": this.level,
-		"inbounds":inbounds
-      },
-      "private": this.privateKey,
-      "public": this.mypublickey
-    };
+  //     "action": "createPackages", 
+  //     "payloaddata": {
+  //       "serialNumber": this.serialnum,
+  //       "description": this.serialnum+ this.level,
+  //       "location": {
+  //         "type": 1,
+  //         "body": {
+  //           "address": this.location
+  //         }
+  //       },
+  //       "level": this.level,
+	// 	"inbounds":inbounds
+  //     },
+  //     "private": this.privateKey,
+  //     "public": this.mypublickey
+  //   };
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     })
+  //   };
 
-    var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
-      (val) => {
-        console.log("POST call successful value returned in body", val);
-        this.blockchain = val;
-        if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
-          JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+  //   var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
+  //     (val) => {
+  //       console.log("POST call successful value returned in body", val);
+  //       this.blockchain = val;
+  //       if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
+  //         JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-          this.status = JSON.parse(this.blockchain.response.body);            
-          this.statusValue = this.status.data[0].status;
-          this.itemId = this.status.data[0].id;
-          if (this.statusValue == 'COMMITTED') {
-        this.base = this.httpuser.createpackage(this.createpackage);
-        this.call = this.base.subscribe((data) => {     
+  //         this.status = JSON.parse(this.blockchain.response.body);            
+  //         this.statusValue = this.status.data[0].status;
+  //         this.itemId = this.status.data[0].id;
+  //         if (this.statusValue == 'COMMITTED') {
+  //       this.base = this.httpuser.createpackage(this.createpackage);
+  //       this.call = this.base.subscribe((data) => {     
 		
-			console.log(JSON.stringify(data));
-          this.packageid = data.PackageId;
-          this.packageserial = data.serial;
-          alert('Request Accepted');
-          let el: HTMLElement = this.completeModal.nativeElement;
-          el.click(); 
-          //this.registerForm.reset();
-        });
-      }
-      else {
-        alert('Request Rejected');
-      }
-    } else {
+	// 		console.log(JSON.stringify(data));
+  //         this.packageid = data.PackageId;
+  //         this.packageserial = data.serial;
+  //         alert('Request Accepted');
+  //         let el: HTMLElement = this.completeModal.nativeElement;
+  //         el.click(); 
+  //         //this.registerForm.reset();
+  //       });
+  //     }
+  //     else {
+  //       alert('Request Rejected');
+  //     }
+  //   } else {
 
-      that.http.get(this.blockchainUrl+"/batch_statuses?"+ this.blockchain.id + "&wait").subscribe((val) => {
-        this.blockchain2 =val
-        if (that.httpuser.IsJsonString(this.blockchain2.body)) {
-          this.status = JSON.parse(this.blockchain2.body);
-          console.log('json value2', this.status.data[0].status);
-          this.statusValue = this.status.data[0].status;
-          this.itemId = this.status.data[0].id;
-          if (this.statusValue == 'COMMITTED') {
-            this.base = this.httpuser.createpackage(this.createpackage);
-            this.call = this.base.subscribe((data) => {
-				console.log("AT = "+ JSON.stringify(data));
-              this.packageid = data.PackageId;
-              this.packageserial = data.serial; 
-               alert('Request Accepted');
-               //this.registerForm.reset();
-            });
-          }
-          else {
-            alert('Request Rejected');
-          }
-        }
-      })
-    }
-  // }).catch(function (err) {
-  //   console.log(err.message);
-  });
+  //     that.http.get(this.blockchainUrl+"/batch_statuses?"+ this.blockchain.id + "&wait").subscribe((val) => {
+  //       this.blockchain2 =val
+  //       if (that.httpuser.IsJsonString(this.blockchain2.body)) {
+  //         this.status = JSON.parse(this.blockchain2.body);
+  //         console.log('json value2', this.status.data[0].status);
+  //         this.statusValue = this.status.data[0].status;
+  //         this.itemId = this.status.data[0].id;
+  //         if (this.statusValue == 'COMMITTED') {
+  //           this.base = this.httpuser.createpackage(this.createpackage);
+  //           this.call = this.base.subscribe((data) => {
+	// 			console.log("AT = "+ JSON.stringify(data));
+  //             this.packageid = data.PackageId;
+  //             this.packageserial = data.serial; 
+  //              alert('Request Accepted');
+  //              //this.registerForm.reset();
+  //           });
+  //         }
+  //         else {
+  //           alert('Request Rejected');
+  //         }
+  //       }
+  //     })
+  //   }
+  // // }).catch(function (err) {
+  // //   console.log(err.message);
+  // });
 }
 }
 

@@ -42,53 +42,54 @@ export class SignupComponent implements OnInit {
     this.auth.signup(data).subscribe((res) => {
       this.keys = res;
       console.log(this.keys);
-      if (this.keys.role == 1) {
-        const Metadata = {
+     //commmeting blockchain api
+      //if (this.keys.role == 1) {
+        // const Metadata = {
 
-          "action": "createAdmin",
-          "payloaddata": {
-            "name": this.keys.firstName + ' ' + this.keys.lastName,
-            "location": {
-              "type": 1,
-              "body": {
-                "address": this.keys.location
-              }
-            },
-            "email": this.keys.email
-          },
-          "private": this.keys.privateKey,
-          "public": this.keys.publicKey
-        }
+        //   "action": "createAdmin",
+        //   "payloaddata": {
+        //     "name": this.keys.firstName + ' ' + this.keys.lastName,
+        //     "location": {
+        //       "type": 1,
+        //       "body": {
+        //         "address": this.keys.location
+        //       }
+        //     },
+        //     "email": this.keys.email
+        //   },
+        //   "private": this.keys.privateKey,
+        //   "public": this.keys.publicKey
+        // }
 
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json'
-          })
-        };
+        // const httpOptions = {
+        //   headers: new HttpHeaders({
+        //     'Content-Type': 'application/json'
+        //   })
+        // };
 
-        var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
-          (val) => {
-            console.log(val);
+        // var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
+        //   (val) => {
+        //     console.log(val);
 
-            this.resvalue = val;
-            this.status = JSON.parse(this.resvalue.response.body);
+        //     this.resvalue = val;
+        //     this.status = JSON.parse(this.resvalue.response.body);
 
-            console.log('json value2', this.status.data[0].status);
+        //     console.log('json value2', this.status.data[0].status);
 
-            this.statusValue = this.status.data[0].status;
-            this.itemId = this.status.data[0].id;
-            this.myid = JSON.stringify(this.keys) + "'transectionId':" + (this.itemId);
+        //     this.statusValue = this.status.data[0].status;
+        //     this.itemId = this.status.data[0].id;
+        //     this.myid = JSON.stringify(this.keys) + "'transectionId':" + (this.itemId);
 
-            this.dyanmicDownloadByHtmlTag({
-              fileName: this.keys.firstName + ' ' + this.keys.lastName,
-              text: this.myid
-            });
+        //     this.dyanmicDownloadByHtmlTag({
+        //       fileName: this.keys.firstName + ' ' + this.keys.lastName,
+        //       text: this.myid
+        //     });
 
-            alert(' User Successfully Registered!!');
-            this.router.navigate(['/login']);
-          });
-      }
-      else {
+        //     alert(' User Successfully Registered!!');
+        //     this.router.navigate(['/login']);
+        //   });
+     // }
+      //else {
         this.dyanmicDownloadByHtmlTag({
           fileName: this.keys.firstName + ' ' + this.keys.lastName,
           text: JSON.stringify(res)
@@ -96,7 +97,7 @@ export class SignupComponent implements OnInit {
 
         alert('Successfully Registered!!');
         this.router.navigate(['/login']);
-      }
+     // }
       this.loading = false
     }, (err) => {
       this.loading = false

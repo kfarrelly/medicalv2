@@ -102,74 +102,74 @@ console.log('Package list',data);
 
    //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 			  
- const Metadata = {
-  "action": "recieveFromManufecturer",
-  "payloaddata": {
-      "serialNumber": this.mlist[0].serial,
-      "status": statusid,
-      "comment": "Delivered",
-	  "level": this.mlist[0].level,
-  },
-  "private":this.privateKey,
-  "public": this.mypublickey
-    }	    
+//  const Metadata = {
+//   "action": "recieveFromManufecturer",
+//   "payloaddata": {
+//       "serialNumber": this.mlist[0].serial,
+//       "status": statusid,
+//       "comment": "Delivered",
+// 	  "level": this.mlist[0].level,
+//   },
+//   "private":this.privateKey,
+//   "public": this.mypublickey
+//     }	    
 
-const httpOptions = {
-headers: new HttpHeaders({
-  'Content-Type': 'application/json'
-})
-}
+// const httpOptions = {
+// headers: new HttpHeaders({
+//   'Content-Type': 'application/json'
+// })
+// }
 
-    return this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
- (val) => {	
+//     return this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
+//  (val) => {	
 
-  console.log("POST call successful value returned in body", val);
-  this.blockchain = val;
-  if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
-    JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+//   console.log("POST call successful value returned in body", val);
+//   this.blockchain = val;
+//   if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
+//     JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-    this.status = JSON.parse(this.blockchain.response.body);            
-    this.statusValue = this.status.data[0].status;
-    this.itemId = this.status.data[0].id;
-    if (this.statusValue == 'COMMITTED') {   
-	   this.displayTable=true; 
-	   if(statusid == 5) this.packageStatus = "Rejected from Distributer";
-		this.transporter(this.mlist[0].serial,this.mlist[0].medicines, this.mlist[0].barcode, this.mlist[0].location, this.mlist[0].level, this.mlist[0].packages, this.mlist[0].PackageId, this.mlist[0].role, this.mlist[0].time, this.mypublickey,this.packageStatus);
-		if(statusid == 5)
-			alert("Package Returned ");
-		else
-			alert("Package piked ");
-  }
-  else{
-	  alert("Process not completed");
-  }
-  }
-  else {
+//     this.status = JSON.parse(this.blockchain.response.body);            
+//     this.statusValue = this.status.data[0].status;
+//     this.itemId = this.status.data[0].id;
+//     if (this.statusValue == 'COMMITTED') {   
+// 	   this.displayTable=true; 
+// 	   if(statusid == 5) this.packageStatus = "Rejected from Distributer";
+// 		this.transporter(this.mlist[0].serial,this.mlist[0].medicines, this.mlist[0].barcode, this.mlist[0].location, this.mlist[0].level, this.mlist[0].packages, this.mlist[0].PackageId, this.mlist[0].role, this.mlist[0].time, this.mypublickey,this.packageStatus);
+// 		if(statusid == 5)
+// 			alert("Package Returned ");
+// 		else
+// 			alert("Package piked ");
+//   }
+//   else{
+// 	  alert("Process not completed");
+//   }
+//   }
+//   else {
 
-    that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-      this.blockchain2 =val
-      if (that.httpuser.IsJsonString(this.blockchain2.body)) {
-        this.status = JSON.parse(this.blockchain2.body);
-        console.log('json value2', this.status.data[0].status);
-        this.statusValue = this.status.data[0].status;
-        this.itemId = this.status.data[0].id;
-        if (this.statusValue == 'COMMITTED') {
-				if(statusid == 5) this.packageStatus = "Rejected to Distributer";
-                  this.transporter(this.mlist[0].serial,this.mlist[0].medicines, this.mlist[0].barcode, this.mlist[0].location, this.mlist[0].level, this.mlist[0].packages, this.mlist[0].PackageId, this.mlist[0].role, this.mlist[0].time, this.mypublickey,this.packageStatus);
-                  if(statusid == 5)
-					alert("Package Returned ");
-				else
-					alert("Package picked");
-        }
-        else {
-          alert('Request Rejected');
-        }
-      }
-    })
-  }
-// }).catch(function (err) {
-//   console.log(err.message);
-});
+//     that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+//       this.blockchain2 =val
+//       if (that.httpuser.IsJsonString(this.blockchain2.body)) {
+//         this.status = JSON.parse(this.blockchain2.body);
+//         console.log('json value2', this.status.data[0].status);
+//         this.statusValue = this.status.data[0].status;
+//         this.itemId = this.status.data[0].id;
+//         if (this.statusValue == 'COMMITTED') {
+// 				if(statusid == 5) this.packageStatus = "Rejected to Distributer";
+//                   this.transporter(this.mlist[0].serial,this.mlist[0].medicines, this.mlist[0].barcode, this.mlist[0].location, this.mlist[0].level, this.mlist[0].packages, this.mlist[0].PackageId, this.mlist[0].role, this.mlist[0].time, this.mypublickey,this.packageStatus);
+//                   if(statusid == 5)
+// 					alert("Package Returned ");
+// 				else
+// 					alert("Package picked");
+//         }
+//         else {
+//           alert('Request Rejected');
+//         }
+//       }
+//     })
+//   }
+// // }).catch(function (err) {
+// //   console.log(err.message);
+// });
 });
 }
 

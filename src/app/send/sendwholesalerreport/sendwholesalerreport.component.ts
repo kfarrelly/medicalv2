@@ -95,67 +95,67 @@ console.log('medicne list',data);
 
    //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 			  
- const Metadata = {
-  "action": "recieveFromManufecturer",
-  "payloaddata": {
-      "serialNumber": this.mlist[0].serial,
-      "status": 4,
-      "comment": "Delivered"
-  },
-  "private":this.privateKey,
-  "public": this.mypublickey
-    }	    
+//  const Metadata = {
+//   "action": "recieveFromManufecturer",
+//   "payloaddata": {
+//       "serialNumber": this.mlist[0].serial,
+//       "status": 4,
+//       "comment": "Delivered"
+//   },
+//   "private":this.privateKey,
+//   "public": this.mypublickey
+//     }	    
 
-const httpOptions = {
-headers: new HttpHeaders({
-  'Content-Type': 'application/json'
-})
-}
+// const httpOptions = {
+// headers: new HttpHeaders({
+//   'Content-Type': 'application/json'
+// })
+// }
 
-    return this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
- (val) => {	
+//     return this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
+//  (val) => {	
 
-  console.log("POST call successful value returned in body", val);
-  this.blockchain = val;
-  if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
-    JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+//   console.log("POST call successful value returned in body", val);
+//   this.blockchain = val;
+//   if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
+//     JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-    this.status = JSON.parse(this.blockchain.response.body);            
-    this.statusValue = this.status.data[0].status;
-    this.itemId = this.status.data[0].id;
-    if (this.statusValue == 'COMMITTED') {   
-   this.displayTable=true; 
-   this.transporter(this.mlist[0].serial,this.mlist[0].medicine,this.mlist[0].barcode,this.mlist[0].location,this.mlist[0].weight,this.mlist[0].Edate,this.mlist[0].Mdate,
-    this.mlist[0].MedicineId,this.mlist[0].role,this.mlist[0].time,this.mypublickey,this.medicineStatus);
-   alert("Package piked ");
-  }
-  else{
-	  alert("Process not completed");
-  }
-  }
-  else {
+//     this.status = JSON.parse(this.blockchain.response.body);            
+//     this.statusValue = this.status.data[0].status;
+//     this.itemId = this.status.data[0].id;
+//     if (this.statusValue == 'COMMITTED') {   
+//    this.displayTable=true; 
+//    this.transporter(this.mlist[0].serial,this.mlist[0].medicine,this.mlist[0].barcode,this.mlist[0].location,this.mlist[0].weight,this.mlist[0].Edate,this.mlist[0].Mdate,
+//     this.mlist[0].MedicineId,this.mlist[0].role,this.mlist[0].time,this.mypublickey,this.medicineStatus);
+//    alert("Package piked ");
+//   }
+//   else{
+// 	  alert("Process not completed");
+//   }
+//   }
+//   else {
 
-    that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-      this.blockchain2 =val
-      if (that.httpuser.IsJsonString(this.blockchain2.body)) {
-        this.status = JSON.parse(this.blockchain2.body);
-        console.log('json value2', this.status.data[0].status);
-        this.statusValue = this.status.data[0].status;
-        this.itemId = this.status.data[0].id;
-        if (this.statusValue == 'COMMITTED') {
-          this.transporter(this.mlist[0].serial,this.mlist[0].medicine,this.mlist[0].barcode,this.mlist[0].location,this.mlist[0].weight,this.mlist[0].Edate,this.mlist[0].Mdate,
-            this.mlist[0].MedicineId,this.mlist[0].role,this.mlist[0].time,this.mypublickey,this.medicineStatus);
-            alert("Package piked ");
-        }
-        else {
-          alert('Request Rejected');
-        }
-      }
-    })
-  }
-// }).catch(function (err) {
-//   console.log(err.message);
-});
+//     that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+//       this.blockchain2 =val
+//       if (that.httpuser.IsJsonString(this.blockchain2.body)) {
+//         this.status = JSON.parse(this.blockchain2.body);
+//         console.log('json value2', this.status.data[0].status);
+//         this.statusValue = this.status.data[0].status;
+//         this.itemId = this.status.data[0].id;
+//         if (this.statusValue == 'COMMITTED') {
+//           this.transporter(this.mlist[0].serial,this.mlist[0].medicine,this.mlist[0].barcode,this.mlist[0].location,this.mlist[0].weight,this.mlist[0].Edate,this.mlist[0].Mdate,
+//             this.mlist[0].MedicineId,this.mlist[0].role,this.mlist[0].time,this.mypublickey,this.medicineStatus);
+//             alert("Package piked ");
+//         }
+//         else {
+//           alert('Request Rejected');
+//         }
+//       }
+//     })
+//   }
+// // }).catch(function (err) {
+// //   console.log(err.message);
+// });
 });
 }
 
@@ -237,71 +237,71 @@ mTransection(serial:string,distributerId:string,transpoterId:string) {
   let that = this; 
   //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 			  
- const Metadata = {
-			  "action": "sendToDistributer",
-    "payloaddata": {
-        "serialNumber": serial,
-        "distributer": {
-            "address": distributerId,
-            "comment": "In Transaction"
-        },
-        "transporterid": transpoterId
-    },
-				"private":this.privateKey,
-				"public": this.mypublickey
-					}	    
+//  const Metadata = {
+// 			  "action": "sendToDistributer",
+//     "payloaddata": {
+//         "serialNumber": serial,
+//         "distributer": {
+//             "address": distributerId,
+//             "comment": "In Transaction"
+//         },
+//         "transporterid": transpoterId
+//     },
+// 				"private":this.privateKey,
+// 				"public": this.mypublickey
+// 					}	    
 	
-	const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+// 	const httpOptions = {
+//       headers: new HttpHeaders({
+//         'Content-Type': 'application/json'
+//       })
+//     };
 	
-            var x = this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
-       (val) => {	
+//             var x = this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
+//        (val) => {	
 	  
-console.log("POST call successful value returned in body", val);
-this.blockchain = val;
-if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
-  JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+// console.log("POST call successful value returned in body", val);
+// this.blockchain = val;
+// if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
+//   JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-  this.status = JSON.parse(this.blockchain.response.body);            
-  this.statusValue = this.status.data[0].status;
-  this.itemId = this.status.data[0].id;
-  if (this.statusValue == 'COMMITTED') {
-    this.transection = new Transection(serial,distributerId,transpoterId);
-    this.base = this.httpuser.medicineTransection(this.transection);
-    this.call = this.base.subscribe(data => {        
-        alert('Request Accepted');       
-      });
-    }
-    else {
-      alert('Request Rejected');
-    }
-  } else {
+//   this.status = JSON.parse(this.blockchain.response.body);            
+//   this.statusValue = this.status.data[0].status;
+//   this.itemId = this.status.data[0].id;
+//   if (this.statusValue == 'COMMITTED') {
+//     this.transection = new Transection(serial,distributerId,transpoterId);
+//     this.base = this.httpuser.medicineTransection(this.transection);
+//     this.call = this.base.subscribe(data => {        
+//         alert('Request Accepted');       
+//       });
+//     }
+//     else {
+//       alert('Request Rejected');
+//     }
+//   } else {
 
-    that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-      this.blockchain2 =val
-      if (that.httpuser.IsJsonString(this.blockchain2.body)) {
-        this.status = JSON.parse(this.blockchain2.body);
-        console.log('json value2', this.status.data[0].status);
-        this.statusValue = this.status.data[0].status;
-        this.itemId = this.status.data[0].id;
-        if (this.statusValue == 'COMMITTED') {
-          this.transection = new Transection(serial,distributerId,transpoterId);
-          this.base = this.httpuser.medicineTransection(this.transection);
-          this.call = this.base.subscribe(data => {              
-             alert('Request Accepted');            
-          });
-        }
-        else {
-          alert('Request Rejected');
-        }
-      }
-    })
-  }
-// }).catch(function (err) {
-//   console.log(err.message);
-});
+//     that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+//       this.blockchain2 =val
+//       if (that.httpuser.IsJsonString(this.blockchain2.body)) {
+//         this.status = JSON.parse(this.blockchain2.body);
+//         console.log('json value2', this.status.data[0].status);
+//         this.statusValue = this.status.data[0].status;
+//         this.itemId = this.status.data[0].id;
+//         if (this.statusValue == 'COMMITTED') {
+//           this.transection = new Transection(serial,distributerId,transpoterId);
+//           this.base = this.httpuser.medicineTransection(this.transection);
+//           this.call = this.base.subscribe(data => {              
+//              alert('Request Accepted');            
+//           });
+//         }
+//         else {
+//           alert('Request Rejected');
+//         }
+//       }
+//     })
+//   }
+// // }).catch(function (err) {
+// //   console.log(err.message);
+// });
 }
 }
