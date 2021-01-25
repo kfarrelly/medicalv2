@@ -224,7 +224,7 @@ app.post("/activation", (req, res) => {
 
 	// signup post api
 
-	app.post("/signup", (req, res) => {
+app.post("/signup", (req, res) => {
 
 		//public private key;
 		const context = createContext('secp256k1');
@@ -302,7 +302,7 @@ app.post("/activation", (req, res) => {
 
 	//user schema 2
 
-	app.post("/signup2", (req, res) => {
+app.post("/signup2", (req, res) => {
 
 		var mailOptions = {
 			from: 'root@meditrace.com',
@@ -328,7 +328,7 @@ app.post("/activation", (req, res) => {
 		});
 	});
 
-  app.get('/password', (req, res) => {
+app.get('/password', (req, res) => {
     try{
       bcrypt.genSalt(7, (err, salt) => {
         if (err) { return console.log(err); }
@@ -343,10 +343,10 @@ app.post("/activation", (req, res) => {
       catch (err) {
         return res.status(500).send(err);
       }
-    })
+})
 
 	//login api
-	app.post('/login', (req, res) => {
+app.post('/login', (req, res) => {
 
 		Userlogin2.findOne({ 'email': req.body.email }).then((result) => {
       console.log(req.body.password);
@@ -400,7 +400,7 @@ app.post("/activation", (req, res) => {
 
 	//new user api
 
-	app.post('/newuser', (req, res) => {
+app.post('/newuser', (req, res) => {
 		res.header('confirmation', 'Creating New user');
 
 

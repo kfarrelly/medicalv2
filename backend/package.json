@@ -26,7 +26,11 @@
     "sawtooth-sdk": "^1.0.5",
     "tslib": "^1.9.0",
     "uuid": "^3.3.2",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "amazon-qldb-driver-nodejs": "0.1.0-preview.2",
+    "aws-sdk": "^2.596.0",
+    "cfn-response-promise": "^1.0.1",
+    "ion-js": "^3.1.2"
   },
   "devDependencies": {
     "@types/node": "~8.9.4",
@@ -43,6 +47,8 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "typescript": "~3.2.2",
+    "serverless-iam-roles-per-function": "^2.0.2",
+    "serverless-pseudo-parameters": "^2.5.0"
   }
 }
