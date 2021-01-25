@@ -33,7 +33,7 @@ export class NotificationComponent implements OnInit {
 
 
   @ViewChild('completeModal') completeModal: ElementRef;
-  apiURL: any = this.http.uri;
+  blockchainUrl: any = this.http.blockchainUrl;
   loading:boolean;
   constructor(private http: AuthService, private http1: HttpClient, private router: Router) { }
 

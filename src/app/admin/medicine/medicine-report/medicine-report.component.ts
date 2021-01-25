@@ -40,7 +40,7 @@ export class MedicineReportComponent implements OnInit {
   
   
   @ViewChild('completeModal') completeModal: ElementRef;
-  apiURL: any = this.http.uri;
+  blockchainUrl: any = this.http.blockchainUrl;
   constructor(private http: AuthService, private http1: HttpClient, private router: Router) { }
 
   ngOnInit() {
@@ -188,7 +188,7 @@ export class MedicineReportComponent implements OnInit {
       })
     };
 
-    var x = this.http1.post(this.apiURL, Metadata, httpOptions).subscribe(
+    var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body", val);
         this.blockchain = val;
@@ -218,7 +218,7 @@ export class MedicineReportComponent implements OnInit {
           }
         } else {
 
-          that.http1.get(this.apiURL+"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+          that.http1.get(this.blockchainUrl+"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
             this.blockchain2 = val
             if (that.http.IsJsonString(this.blockchain2.body)) {
               this.status = JSON.parse(this.blockchain2.body);

@@ -44,7 +44,7 @@ export class PackageDetailComponent implements OnInit {
   lastname;
  
   @ViewChild('completeModal')completeModal: ElementRef;
-  apiURL: any = this.http.uri;
+  blockchainUrl: any = this.http.blockchainUrl;
   constructor(private route: ActivatedRoute, private router: Router, private http: AuthService, private http1: HttpClient, private formBuilder: FormBuilder) { }
 
 
@@ -222,7 +222,7 @@ export class PackageDetailComponent implements OnInit {
       })
     };
 
-    var x = this.http1.post(this.apiURL, Metadata, httpOptions).subscribe(
+    var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body", val);
         this.blockchain = val;

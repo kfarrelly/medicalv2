@@ -40,7 +40,7 @@ itemId:any=[];
 medicineStatus;
   mypublickey:any;
   privateKey:any;
-  apiURL:any = this.httpuser.uri;
+  blockchainUrl:any = this.httpuser.blockchainUrl;
 
   constructor(private httpuser: AuthService,private qrReader: QrCodeReader,private http: HttpClient) { }
 
@@ -144,7 +144,7 @@ headers: new HttpHeaders({
 })
 }
 
-    return this.http.post(this.apiURL, Metadata,httpOptions).subscribe(
+    return this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
  (val) => {	
 
   console.log("POST call successful value returned in body", val);
@@ -248,7 +248,7 @@ mTransection(serial:string,distributerId:string,transpoterId:string) {
       })
     };
 	
-            var x = this.http.post(this.apiURL, Metadata,httpOptions).subscribe(
+            var x = this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
        (val) => {	
 	  
 console.log("POST call successful value returned in body", val);

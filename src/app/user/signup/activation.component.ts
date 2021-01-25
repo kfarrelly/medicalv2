@@ -20,7 +20,7 @@ export class ActivationComponent implements OnInit {
   data;
   message:any;
   actcode:any;
-  apiURL:any = this.auth.uri+"/activation"
+  blockchainUrl:any = this.auth.blockchainUrl+"/activation"
  
   
   
@@ -44,7 +44,7 @@ export class ActivationComponent implements OnInit {
       })
     };
 	
-	 var x = this.http.post(this.apiURL, Metadata,httpOptions).subscribe(
+	 var x = this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
        (val) => {		   
         alert("Account verfied successfully");
 		this.router.navigate(['/login']);

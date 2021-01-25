@@ -23,7 +23,7 @@ role:any;
  userlog:UserLog;
 base;
   call;
-apiURL: any = this.http.uri;
+blockchainUrl: any = this.http.blockchainUrl;
  @ViewChild('closeModal') closeModal: ElementRef
  @ViewChild('closeProfile') closeProfile: ElementRef
   constructor(private http:AuthService,private route: ActivatedRoute,private router: Router,private http2: HttpClient) { }
@@ -139,7 +139,7 @@ apiURL: any = this.http.uri;
 //         })
 //       }
 
-//       return this.http2.post(this.apiURL, Metadata, httpOptions).subscribe(
+//       return this.http2.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
 //         (val) => {
 
 //           console.log("POST call successful value returned in body", val);

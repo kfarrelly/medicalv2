@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
   adminres: any = [];
   registerForm: FormGroup;
   submitted = false;
-  apiURL: any = this.auth.uri;
+  blockchainUrl: any = this.auth.blockchainUrl;
   loading = false
 
   constructor(private auth: AuthService, private formBuilder: FormBuilder, private router: Router, private http: HttpClient) { }
@@ -66,7 +66,7 @@ export class SignupComponent implements OnInit {
           })
         };
 
-        var x = this.http.post(this.apiURL, Metadata, httpOptions).subscribe(
+        var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
           (val) => {
             console.log(val);
 

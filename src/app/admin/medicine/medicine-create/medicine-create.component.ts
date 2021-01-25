@@ -42,7 +42,7 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
   myrole1;
   firstname;
   lastname;
-  apiURL: any = this.httpuser.uri;
+  blockchainUrl: any = this.httpuser.blockchainUrl;
   @ViewChild('completeModal') completeModal: ElementRef;
   SerialNumber: string;
   Medicine: string;
@@ -459,7 +459,7 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
       })
     };
 
-    var x = this.http.post(this.apiURL, Metadata, httpOptions).subscribe(
+    var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body", val);
         this.blockchain = val;

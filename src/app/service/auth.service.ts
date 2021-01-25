@@ -23,7 +23,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
   //uri = 'http://localhost:8080';
-  uri = environment.URL;
+  blockchainUrl = environment.URL;
   apiuri = environment.APIURL;
   batchUrl =environment.BATCHURL;
   usereamil;
