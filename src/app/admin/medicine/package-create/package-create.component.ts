@@ -48,7 +48,7 @@ export class PackageCreateComponent implements OnInit, OnDestroy {
   myrole1;
   firstname;
   lastname;
-  apiURL: any = this.httpuser.uri;
+  blockchainUrl: any = this.httpuser.blockchainUrl;
   @ViewChild('completeModal')completeModal: ElementRef;
 
   constructor(private httpuser: AuthService, private qrReader: QrCodeReader, private http: HttpClient, private formBuilder: FormBuilder) {
@@ -269,7 +269,7 @@ export class PackageCreateComponent implements OnInit, OnDestroy {
       })
     };
 
-    var x = this.http.post(this.apiURL, Metadata, httpOptions).subscribe(
+    var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body", val);
         this.blockchain = val;
@@ -297,7 +297,7 @@ export class PackageCreateComponent implements OnInit, OnDestroy {
       }
     } else {
 
-      that.http.get(this.apiURL+"/batch_statuses?"+ this.blockchain.id + "&wait").subscribe((val) => {
+      that.http.get(this.blockchainUrl+"/batch_statuses?"+ this.blockchain.id + "&wait").subscribe((val) => {
         this.blockchain2 =val
         if (that.httpuser.IsJsonString(this.blockchain2.body)) {
           this.status = JSON.parse(this.blockchain2.body);

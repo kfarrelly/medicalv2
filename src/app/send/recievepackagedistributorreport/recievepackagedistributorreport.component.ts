@@ -43,7 +43,7 @@ export class RecievepackagedistributorreportComponent implements OnInit {
   mypublickey: any;myrole:any;
   privateKey: any;
   @ViewChild('completeModal')completeModal: ElementRef;
-  apiURL: any = this.httpuser.uri;;
+  blockchainUrl: any = this.httpuser.blockchainUrl;;
 
   constructor(private httpuser: AuthService, private qrReader: QrCodeReader, private http: HttpClient) { }
 
@@ -118,7 +118,7 @@ export class RecievepackagedistributorreportComponent implements OnInit {
         })
       }
 
-      return this.http.post(this.apiURL, Metadata, httpOptions).subscribe(
+      return this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
         (val) => {
 
           console.log("POST call successful value returned in body", val);
@@ -279,7 +279,7 @@ headers: new HttpHeaders({
 })
 }
 
-    return this.http.post(this.apiURL, Metadata,httpOptions).subscribe(
+    return this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
  (val) => {	
 
   console.log("POST call successful value returned in body", val);
@@ -482,7 +482,7 @@ medicineTransporter(a,b,c,d,e,f,g,h,i,j,k,l){
       })
     };
 
-    var x = this.http.post(this.apiURL, Metadata, httpOptions).subscribe(
+    var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body", val);
         this.blockchain = val;

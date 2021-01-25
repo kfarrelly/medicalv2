@@ -21,7 +21,7 @@ export class AgentCreateComponent implements OnInit {
   submitted = false;
   mypublickey: any;
   privateKey: any;
-  apiURL: any = this.http.uri;
+  blockchainUrl: any = this.http.blockchainUrl;
   batchUrl : any = this.http
   @ViewChild('completeModal')completeModal: ElementRef;
 
@@ -82,7 +82,7 @@ export class AgentCreateComponent implements OnInit {
         })
       };
 
-      var x = this.http1.post(this.apiURL, Metadata, httpOptions).subscribe(
+      var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
         (val) => {
           console.log("POST call successful value returned in body", val);
           this.blockchain = val;

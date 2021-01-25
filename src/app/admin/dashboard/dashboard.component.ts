@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit, DoCheck, OnDestroy {
 	list: any = [];
 	user: any = [];
 	isShown: boolean = false;
-	popuptask: boolean = true;
+	popuptask: boolean = false;
 	button1: any;
 	privateKeyForm: FormGroup
 	submitted = false;
@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit, DoCheck, OnDestroy {
 
 		})
 		this.button1 = 'show';
-		this.onloadcheckKey();
+		//this.onloadcheckKey();
 		this.myrole = localStorage.getItem("role");
 		this.Manufacturerole();
 

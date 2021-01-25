@@ -37,7 +37,7 @@ export class SenddistributorComponent implements OnInit {
   mypublickey: any;
   privateKey: any;
   @ViewChild('completeModal')completeModal: ElementRef;
-  apiURL: any = this.httpuser.uri;
+  blockchainUrl: any = this.httpuser.blockchainUrl;
 
   constructor(private route:Router, private httpuser: AuthService, private qrReader: QrCodeReader, private http: HttpClient) { }
 
@@ -118,7 +118,7 @@ export class SenddistributorComponent implements OnInit {
         })
       }
 
-      return this.http.post(this.apiURL, Metadata, httpOptions).subscribe(
+      return this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
         (val) => {
 
           console.log("POST call successful value returned in body", val);
@@ -231,7 +231,7 @@ export class SenddistributorComponent implements OnInit {
       })
     };
 
-    var x = this.http.post(this.apiURL, Metadata, httpOptions).subscribe(
+    var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
       (val) => {
         console.log("POST call successful value returned in body", val);
         this.blockchain = val;
