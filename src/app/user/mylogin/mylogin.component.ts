@@ -38,7 +38,7 @@ export class MyloginComponent implements OnInit, OnDestroy {
         localStorage.setItem("user", x);
         localStorage.setItem("pass", y);
         localStorage.setItem("id_token", this.tempToken);
-        localStorage.setItem("publicKey", myrole.publicKey);
+        localStorage.setItem("publicKey", 'privateKey');
         localStorage.setItem("role", myrole.role);
         localStorage.setItem("email", myrole.email);
         localStorage.setItem("userId", myrole.userId);
