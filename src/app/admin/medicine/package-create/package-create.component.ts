@@ -244,6 +244,8 @@ export class PackageCreateComponent implements OnInit, OnDestroy {
                 this.packageid = data.PackageId;
                 this.packageserial = data.serial; 
                  alert('Request Accepted');
+                 let el: HTMLElement = this.completeModal.nativeElement;
+                 el.click(); 
                  //this.registerForm.reset();
               });
     //blockcahin
