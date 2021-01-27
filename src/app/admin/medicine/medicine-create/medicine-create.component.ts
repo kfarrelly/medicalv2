@@ -79,57 +79,56 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
     this.lastname = localStorage.getItem("lastName");
     console.log("User name", this.firstname, this.lastname);
     this.basicLogisticInformation = this.formBuilder.group({
-      SerialNumber: ['', Validators.required],
-      Medicine: ['', Validators.required],
-      MedicineCurrentTempurature: ['', Validators.required],
-      Location: ['', Validators.required],
-      Weight: ['', Validators.required],
-      customern: ['', Validators.required],
-      customername: ['', Validators.required],
-      shipton: ['', Validators.required],
-      countrycode: ['', Validators.required],
-      shiptoparty: ['', Validators.required],
-      pharmadeliveryno: ['', Validators.required],
-      salesorderendcustomer: ['', Validators.required],
-      purchaseorderendcustomer: ['', Validators.required],
-      shippedquantity: ['', Validators.required],
-      unit: ['', Validators.required],
+      SerialNumber: ['SerialNumber', Validators.required],
+      Medicine: ['Medicine', Validators.required],
+      MedicineCurrentTempurature: ['21', Validators.required],
+      Location: ['12', Validators.required],
+      Weight: ['Weight', Validators.required],
+      customern: ['customern', Validators.required],
+      customername: ['customername', Validators.required],
+      shipton: ['shipton', Validators.required],
+      countrycode: ['countrycode', Validators.required],
+      shiptoparty: ['shiptoparty', Validators.required],
+      pharmadeliveryno: ['pharmadeliveryno', Validators.required],
+      salesorderendcustomer: ['salesorderendcustomer', Validators.required],
+      purchaseorderendcustomer: ['purchaseorderendcustomer', Validators.required],
+      shippedquantity: ['shippedquantity', Validators.required],
+      unit: ['unit', Validators.required],
     })
 
     this.additionalLogisticInformation = this.formBuilder.group({
-      aproductname: ['', Validators.required],
-      dosageform: ['', Validators.required],
-      packagetype: ['', Validators.required],
-      packagesize: [''],
-      globelmaterialno: ['', Validators.required],
-      batchn: ['', Validators.required],
-      dateofmanufecture: ['', Validators.required],
-      releasedate: ['', Validators.required],
-      expirydate: ['', Validators.required],
-      productionqty: ['', Validators.required],
+      aproductname: ['aproductname', Validators.required],
+      dosageform: ['dosageform', Validators.required],
+      packagetype: ['packagetype', Validators.required],
+      packagesize: ['packagesize'],
+      globelmaterialno: [88, Validators.required],
+      batchn: ['batchn', Validators.required],
+      dateofmanufecture: ['dateofmanufecture', Validators.required],
+      releasedate: ['01/27/2021', Validators.required],
+      expirydate: ['01/28/2021', Validators.required],
+      productionqty: [34, Validators.required],
     });
 
     this.packagingInformation = this.formBuilder.group({
-      pproductname: ['', Validators.required],
-      pglobelmaterialno: ['', Validators.required],
-      plocalmaterialno: [''],
-      apackagingsite: ['', Validators.required],
-      manufacturinglicense: ['', Validators.required],
-      gmvcertificateno: ['', Validators.required],
+      pproductname: ['das', Validators.required],
+      pglobelmaterialno: [45, Validators.required],
+      plocalmaterialno: [434],
+      apackagingsite: ['apackagingsite', Validators.required],
+      manufacturinglicense: ['manufacturinglicense', Validators.required],
+      gmvcertificateno: [231, Validators.required],
     });
 
     this.requirementInformation = this.formBuilder.group({
-      certificateno: ['', Validators.required],
-      productn: ['', Validators.required],
-      globalmaterialn: ['', Validators.required],
-      localmaterialn: ['', Validators.required],
+      certificateno: ['certificateno', Validators.required],
+      productn: ['productn', Validators.required],
+      globalmaterialn: [222, Validators.required],
+      localmaterialn: [333, Validators.required],
       areleasedate: ['', Validators.required],
-      abatchn: ['', Validators.required],
-      amanufacturingsite: ['', Validators.required],
-      amanufacturinglicense: ['', Validators.required],
+      abatchn: [444, Validators.required],
+      amanufacturingsite: ['amanufacturingsite', Validators.required],
+      amanufacturinglicense: ['amanufacturinglicense', Validators.required],
       ManufacturedDate: ['', Validators.required],
-      ExpiryDate: [''],
-      localmaterialno: ['', Validators.required],
+      localmaterialno: ['localmaterialno', Validators.required],
     })
     //this.medicineid = '92516006ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b5';
     this.registerForm = this.formBuilder.group({
@@ -248,64 +247,64 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
   // convenience getter for easy access to form fields
   get f() { return this.registerForm.controls; }
 
-  onSubmit(
+  
     // serialNo: string, medicine: string, location: string, MedicineCurrentTempurature: string, weight: string, customern: string, customername: string, shipton: string, countrycode: string, shiptoparty: string, pharmadeliveryno: string, salesorderendcustomer: string, purchaseorderendcustomer: string, shippedquantity: string, unit: string, aproductname: string, dosageform: string, packagetype: string, packagesize: string, globelmaterialno: string, batchn: string, dateofmanufecture: string, releasedate: string, expirydate: string, productionqty: string, pproductname: string, pglobelmaterialno: string, plocalmaterialno: string, apackagingsite: string, manufacturinglicense: string, gmvcertificateno: string, certificateno: string, productn: string, globalmaterialn: string, localmaterialn: string, areleasedate: string, abatchn: string, amanufacturingsite: string, amanufacturinglicense: string, mdate: string, edate: string,
     // localmaterialno: string, barcode: string,
-  ) {
-    console.log(this.basicLogisticInformation)
-    var serialNo = this.basicLogisticInformation.get('serialNumber').value;
-    var medicine = this.basicLogisticInformation.get('Medicine').value;
-    var MedicineCurrentTempurature = this.basicLogisticInformation.get('MedicineCurrentTempurature').value;
-    var location = this.basicLogisticInformation.get('Location').value;
-    var weight = this.basicLogisticInformation.get('Weight').value;
-    var customern = this.basicLogisticInformation.get('customern').value;
-    var customername = this.basicLogisticInformation.get('customername').value;
-    var shipton = this.basicLogisticInformation.get('shipton').value;
-    var countrycode = this.basicLogisticInformation.get('countrycode').value;
-    var shiptoparty = this.basicLogisticInformation.get('shiptoparty').value;
-    var pharmadeliveryno = this.basicLogisticInformation.get('pharmadeliveryno').value;
-    var salesorderendcustomer = this.basicLogisticInformation.get('salesorderendcustomer').value;
-    var purchaseorderendcustomer = this.basicLogisticInformation.get('purchaseorderendcustomer').value;
-    var shippedquantity = this.basicLogisticInformation.get('shippedquantity').value;
-    var unit = this.basicLogisticInformation.get('unit').value;
-    var aproductname = this.additionalLogisticInformation.get('aproductname').value;
-    var dosageform = this.additionalLogisticInformation.get('dosageform').value;
-    var packagetype = this.additionalLogisticInformation.get('packagetype').value;
-   var packagesize = this.additionalLogisticInformation.get('packagesize').value;
-    var globelmaterialno = this.additionalLogisticInformation.get('globelmaterialno').value;
-    var batchn = this.additionalLogisticInformation.get('batchn').value;
-    var dateofmanufecture = this.additionalLogisticInformation.get('dateofmanufecture').value;
-    var releasedate = this.additionalLogisticInformation.get('releasedate').value;
-    var expirydate = this.additionalLogisticInformation.get('expirydate').value;
-    var productionqty = this.packagingInformation.get('productionqty').value;
-    var pproductname = this.packagingInformation.get('pproductname').value;
-    var pglobelmaterialno= this.packagingInformation.get('pglobelmaterialno').value;
-    var apackagingsite= this.packagingInformation.get('apackagingsite').value;
+    onSubmit() {
+   
+    var serialNo = this.basicLogisticInformation.value.SerialNumber;
+    console.log(serialNo)
+    var medicine = this.basicLogisticInformation.value.Medicine;
+    var MedicineCurrentTempurature = this.basicLogisticInformation.value.MedicineCurrentTempurature;
+    var location = this.basicLogisticInformation.value.Location;
+    var weight = this.basicLogisticInformation.value.Weight;
+    var customern = this.basicLogisticInformation.value.customern;
+    var customername = this.basicLogisticInformation.value.customername;
+    var shipton = this.basicLogisticInformation.value.shipton;
+    var countrycode = this.basicLogisticInformation.value.countrycode;
+    var shiptoparty = this.basicLogisticInformation.value.shiptoparty;
+    var pharmadeliveryno = this.basicLogisticInformation.value.pharmadeliveryno;
+    var salesorderendcustomer = this.basicLogisticInformation.value.salesorderendcustomer;
+    var purchaseorderendcustomer = this.basicLogisticInformation.value.purchaseorderendcustomer;
+    var shippedquantity = this.basicLogisticInformation.value.shippedquantity;
+    var unit = this.basicLogisticInformation.value.unit;
+    var aproductname = this.additionalLogisticInformation.value.aproductname;
+    var dosageform = this.additionalLogisticInformation.value.dosageform;
+    var packagetype = this.additionalLogisticInformation.value.packagetype;
+   var packagesize = this.additionalLogisticInformation.value.packagesize;
+    var globelmaterialno = this.additionalLogisticInformation.value.globelmaterialno;
+    var batchn = this.additionalLogisticInformation.value.batchn;
+    var dateofmanufecture = this.additionalLogisticInformation.value.dateofmanufecture;
+    var releasedate = this.additionalLogisticInformation.value.releasedate;
+    var expirydate = this.additionalLogisticInformation.value.expirydate;
+    var productionqty = this.additionalLogisticInformation.value.productionqty;
+    var pproductname = this.packagingInformation.value.pproductname;
+    var pglobelmaterialno= this.packagingInformation.value.pglobelmaterialno;
+    var apackagingsite= this.packagingInformation.value.apackagingsite;
 
-    var manufacturinglicense = this.packagingInformation.get('manufacturinglicense').value;
+    var manufacturinglicense = this.packagingInformation.value.manufacturinglicense;
 
-    var gmvcertificateno= this.packagingInformation.get('gmvcertificateno').value;
+    var gmvcertificateno= this.packagingInformation.value.gmvcertificateno;
 
-    var certificateno = this.requirementInformation.get('certificateno').value;
+    var certificateno = this.requirementInformation.value.certificateno;
 
-    var productn= this.requirementInformation.get('productn').value;
+    var productn= this.requirementInformation.value.productn;
 
-    var globalmaterialn = this.requirementInformation.get('globalmaterialn').value;
+    var globalmaterialn = this.requirementInformation.value.globalmaterialn;
 
-    var localmaterialn = this.requirementInformation.get('localmaterialn').value;
+    var localmaterialn = this.requirementInformation.value.localmaterialn;
 
-    var plocalmaterialno = this.packagingInformation.get('plocalmaterialno').value;
+    var plocalmaterialno = this.packagingInformation.value.plocalmaterialno;
 
-    var areleasedate = this.requirementInformation.get('areleasedate').value;
+    var areleasedate = this.requirementInformation.value.areleasedate;
 
-    var abatchn= this.requirementInformation.get('abatchn').value;
+    var abatchn= this.requirementInformation.value.abatchn;
 
-    var amanufacturingsite = this.requirementInformation.get('amanufacturingsite').value;
+    var amanufacturingsite = this.requirementInformation.value.amanufacturingsite;
 
-    var amanufacturinglicense= this.requirementInformation.get('amanufacturinglicense').value;
-   var mdate = this.requirementInformation.get('ManufacturedDate').value;
-   var edate = this.requirementInformation.get('ExpiryDate').value; 
-   var localmaterialno = this.requirementInformation.get('localmaterialno').value;
+    var amanufacturinglicense= this.requirementInformation.value.amanufacturinglicense;
+   var mdate = this.requirementInformation.value.ManufacturedDate;
+   var localmaterialno = this.requirementInformation.value.localmaterialno;
    var barcode = '';
 
     if (serialNo == '' || typeof serialNo == 'undefined') {
@@ -487,7 +486,7 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
     console.log("Private Key", this.privateKey);
 
 
-    this.createmedicne = new Medicine(serialNo, medicine, MedicineCurrentTempurature, location, weight, '', this.medicineStatus, this.userId, customern, customername, shipton, countrycode, shiptoparty, pharmadeliveryno, salesorderendcustomer, purchaseorderendcustomer, shippedquantity, unit, aproductname, dosageform, packagetype, packagesize, globelmaterialno, plocalmaterialno, batchn, dateofmanufecture, releasedate, expirydate, productionqty, pproductname, pglobelmaterialno, apackagingsite, manufacturinglicense, gmvcertificateno, certificateno, productn, globalmaterialn, localmaterialn, areleasedate, abatchn, amanufacturingsite, amanufacturinglicense, mdate, edate, localmaterialno, barcode
+    this.createmedicne = new Medicine(serialNo, medicine, MedicineCurrentTempurature, location, weight, '', this.medicineStatus, this.userId, customern, customername, shipton, countrycode, shiptoparty, pharmadeliveryno, salesorderendcustomer, purchaseorderendcustomer, shippedquantity, unit, aproductname, dosageform, packagetype, packagesize, globelmaterialno, plocalmaterialno, batchn, dateofmanufecture, releasedate, expirydate, productionqty, pproductname, pglobelmaterialno, apackagingsite, manufacturinglicense, gmvcertificateno, certificateno, productn, globalmaterialn, localmaterialn, areleasedate, abatchn, amanufacturingsite, amanufacturinglicense, mdate, expirydate, localmaterialno, barcode
     );
     console.log('createmedicne object => console of data', JSON.stringify(this.createmedicne));
     this.base = this.httpuser.createmedicine(this.createmedicne);
@@ -496,7 +495,14 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
                   this.medicineid = data.MedicineId;
                   this.medicineserial = data.serial;
                   alert('Request Accepted');
+<<<<<<< HEAD
                   this.registerForm.reset();
+=======
+                  let el: HTMLElement = this.completeModal.nativeElement;
+                  el.click();
+                 
+                  //this.registerForm.reset();
+>>>>>>> 939f06b95029bb6ce4272f4e8973a5f71a11a9cd
         });
     //blockcahin
     // const Metadata = {
@@ -588,6 +594,8 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
     if (this.basicLogisticInformation.invalid) {
       return;
     }
+  console.log(this.basicLogisticInformation.value)
+  console.log(this.basicLogisticInformation.value.SerialNumber)
     console.log('basic value', this.basicInfoFormControl);
     stepper.next();
   }
@@ -616,10 +624,13 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
 
   onRequirementInfoSubmit(stepper: MatStepper) {
     this.requirementSubmit = true
+    console.log('requirementInformation', this.requirementInformation);
     if (this.requirementInformation.invalid) {
       return;
     }
-    console.log('packaging value', this.requirementInfoFormControl);
+  
+    console.log('onRequirementInfoSubmit', this.requirementInfoFormControl);
+    this.onSubmit()
     console.log('stepper',stepper);
   }
 }

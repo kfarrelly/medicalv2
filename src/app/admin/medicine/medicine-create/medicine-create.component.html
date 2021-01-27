@@ -4,16 +4,16 @@
   <h4>Logistic Cover Sheet NCH010400787797 to Batch Certificate</h4>
   <mat-horizontal-stepper linear #stepper>
     <mat-step>
-      <form  [formGroup]="basicLogisticInformation" (ngSubmit)="onBasicInfoSubmit(stepper)">
+      <form [formGroup]="basicLogisticInformation" (ngSubmit)="onBasicInfoSubmit(stepper)">
         <div class="row mb-3 justify-content-center"><b>Basic Logistic Information</b></div>
         <div class="row">
           <div class="col">
             <div class="form-group">
               <label>Product Name:</label>
               <input #se type="text" formControlName="SerialNumber" name="SerialNumber"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.SerialNumber.errors }" class="form-control required"
-                maxlength="30" required>
-                <div *ngIf="basicSubmit && basicInfoFormControl.SerialNumber.errors" class="invalid-feedback">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.SerialNumber.errors }"
+                class="form-control required" maxlength="30" required>
+              <div *ngIf="basicSubmit && basicInfoFormControl.SerialNumber.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.SerialNumber.errors.required">Product Name required </div>
               </div>
             </div>
@@ -24,8 +24,8 @@
             <div class="form-group">
               <label>Customer's Product Name:</label>
               <input #me type="name" formControlName="Medicine" name="Medicine"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.Medicine.errors }" class="form-control required"
-                maxlength="30">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.Medicine.errors }"
+                class="form-control required" maxlength="30">
               <div *ngIf="basicSubmit && basicInfoFormControl.Medicine.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.Medicine.errors.required">Customer's Product required </div>
               </div>
@@ -37,8 +37,8 @@
             <div class="form-group">
               <label>Batch N:</label>
               <input #lo type="text" formControlName="Location" name="Location"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.Location.errors }" class="form-control required"
-                maxlength="30">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.Location.errors }"
+                class="form-control required" maxlength="30">
               <div *ngIf="basicSubmit && basicInfoFormControl.Location.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.Location.errors.required">Batch N required </div>
               </div>
@@ -56,8 +56,10 @@
                 max="99" formControlName="MedicineCurrentTempurature" name="MedicineCurrentTempurature"
                 [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.MedicineCurrentTempurature.errors }"
                 class="form-control required">
-              <div *ngIf="basicSubmit && basicInfoFormControl.MedicineCurrentTempurature.errors" class="invalid-feedback">
-                <div *ngIf="basicInfoFormControl.MedicineCurrentTempurature.errors.required">Global Valuated Material required </div>
+              <div *ngIf="basicSubmit && basicInfoFormControl.MedicineCurrentTempurature.errors"
+                class="invalid-feedback">
+                <div *ngIf="basicInfoFormControl.MedicineCurrentTempurature.errors.required">Global Valuated Material
+                  required </div>
               </div>
             </div>
           </div>
@@ -65,8 +67,8 @@
             <div class="form-group">
               <label>Batch Certificate N</label>
               <input #we type="text" formControlName="Weight" name="Weight"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.Weight.errors }" class="form-control required" min=0
-                oninput="validity.valid||(value='');">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.Weight.errors }"
+                class="form-control required" min=0 oninput="validity.valid||(value='');">
               <div *ngIf="basicSubmit && basicInfoFormControl.Weight.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.Weight.errors.required">Batch Certificate required </div>
               </div>
@@ -78,7 +80,8 @@
             <div class="form-group">
               <label>Customer N</label>
               <input #cn type="text" formControlName="customern" name="customern"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.customern.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.customern.errors }"
+                class="form-control required">
               <div *ngIf="basicSubmit && basicInfoFormControl.customern.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.customern.errors.required">Customer N required</div>
               </div>
@@ -88,7 +91,8 @@
             <div class="form-group">
               <label>Customer Name:</label>
               <input #cusn type="text" name="customername" formControlName="customername"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.customername.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.customername.errors }"
+                class="form-control required">
               <div *ngIf="basicSubmit && basicInfoFormControl.customername.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.customername.errors.required">Customer Name required</div>
               </div>
@@ -100,7 +104,8 @@
             <div class="form-group">
               <label>Ship to N</label>
               <input #stn type="text" name="shipton" formControlName="shipton"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.shipton.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.shipton.errors }"
+                class="form-control required">
               <div *ngIf="basicSubmit && basicInfoFormControl.shipton.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.shipton.errors.required">Ship N required</div>
               </div>
@@ -110,7 +115,8 @@
             <div class="form-group">
               <label>Country Code</label>
               <input #cc type="text" name="countrycode" formControlName="countrycode"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.countrycode.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.countrycode.errors }"
+                class="form-control required">
               <div *ngIf="basicSubmit && basicInfoFormControl.countrycode.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.countrycode.errors.required">Country Code required</div>
               </div>
@@ -124,7 +130,8 @@
             <div class="form-group">
               <label>Ship to Party:</label>
               <input #stp type="text" name="shiptoparty" formControlName="shiptoparty"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.shiptoparty.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.shiptoparty.errors }"
+                class="form-control required">
               <div *ngIf="basicSubmit && basicInfoFormControl.shiptoparty.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.shiptoparty.errors.required">Ship to Party required</div>
               </div>
@@ -134,10 +141,11 @@
             <div class="form-group">
               <label>Pharma Outbound Delivery No:</label>
               <input #podn type="text" name="pharmadeliveryno" formControlName="pharmadeliveryno"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.pharmadeliveryno.errors }" class="form-control required"
-                maxlength="30">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.pharmadeliveryno.errors }"
+                class="form-control required" maxlength="30">
               <div *ngIf="basicSubmit && basicInfoFormControl.pharmadeliveryno.errors" class="invalid-feedback">
-                <div *ngIf="basicInfoFormControl.pharmadeliveryno.errors.required">Pharma Outbound Delivery No. required</div>
+                <div *ngIf="basicInfoFormControl.pharmadeliveryno.errors.required">Pharma Outbound Delivery No. required
+                </div>
               </div>
             </div>
           </div>
@@ -149,8 +157,8 @@
             <div class="form-group">
               <label>Sales Order No vs. End Customer:</label>
               <input #sonec type="text" name="salesorderendcustomer" formControlName="salesorderendcustomer"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.salesorderendcustomer.errors }" class="form-control required"
-                maxlength="30">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.salesorderendcustomer.errors }"
+                class="form-control required" maxlength="30">
               <div *ngIf="basicSubmit && basicInfoFormControl.salesorderendcustomer.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.salesorderendcustomer.errors.required"></div>
               </div>
@@ -163,7 +171,8 @@
                 [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.purchaseorderendcustomer.errors }"
                 class="form-control required">
               <div *ngIf="basicSubmit && basicInfoFormControl.purchaseorderendcustomer.errors" class="invalid-feedback">
-                <div *ngIf="basicInfoFormControl.purchaseorderendcustomer.errors.required">Purchase Order N of End Customer required</div>
+                <div *ngIf="basicInfoFormControl.purchaseorderendcustomer.errors.required">Purchase Order N of End
+                  Customer required</div>
               </div>
             </div>
           </div>
@@ -173,7 +182,8 @@
             <div class="form-group">
               <label>Shipped Quantity:</label>
               <input #sq type="text" name="shippedquantity" formControlName="shippedquantity"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.shippedquantity.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.shippedquantity.errors }"
+                class="form-control required">
               <div *ngIf="basicSubmit && basicInfoFormControl.shippedquantity.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.shippedquantity.errors.required">Shipped Quantity required</div>
               </div>
@@ -185,7 +195,8 @@
             <div class="form-group">
               <label>Unit:</label>
               <input #unit type="text" name="unit" formControlName="unit"
-                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.unit.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': basicSubmit && basicInfoFormControl.unit.errors }"
+                class="form-control required">
               <div *ngIf="basicSubmit && basicInfoFormControl.unit.errors" class="invalid-feedback">
                 <div *ngIf="basicInfoFormControl.unit.errors.required"> Unit required</div>
               </div>
@@ -207,7 +218,8 @@
             <div class="form-group">
               <label>Product Name:</label>
               <input #apn type="text" name="aproductname" formControlName="aproductname"
-                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.aproductname.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.aproductname.errors }"
+                class="form-control required">
               <div *ngIf="additionalSubmit && additionalInfoFormControl.aproductname.errors" class="invalid-feedback">
                 <div *ngIf="additionalInfoFormControl.aproductname.errors.required">Product Name required</div>
               </div>
@@ -217,7 +229,8 @@
             <div class="form-group">
               <label>Dosage Form:</label>
               <input #df type="text" name="dosageform" formControlName="dosageform"
-                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.dosageform.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.dosageform.errors }"
+                class="form-control required">
               <div *ngIf="additionalSubmit && additionalInfoFormControl.dosageform.errors" class="invalid-feedback">
                 <div *ngIf="additionalInfoFormControl.dosageform.errors.required">Dosage Form required</div>
               </div>
@@ -229,7 +242,8 @@
             <div class="form-group">
               <label>Package type:</label>
               <input #pt type="text" onkeypress="return /[a-z]/i.test(event.key)" formControlName="packagetype"
-                name="packagetype" [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.packagetype.errors }"
+                name="packagetype"
+                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.packagetype.errors }"
                 class="form-control required">
               <div *ngIf="additionalSubmit && additionalInfoFormControl.packagetype.errors" class="invalid-feedback">
                 <div *ngIf="additionalInfoFormControl.packagetype.errors.required"> Package Type required</div>
@@ -255,9 +269,12 @@
               <input #gm type="number" pattern="[0-9]*"
                 oninput="javascript: if (this.value != this.number) this.value = this.value.slice(null);" min="0"
                 max="99" formControlName="globelmaterialno" name="globelmaterialno"
-                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.globelmaterialno.errors }" class="form-control required">
-              <div *ngIf="additionalSubmit && additionalInfoFormControl.globelmaterialno.errors" class="invalid-feedback">
-                <div *ngIf="additionalInfoFormControl.globelmaterialno.errors.required"> Global Material No. required</div>
+                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.globelmaterialno.errors }"
+                class="form-control required">
+              <div *ngIf="additionalSubmit && additionalInfoFormControl.globelmaterialno.errors"
+                class="invalid-feedback">
+                <div *ngIf="additionalInfoFormControl.globelmaterialno.errors.required"> Global Material No. required
+                </div>
               </div>
             </div>
           </div>
@@ -265,7 +282,8 @@
             <div class="form-group">
               <label>Batch N:</label>
               <input #bn type="text" name="batchn" formControlName="batchn"
-                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.batchn.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.batchn.errors }"
+                class="form-control required">
               <div *ngIf="additionalSubmit && additionalInfoFormControl.batchn.errors" class="invalid-feedback">
                 <div *ngIf="additionalInfoFormControl.batchn.errors.required">Batch N Quantity required</div>
               </div>
@@ -278,9 +296,12 @@
             <div class="form-group">
               <label>Date of Manufacturing:</label>
               <input #dom type="date" name="dateofmanufecture" formControlName="dateofmanufecture"
-                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.dateofmanufecture.errors }" class="form-control required">
-              <div *ngIf="additionalSubmit && additionalInfoFormControl.dateofmanufecture.errors" class="invalid-feedback">
-                <div *ngIf="additionalInfoFormControl.dateofmanufecture.errors.required">Date of Manufacturing required</div>
+                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.dateofmanufecture.errors }"
+                class="form-control required">
+              <div *ngIf="additionalSubmit && additionalInfoFormControl.dateofmanufecture.errors"
+                class="invalid-feedback">
+                <div *ngIf="additionalInfoFormControl.dateofmanufecture.errors.required">Date of Manufacturing required
+                </div>
               </div>
             </div>
           </div>
@@ -290,24 +311,11 @@
             <div class="form-group">
               <label>Release Date:</label>
               <input #rd type="date" name="releasedate" formControlName="releasedate"
-                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.releasedate.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.releasedate.errors }"
+                class="form-control required">
               <div *ngIf="additionalSubmit && additionalInfoFormControl.releasedate.errors" class="invalid-feedback">
                 <div *ngIf="additionalInfoFormControl.releasedate.errors.required">Release Date required</div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <label>Expiry Date:</label>
-              <input #ed type="date" name="expirydate" formControlName="expirydate"
-                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.expirydate.errors }" class="form-control required">
-              <div *ngIf="additionalSubmit && additionalInfoFormControl.expirydate.errors" class="invalid-feedback">
-                <div *ngIf="additionalInfoFormControl.expirydate.errors.required">Expiry Date required</div>
-              </div>
-
-
             </div>
           </div>
         </div>
@@ -318,7 +326,8 @@
               <input #pq type="number" pattern="[0-9]*"
                 oninput="javascript: if (this.value != this.number) this.value = this.value.slice(null);" min="0"
                 max="99" name="productionqty" formControlName="productionqty"
-                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.productionqty.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': additionalSubmit && additionalInfoFormControl.productionqty.errors }"
+                class="form-control required">
               <div *ngIf="additionalSubmit && additionalInfoFormControl.productionqty.errors" class="invalid-feedback">
                 <div *ngIf="additionalInfoFormControl.productionqty.errors.required"> Production Qty required</div>
               </div>
@@ -340,7 +349,8 @@
             <div class="form-group">
               <label>Product Name:</label>
               <input #ppn type="text" name="pproductname" formControlName="pproductname"
-                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.pproductname.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.pproductname.errors }"
+                class="form-control required">
               <div *ngIf="packagingSubmit && packagingInfoFormControl.pproductname.errors" class="invalid-feedback">
                 <div *ngIf="packagingInfoFormControl.pproductname.errors.required">Product Name required</div>
               </div>
@@ -354,9 +364,12 @@
               <input #gmn type="number" pattern="[0-9]*"
                 oninput="javascript: if (this.value != this.number) this.value = this.value.slice(null);" min="0"
                 max="99" name="pglobelmaterialno" formControlName="pglobelmaterialno"
-                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.pglobelmaterialno.errors }" class="form-control required">
-              <div *ngIf="packagingSubmit && packagingInfoFormControl.pglobelmaterialno.errors" class="invalid-feedback">
-                <div *ngIf="packagingInfoFormControl.pglobelmaterialno.errors.required"> Global Material No. required</div>
+                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.pglobelmaterialno.errors }"
+                class="form-control required">
+              <div *ngIf="packagingSubmit && packagingInfoFormControl.pglobelmaterialno.errors"
+                class="invalid-feedback">
+                <div *ngIf="packagingInfoFormControl.pglobelmaterialno.errors.required"> Global Material No. required
+                </div>
               </div>
             </div>
           </div>
@@ -368,7 +381,8 @@
               <input #localm type="number" pattern="[0-9]*"
                 oninput="javascript: if (this.value != this.number) this.value = this.value.slice(null);" min="0"
                 max="99" name="plocalmaterialno" formControlName="plocalmaterialno"
-                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.plocalmaterialno.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.plocalmaterialno.errors }"
+                class="form-control required">
               <div *ngIf="packagingSubmit && packagingInfoFormControl.plocalmaterialno.errors" class="invalid-feedback">
                 <div *ngIf="packagingInfoFormControl.plocalmaterialno.errors.required">Local Material No. required</div>
               </div>
@@ -382,7 +396,8 @@
             <div class="form-group">
               <label>Packaging Site:</label>
               <input #pcsi type="text" name="apackagingsite" formControlName="apackagingsite"
-                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.apackagingsite.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.apackagingsite.errors }"
+                class="form-control required">
               <div *ngIf="packagingSubmit && packagingInfoFormControl.apackagingsite.errors" class="invalid-feedback">
                 <div *ngIf="packagingInfoFormControl.apackagingsite.errors.required"> Packaging Site required</div>
               </div>
@@ -394,9 +409,12 @@
             <div class="form-group">
               <label>Manufacturing License:</label>
               <input #ml type="text" name="manufacturinglicense" formControlName="manufacturinglicense"
-                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.manufacturinglicense.errors }" class="form-control required">
-              <div *ngIf="packagingSubmit && packagingInfoFormControl.manufacturinglicense.errors" class="invalid-feedback">
-                <div *ngIf="packagingInfoFormControl.manufacturinglicense.errors.required">Manufacturing License required</div>
+                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.manufacturinglicense.errors }"
+                class="form-control required">
+              <div *ngIf="packagingSubmit && packagingInfoFormControl.manufacturinglicense.errors"
+                class="invalid-feedback">
+                <div *ngIf="packagingInfoFormControl.manufacturinglicense.errors.required">Manufacturing License
+                  required</div>
               </div>
 
 
@@ -408,9 +426,11 @@
             <div class="form-group">
               <label>GMV Certificate No:</label>
               <input #gmvc type="text" name="gmvcertificateno" formControlName="gmvcertificateno"
-                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.gmvcertificateno.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': packagingSubmit && packagingInfoFormControl.gmvcertificateno.errors }"
+                class="form-control required">
               <div *ngIf="packagingSubmit && packagingInfoFormControl.gmvcertificateno.errors" class="invalid-feedback">
-                <div *ngIf="packagingInfoFormControl.gmvcertificateno.errors.required"> GMV Certificate No required</div>
+                <div *ngIf="packagingInfoFormControl.gmvcertificateno.errors.required"> GMV Certificate No required
+                </div>
               </div>
             </div>
           </div>
@@ -432,8 +452,10 @@
             <div class="form-group">
               <label>Certificate No:</label>
               <input #cern type="text" min="0" max="99" formControlName="certificateno" name="certificateno"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.certificateno.errors }" class="form-control required">
-              <div *ngIf="requirementSubmit && requirementInfoFormControl.certificateno.errors" class="invalid-feedback">
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.certificateno.errors }"
+                class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.certificateno.errors"
+                class="invalid-feedback">
                 <div *ngIf="requirementInfoFormControl.certificateno.errors.required">Certificate No required</div>
               </div>
 
@@ -446,7 +468,8 @@
             <div class="form-group">
               <label>Product Name:</label>
               <input #prn type="text" name="productn" formControlName="productn"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.productn.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.productn.errors }"
+                class="form-control required">
               <div *ngIf="requirementSubmit && requirementInfoFormControl.productn.errors" class="invalid-feedback">
                 <div *ngIf="requirementInfoFormControl.productn.errors.required"> Product Name required</div>
               </div>
@@ -460,8 +483,10 @@
               <input #glm type="number" pattern="[0-9]*"
                 oninput="javascript: if (this.value != this.number) this.value = this.value.slice(null);" min="0"
                 max="99" name="globalmaterialn" formControlName="globalmaterialn"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.globalmaterialn.errors }" class="form-control required">
-              <div *ngIf="requirementSubmit && requirementInfoFormControl.globalmaterialn.errors" class="invalid-feedback">
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.globalmaterialn.errors }"
+                class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.globalmaterialn.errors"
+                class="invalid-feedback">
                 <div *ngIf="requirementInfoFormControl.globalmaterialn.errors.required">Global Material N required</div>
               </div>
 
@@ -476,8 +501,10 @@
               <input #lmn type="number" pattern="[0-9]*"
                 oninput="javascript: if (this.value != this.number) this.value = this.value.slice(null);" min="0"
                 max="99" name="localmaterialn" formControlName="localmaterialn"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.localmaterialn.errors }" class="form-control required">
-              <div *ngIf="requirementSubmit && requirementInfoFormControl.localmaterialn.errors" class="invalid-feedback">
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.localmaterialn.errors }"
+                class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.localmaterialn.errors"
+                class="invalid-feedback">
                 <div *ngIf="requirementInfoFormControl.localmaterialn.errors.required">Local Material N required</div>
               </div>
             </div>
@@ -488,7 +515,8 @@
             <div class="form-group">
               <label>Release Date:</label>
               <input #rld type="date" name="areleasedate" formControlName="areleasedate"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.areleasedate.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.areleasedate.errors }"
+                class="form-control required">
               <div *ngIf="requirementSubmit && requirementInfoFormControl.areleasedate.errors" class="invalid-feedback">
                 <div *ngIf="requirementInfoFormControl.areleasedate.errors.required">Release Date required</div>
               </div>
@@ -502,7 +530,8 @@
               <input #abn type="number" pattern="[0-9]*"
                 oninput="javascript: if (this.value != this.number) this.value = this.value.slice(null);" min="0"
                 max="99" name="abatchn" formControlName="abatchn"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.abatchn.errors }" class="form-control required">
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.abatchn.errors }"
+                class="form-control required">
               <div *ngIf="requirementSubmit && requirementInfoFormControl.abatchn.errors" class="invalid-feedback">
                 <div *ngIf="requirementInfoFormControl.abatchn.errors.required">Batch N required</div>
               </div>
@@ -516,9 +545,12 @@
             <div class="form-group">
               <label>Manufacturing Site:</label>
               <input #ams type="text" name="amanufacturingsite" formControlName="amanufacturingsite"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.amanufacturingsite.errors }" class="form-control required">
-              <div *ngIf="requirementSubmit && requirementInfoFormControl.amanufacturingsite.errors" class="invalid-feedback">
-                <div *ngIf="requirementInfoFormControl.amanufacturingsite.errors.required"> Manufacturing Site required</div>
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.amanufacturingsite.errors }"
+                class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.amanufacturingsite.errors"
+                class="invalid-feedback">
+                <div *ngIf="requirementInfoFormControl.amanufacturingsite.errors.required"> Manufacturing Site required
+                </div>
               </div>
             </div>
           </div>
@@ -529,33 +561,42 @@
             <div class="form-group">
               <label>Manufacturing License:</label>
               <input #amn type="text" name="amanufacturinglicense" formControlName="amanufacturinglicense"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.amanufacturinglicense.errors }" class="form-control required">
-              <div *ngIf="requirementSubmit && requirementInfoFormControl.amanufacturinglicense.errors" class="invalid-feedback">
-                <div *ngIf="requirementInfoFormControl.amanufacturinglicense.errors.required">Manufacturing License required</div>
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.amanufacturinglicense.errors }"
+                class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.amanufacturinglicense.errors"
+                class="invalid-feedback">
+                <div *ngIf="requirementInfoFormControl.amanufacturinglicense.errors.required">Manufacturing License
+                  required</div>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="form-group">
-              <label>Expiry Date:</label>
-              <input #rld type="date" name="ExpiryDate" formControlName="ExpiryDate"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.ExpiryDate.errors }" class="form-control required">
-              <div *ngIf="requirementSubmit && requirementInfoFormControl.ExpiryDate.errors" class="invalid-feedback">
-                <div *ngIf="requirementInfoFormControl.ExpiryDate.errors.required">Expiry Date required</div>
-              </div>
 
-
-            </div>
-          </div>
         </div>
         <div class="row">
           <div class="col">
             <div class="form-group">
               <label>Local Material No:</label>
-              <input #rld type="date" name="localmaterialno" formControlName="localmaterialno"
-                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.localmaterialno.errors }" class="form-control required">
-              <div *ngIf="requirementSubmit && requirementInfoFormControl.localmaterialno.errors" class="invalid-feedback">
+              <input #rld type="text" name="localmaterialno" formControlName="localmaterialno"
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.localmaterialno.errors }"
+                class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.localmaterialno.errors"
+                class="invalid-feedback">
                 <div *ngIf="requirementInfoFormControl.localmaterialno.errors.required">localmaterialno required</div>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Manufactured Date:</label>
+              <input #rld type="date" name="ManufacturedDate" formControlName="ManufacturedDate"
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.ManufacturedDate.errors }"
+                class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.ManufacturedDate.errors"
+                class="invalid-feedback">
+                <div *ngIf="requirementInfoFormControl.ManufacturedDate.errors.required">Manufactured Date required
+                </div>
               </div>
 
 
@@ -565,45 +606,56 @@
 
         <div class="row">
           <div class="col col d-flex justify-content-end">
-            <button class="btn btn-primary width-100px" type="submit" >Create Records</button>
+            <button class="btn btn-primary width-100px" type="submit">Create Records</button>
           </div>
         </div>
-      </form>
-    </mat-step>
-  </mat-horizontal-stepper>
-  <!-- The Modal -->
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
+        <div class="row text-left">
+          <div class="col">
+            <div class="form-group">
+              <button type="button" #completeModal style=" margin: 0px; display: none" class="btn btn-primary"
+                data-toggle="modal" data-target="#myModal">
+                Generate QR Code
+              </button>
 
-        <!-- Modal Header QR Code Generator Start -->
-        <div class="modal-header">
-
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body" style="margin-left:125px">
-          <div>
-            <h3>Medicine QR Code Image</h3>
-            <qrcode #parent [qrdata]="medicineid" [size]="256" [level]="'M'"></qrcode>
-          </div>
-
-          <br>
-
-          <div class="text">
-
-            <button (click)="saveAsImage(parent)">Download QR Code Image</button>
+            </div>
           </div>
         </div>
+</form>
+</mat-step>
+</mat-horizontal-stepper>
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-        <!-- Modal footer  QR Code Generator End-->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
+      <!-- Modal Header QR Code Generator Start -->
+      <div class="modal-header">
 
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="margin-left:125px">
+        <div>
+          <h3>Medicine QR Code Image</h3>
+          <qrcode #parent [qrdata]="medicineid" [size]="256" [level]="'M'"></qrcode>
+        </div>
+
+        <br>
+
+        <div class="text">
+
+          <button (click)="saveAsImage(parent)">Download QR Code Image</button>
+        </div>
+      </div>
+
+      <!-- Modal footer  QR Code Generator End-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
     </div>
   </div>
+</div>
 
 </div>

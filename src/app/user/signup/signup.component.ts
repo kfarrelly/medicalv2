@@ -90,10 +90,10 @@ export class SignupComponent implements OnInit {
         //   });
      // }
       //else {
-        this.dyanmicDownloadByHtmlTag({
-          fileName: this.keys.firstName + ' ' + this.keys.lastName,
-          text: JSON.stringify(res)
-        });
+        // this.dyanmicDownloadByHtmlTag({
+        //   fileName: this.keys.firstName + ' ' + this.keys.lastName,
+        //   text: JSON.stringify(res)
+        // });
 
         alert('Successfully Registered!!');
         this.router.navigate(['/login']);
