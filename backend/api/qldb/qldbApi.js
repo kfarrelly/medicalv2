@@ -50,6 +50,10 @@ async function insertDocument(txn,
   return result;
 }
 
+function generateUniqueAdId() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
 
 let tableExists = false;
 
@@ -64,6 +68,7 @@ module.exports = {
       //   await ensureTable(driver);
       // }
       let dataArray = [];
+      documentData.ID=generateUniqueAdId();
       dataArray.push(documentData);
       console.log(dataArray);
 
