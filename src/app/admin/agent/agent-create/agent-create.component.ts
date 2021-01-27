@@ -57,78 +57,78 @@ export class AgentCreateComponent implements OnInit {
       this.submitted = true;
       //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 
-      const Metadata = {
-        "action": "registerUsers",
-        "payloaddata": {
-          "name": fName + ' ' + lName,
-          "email": email,
-          "contactNumber": mobile,
-          "role": role,
-          "location": {
-            "type": 1,
-            "body": {
-              "address": location
-            }
-          },
-          "publicKey": pkey
-        },
-        "private": this.privateKey,
-        "public": this.mypublickey
-      }
+      // const Metadata = {
+      //   "action": "registerUsers",
+      //   "payloaddata": {
+      //     "name": fName + ' ' + lName,
+      //     "email": email,
+      //     "contactNumber": mobile,
+      //     "role": role,
+      //     "location": {
+      //       "type": 1,
+      //       "body": {
+      //         "address": location
+      //       }
+      //     },
+      //     "publicKey": pkey
+      //   },
+      //   "private": this.privateKey,
+      //   "public": this.mypublickey
+      // }
 
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      };
+      // const httpOptions = {
+      //   headers: new HttpHeaders({
+      //     'Content-Type': 'application/json'
+      //   })
+      // };
 
-      var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
-        (val) => {
-          console.log("POST call successful value returned in body", val);
-          this.blockchain = val;
-          if (that.http.IsJsonString(this.blockchain.response.body)) {
-            JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+      // var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
+      //   (val) => {
+      //     console.log("POST call successful value returned in body", val);
+      //     this.blockchain = val;
+      //     if (that.http.IsJsonString(this.blockchain.response.body)) {
+      //       JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-            this.status = JSON.parse(this.blockchain.response.body);            
-            this.statusValue = this.status.data[0].status;
-            this.itemId = this.status.data[0].id;
-            if (this.statusValue == 'COMMITTED') {
-              console.log('saving data to database',fName,lName);
-              let data = new register(fName, lName, role, mobile, location, email, pass, pkey, userId, this.itemId);
-              this.http.saveSignup(data).subscribe((res) => {
-                alert('Request Accepted');
-                let el: HTMLElement = this.completeModal.nativeElement;
-                el.click(); 
-              });
-            }
-            else {
-              alert('Request Rejected');
-            }
-          } else {
+      //       this.status = JSON.parse(this.blockchain.response.body);            
+      //       this.statusValue = this.status.data[0].status;
+      //       this.itemId = this.status.data[0].id;
+      //       if (this.statusValue == 'COMMITTED') {
+      //         console.log('saving data to database',fName,lName);
+      //         let data = new register(fName, lName, role, mobile, location, email, pass, pkey, userId, this.itemId);
+      //         this.http.saveSignup(data).subscribe((res) => {
+      //           alert('Request Accepted');
+      //           let el: HTMLElement = this.completeModal.nativeElement;
+      //           el.click(); 
+      //         });
+      //       }
+      //       else {
+      //         alert('Request Rejected');
+      //       }
+      //     } else {
 
-            that.http1.get(this.http.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-              this.blockchain2 =val
-              if (that.http.IsJsonString(this.blockchain2.body)) {
-                this.status = JSON.parse(this.blockchain2.body);
-                console.log('json value2', this.status.data[0].status);
-                this.statusValue = this.status.data[0].status;
-                this.itemId = this.status.data[0].id;
-                if (this.statusValue == 'COMMITTED') {
-                  console.log('else saving data to database',fName,lName);
-                  let data = new register(fName, lName, role, mobile, location, email, pass, pkey, userId, this.itemId);
-                  this.http.saveSignup(data).subscribe((res) => {
-                    alert('Request Accepted');
-                  });
-                }
-                else {
-                  alert('Request Rejected');
-                }
-              }
-            })
-          }
-        // }).catch(function (err) {
-        //   console.log(err.message);
-        });
+      //       that.http1.get(this.http.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+      //         this.blockchain2 =val
+      //         if (that.http.IsJsonString(this.blockchain2.body)) {
+      //           this.status = JSON.parse(this.blockchain2.body);
+      //           console.log('json value2', this.status.data[0].status);
+      //           this.statusValue = this.status.data[0].status;
+      //           this.itemId = this.status.data[0].id;
+      //           if (this.statusValue == 'COMMITTED') {
+      //             console.log('else saving data to database',fName,lName);
+      //             let data = new register(fName, lName, role, mobile, location, email, pass, pkey, userId, this.itemId);
+      //             this.http.saveSignup(data).subscribe((res) => {
+      //               alert('Request Accepted');
+      //             });
+      //           }
+      //           else {
+      //             alert('Request Rejected');
+      //           }
+      //         }
+      //       })
+      //     }
+      //   // }).catch(function (err) {
+      //   //   console.log(err.message);
+      //   });
     }
   }
 

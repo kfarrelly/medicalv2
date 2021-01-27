@@ -433,86 +433,86 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
     );
     console.log('createmedicne object => console of data', JSON.stringify(this.createmedicne));
     //blockcahin
-    const Metadata = {
+    // const Metadata = {
 
-      "action": "createMedicine",
-      "payloaddata": {
-        "serialNumber": serialNo,
-        "description": medicine + " " + weight + " " + mdate + " " + edate,
-        "location": {
-          "type": 1,
-          "body": {
-            "address": location
-          }
-        },
-        "uintDescription": {
-          "units": 12
-        }
-      },
-      "private": this.privateKey,
-      "public": this.mypublickey
-    }
+    //   "action": "createMedicine",
+    //   "payloaddata": {
+    //     "serialNumber": serialNo,
+    //     "description": medicine + " " + weight + " " + mdate + " " + edate,
+    //     "location": {
+    //       "type": 1,
+    //       "body": {
+    //         "address": location
+    //       }
+    //     },
+    //     "uintDescription": {
+    //       "units": 12
+    //     }
+    //   },
+    //   "private": this.privateKey,
+    //   "public": this.mypublickey
+    // }
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json'
+    //   })
+    // };
 
-    var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
-      (val) => {
-        console.log("POST call successful value returned in body", val);
-        this.blockchain = val;
-        if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
-          JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+    // var x = this.http.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
+    //   (val) => {
+    //     console.log("POST call successful value returned in body", val);
+    //     this.blockchain = val;
+    //     if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
+    //       JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-          this.status = JSON.parse(this.blockchain.response.body);
-          this.statusValue = this.status.data[0].status;
-          this.itemId = this.status.data[0].id;
-          if (this.statusValue == 'COMMITTED') {
-            this.base = this.httpuser.createmedicine(this.createmedicne);
-            this.call = this.base.subscribe((data) => {
+    //       this.status = JSON.parse(this.blockchain.response.body);
+    //       this.statusValue = this.status.data[0].status;
+    //       this.itemId = this.status.data[0].id;
+    //       if (this.statusValue == 'COMMITTED') {
+    //         this.base = this.httpuser.createmedicine(this.createmedicne);
+    //         this.call = this.base.subscribe((data) => {
 
-              console.log(JSON.stringify(data));
-              this.medicineid = data.MedicineId;
-              this.medicineserial = data.serial;
-              alert('Request Accepted');
-              let el: HTMLElement = this.completeModal.nativeElement;
-              el.click();
-              //this.registerForm.reset();
-            });
-          }
-          else {
-            alert('Request Rejected');
-          }
-        } else {
+    //           console.log(JSON.stringify(data));
+    //           this.medicineid = data.MedicineId;
+    //           this.medicineserial = data.serial;
+    //           alert('Request Accepted');
+    //           let el: HTMLElement = this.completeModal.nativeElement;
+    //           el.click();
+    //           //this.registerForm.reset();
+    //         });
+    //       }
+    //       else {
+    //         alert('Request Rejected');
+    //       }
+    //     } else {
 
-          that.http.get(this.httpuser.batchUrl + "/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-            this.blockchain2 = val
-            if (that.httpuser.IsJsonString(this.blockchain2.body)) {
-              this.status = JSON.parse(this.blockchain2.body);
-              console.log('json value2', this.status.data[0].status);
-              this.statusValue = this.status.data[0].status;
-              this.itemId = this.status.data[0].id;
-              if (this.statusValue == 'COMMITTED') {
-                this.base = this.httpuser.createmedicine(this.createmedicne);
-                this.call = this.base.subscribe((data) => {
-                  console.log("AT = " + JSON.stringify(data));
-                  this.medicineid = data.MedicineId;
-                  this.medicineserial = data.serial;
-                  alert('Request Accepted');
-                  //this.registerForm.reset();
-                });
-              }
-              else {
-                alert('Request Rejected');
-              }
-            }
-          })
-        }
-        // }).catch(function (err) {
-        //   console.log(err.message);
-      });
+    //       that.http.get(this.httpuser.batchUrl + "/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+    //         this.blockchain2 = val
+    //         if (that.httpuser.IsJsonString(this.blockchain2.body)) {
+    //           this.status = JSON.parse(this.blockchain2.body);
+    //           console.log('json value2', this.status.data[0].status);
+    //           this.statusValue = this.status.data[0].status;
+    //           this.itemId = this.status.data[0].id;
+    //           if (this.statusValue == 'COMMITTED') {
+    //             this.base = this.httpuser.createmedicine(this.createmedicne);
+    //             this.call = this.base.subscribe((data) => {
+    //               console.log("AT = " + JSON.stringify(data));
+    //               this.medicineid = data.MedicineId;
+    //               this.medicineserial = data.serial;
+    //               alert('Request Accepted');
+    //               //this.registerForm.reset();
+    //             });
+    //           }
+    //           else {
+    //             alert('Request Rejected');
+    //           }
+    //         }
+    //       })
+    //     }
+    //     // }).catch(function (err) {
+    //     //   console.log(err.message);
+    //   });
   }
   // convenience getter for easy access to form fields
   get basicInfoFormControl() { return this.basicLogisticInformation.controls; }

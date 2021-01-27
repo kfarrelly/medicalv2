@@ -14,7 +14,6 @@ export class SendpharmadashboardComponent implements OnInit {
 	recievedtrans: any = [];
 	dlist:any=[];
 	tlist: any = [];
-   blockchainUrl: any = this.httpuser.blockchainUrl;
 
   constructor(private httpuser: AuthService, private qrReader: QrCodeReader, private http: HttpClient) { }
 

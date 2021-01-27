@@ -31,28 +31,28 @@ export class ActivationComponent implements OnInit {
 	this.actcode = this.route.snapshot.params['id'];
 	
 	
-	const Metadata = {
-        "activation": {
-			"code": this.actcode
-        }
-      }     
+	// const Metadata = {
+  //       "activation": {
+	// 		"code": this.actcode
+  //       }
+  //     }     
   
-  const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+  // const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
         
-      })
-    };
+  //     })
+  //   };
 	
-	 var x = this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
-       (val) => {		   
-        alert("Account verfied successfully");
-		this.router.navigate(['/login']);
+	//  var x = this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
+  //      (val) => {		   
+  //       alert("Account verfied successfully");
+	// 	this.router.navigate(['/login']);
 	    
-      },(err) => {		   
-        console.log(err);
-	    this.message = "Verfication code not match with any account. Kindly check and let us know.";
-      }); 
+  //     },(err) => {		   
+  //       console.log(err);
+	//     this.message = "Verfication code not match with any account. Kindly check and let us know.";
+  //     }); 
 }
       
     

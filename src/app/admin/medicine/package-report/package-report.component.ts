@@ -166,86 +166,86 @@ export class PackageReportComponent implements OnInit {
     console.log(serial, wholesalerId, transpoterId);
     //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 
-    const Metadata = {
-      "action": "sendToWholesaler",
-      "payloaddata": {
-        "serialNumber": serial,
-        "wholesaler": {
-          "address": wholesalerId,
-          "comment": "In Transaction"
-        },
-        "transporterid": transpoterId,
-		"level":this.levelvalue
-      },
+    // const Metadata = {
+    //   "action": "sendToWholesaler",
+    //   "payloaddata": {
+    //     "serialNumber": serial,
+    //     "wholesaler": {
+    //       "address": wholesalerId,
+    //       "comment": "In Transaction"
+    //     },
+    //     "transporterid": transpoterId,
+		// "level":this.levelvalue
+    //   },
 	  
-      "private": this.privateKey,
-      "public": this.mypublickey
-    }
+    //   "private": this.privateKey,
+    //   "public": this.mypublickey
+    // }
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json'
+    //   })
+    // };
 
-    var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
-      (val) => {
-        console.log("POST call successful value returned in body", val);
-        this.blockchain = val;
-        if (that.http.IsJsonString(this.blockchain.response.body)) {
-          JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
-          JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
-          console.log(JSON.parse);
-          this.status = JSON.parse(this.blockchain.response.body);
-          this.statusValue = this.status.data[0].status;
-          this.itemId = this.status.data[0].id;
-          if (this.statusValue == 'COMMITTED') {
+    // var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
+    //   (val) => {
+    //     console.log("POST call successful value returned in body", val);
+    //     this.blockchain = val;
+    //     if (that.http.IsJsonString(this.blockchain.response.body)) {
+    //       JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+    //       JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+    //       console.log(JSON.parse);
+    //       this.status = JSON.parse(this.blockchain.response.body);
+    //       this.statusValue = this.status.data[0].status;
+    //       this.itemId = this.status.data[0].id;
+    //       if (this.statusValue == 'COMMITTED') {
 
-            this.transection = new Transection(serial, wholesalerId, transpoterId);
-            this.base = this.http.medicineTransection(this.transection);
-            this.call = this.base.subscribe(
-              data => {
-                alert('Request Accepted');
-                let el: HTMLElement = this.completeModal.nativeElement;
-                el.click();
+    //         this.transection = new Transection(serial, wholesalerId, transpoterId);
+    //         this.base = this.http.medicineTransection(this.transection);
+    //         this.call = this.base.subscribe(
+    //           data => {
+    //             alert('Request Accepted');
+    //             let el: HTMLElement = this.completeModal.nativeElement;
+    //             el.click();
 
-              });
-          }
-          else {
-            alert('Request Rejected');
-            let el: HTMLElement = this.completeModal.nativeElement;
-            el.click();
-          }
-        } else {
+    //           });
+    //       }
+    //       else {
+    //         alert('Request Rejected');
+    //         let el: HTMLElement = this.completeModal.nativeElement;
+    //         el.click();
+    //       }
+    //     } else {
 
-          that.http1.get(this.blockchainUrl+"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-            this.blockchain2 = val
-            if (that.http.IsJsonString(this.blockchain2.body)) {
-              this.status = JSON.parse(this.blockchain2.body);
-              console.log('json value2', this.status.data[0].status);
-              this.statusValue = this.status.data[0].status;
-              this.itemId = this.status.data[0].id;
-              if (this.statusValue == 'COMMITTED') {
-                this.base = this.http.medicineTransection(this.transection);
-                this.call = this.base.subscribe(
-                  data => {
+    //       that.http1.get(this.blockchainUrl+"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+    //         this.blockchain2 = val
+    //         if (that.http.IsJsonString(this.blockchain2.body)) {
+    //           this.status = JSON.parse(this.blockchain2.body);
+    //           console.log('json value2', this.status.data[0].status);
+    //           this.statusValue = this.status.data[0].status;
+    //           this.itemId = this.status.data[0].id;
+    //           if (this.statusValue == 'COMMITTED') {
+    //             this.base = this.http.medicineTransection(this.transection);
+    //             this.call = this.base.subscribe(
+    //               data => {
 
-                    alert('Request Accepted');
-                    let el: HTMLElement = this.completeModal.nativeElement;
-                    el.click();
+    //                 alert('Request Accepted');
+    //                 let el: HTMLElement = this.completeModal.nativeElement;
+    //                 el.click();
 
-                  });
-              }
-              else {
-                alert('Request Rejected');
-                let el: HTMLElement = this.completeModal.nativeElement;
-                el.click();
-              }
-            }
-          })
-        }
-        // }).catch(function (err) {
-        //   console.log(err.message);
-      });
+    //               });
+    //           }
+    //           else {
+    //             alert('Request Rejected');
+    //             let el: HTMLElement = this.completeModal.nativeElement;
+    //             el.click();
+    //           }
+    //         }
+    //       })
+    //     }
+    //     // }).catch(function (err) {
+    //     //   console.log(err.message);
+    //   });
   }
 }

@@ -143,89 +143,89 @@ export class MedicineDetailComponent implements OnInit {
 
     //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 
-    const Metadata = {
-      "action": "medicineStatusUpdate",
-      "payloaddata": {
-        "serialNumber": serial,
+    // const Metadata = {
+    //   "action": "medicineStatusUpdate",
+    //   "payloaddata": {
+    //     "serialNumber": serial,
        
         
 
-        "physicalState": {
-          "timestamp": this.now,
-          "location": {
-            "type": 1,
-            "body": {
-              "address": location
-            }
-          },
-          "temprature": 12,
+    //     "physicalState": {
+    //       "timestamp": this.now,
+    //       "location": {
+    //         "type": 1,
+    //         "body": {
+    //           "address": location
+    //         }
+    //       },
+    //       "temprature": 12,
           
 
-        },
-        "userRole" :this.myrole,
-      },
-      "private": this.privateKey,
-      "public": this.mypublickey
-    }
+    //     },
+    //     "userRole" :this.myrole,
+    //   },
+    //   "private": this.privateKey,
+    //   "public": this.mypublickey
+    // }
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json'
+    //   })
+    // };
 
-    var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
-      (val) => {
-        console.log("POST call successful value returned in body", val);
-        this.blockchain = val;
-        if (that.http.IsJsonString(this.blockchain.response.body)) {
-          JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+    // var x = this.http1.post(this.blockchainUrl, Metadata, httpOptions).subscribe(
+    //   (val) => {
+    //     console.log("POST call successful value returned in body", val);
+    //     this.blockchain = val;
+    //     if (that.http.IsJsonString(this.blockchain.response.body)) {
+    //       JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-          this.status = JSON.parse(this.blockchain.response.body);
-          this.statusValue = this.status.data[0].status;
-          this.itemId = this.status.data[0].id;
-          if (this.statusValue == 'COMMITTED') {
+    //       this.status = JSON.parse(this.blockchain.response.body);
+    //       this.statusValue = this.status.data[0].status;
+    //       this.itemId = this.status.data[0].id;
+    //       if (this.statusValue == 'COMMITTED') {
 
-            this.mStatus = new Medicine2(serial, me, br, location, we, md, ed, mid, ro, this.now, this.mypublickey, this.updateStatus);
-            this.base = this.http.createmedicine2(this.mStatus);
-            this.call = this.base.subscribe(data => {
-              alert('Status Updated');
-              let el: HTMLElement = this.completeModal.nativeElement;
-              el.click(); 
-              this.medicineStatus2(this.serialNo);
-            });
-          }
-          else {
-            alert('Request Rejected');
-            let el: HTMLElement = this.completeModal.nativeElement;
-             el.click(); 
-          }
-        } else {
+    //         this.mStatus = new Medicine2(serial, me, br, location, we, md, ed, mid, ro, this.now, this.mypublickey, this.updateStatus);
+    //         this.base = this.http.createmedicine2(this.mStatus);
+    //         this.call = this.base.subscribe(data => {
+    //           alert('Status Updated');
+    //           let el: HTMLElement = this.completeModal.nativeElement;
+    //           el.click(); 
+    //           this.medicineStatus2(this.serialNo);
+    //         });
+    //       }
+    //       else {
+    //         alert('Request Rejected');
+    //         let el: HTMLElement = this.completeModal.nativeElement;
+    //          el.click(); 
+    //       }
+    //     } else {
 
-          that.http1.get(this.http.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-            this.blockchain2 = val
-            if (that.http.IsJsonString(this.blockchain2.body)) {
-              this.status = JSON.parse(this.blockchain2.body);              
-              this.statusValue = this.status.data[0].status;
-              this.itemId = this.status.data[0].id;
-              if (this.statusValue == 'COMMITTED') {
-                this.mStatus = new Medicine2(serial, me, br, location, we, md, ed, mid, ro, this.now, this.mypublickey, this.updateStatus);
-                this.base = this.http.createmedicine2(this.mStatus);
-                this.call = this.base.subscribe(data => {
-                  alert('Status Updated');
-                  let el: HTMLElement = this.completeModal.nativeElement;
-                  el.click(); 
-                  this.medicineStatus2(this.serialNo);
-                });
-              }
-              else {
-                alert('Request Rejected');
-                let el: HTMLElement = this.completeModal.nativeElement;
-                el.click(); 
-              }
-            }
-          })
-        }        
-      });
+    //       that.http1.get(this.http.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+    //         this.blockchain2 = val
+    //         if (that.http.IsJsonString(this.blockchain2.body)) {
+    //           this.status = JSON.parse(this.blockchain2.body);              
+    //           this.statusValue = this.status.data[0].status;
+    //           this.itemId = this.status.data[0].id;
+    //           if (this.statusValue == 'COMMITTED') {
+    //             this.mStatus = new Medicine2(serial, me, br, location, we, md, ed, mid, ro, this.now, this.mypublickey, this.updateStatus);
+    //             this.base = this.http.createmedicine2(this.mStatus);
+    //             this.call = this.base.subscribe(data => {
+    //               alert('Status Updated');
+    //               let el: HTMLElement = this.completeModal.nativeElement;
+    //               el.click(); 
+    //               this.medicineStatus2(this.serialNo);
+    //             });
+    //           }
+    //           else {
+    //             alert('Request Rejected');
+    //             let el: HTMLElement = this.completeModal.nativeElement;
+    //             el.click(); 
+    //           }
+    //         }
+    //       })
+    //     }        
+    //   });
   }
 }
