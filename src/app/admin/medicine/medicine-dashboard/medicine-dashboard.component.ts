@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 })
 export class MedicineDashboardComponent implements OnInit {
 
-  
+
   selectedWId: string = '';
   selectedTId: string = '';
   base;
@@ -27,7 +27,7 @@ export class MedicineDashboardComponent implements OnInit {
   users: any = [];
   transporters: any = [];
   transection: any = Transection;
-  
+
   blockchain: any = [];
   blockchain2: any = [];
   status: any = [];
@@ -37,25 +37,25 @@ export class MedicineDashboardComponent implements OnInit {
   privateKey: any;
   myrole;
   userId;
-  
-  
-  
+
+
+
   @ViewChild('completeModal') completeModal: ElementRef;
   blockchainUrl: any = this.http.blockchainUrl;;
   constructor(private http: AuthService, private http1: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.medicinelist();
-	this.medicinetransactions();
+    this.medicinetransactions();
     this.allWholesaler();
     this.allTransporter();
     this.mypublickey = localStorage.getItem("publicKey");
 
     this.privateKey = localStorage.getItem("privateKey");
-    this.myrole= localStorage.getItem("role");
+    this.myrole = localStorage.getItem("role");
     this.userId = localStorage.getItem("userId");
     console.log("User Idhhhhhhh", this.userId);
-    
+
     console.log(this.myrole);
   }
 
@@ -74,38 +74,38 @@ export class MedicineDashboardComponent implements OnInit {
     this.serialvalue = serialId;
   }
 
- 
+
 
   medicinelist() {
-    this.myrole= localStorage.getItem("role");
-   
-    if(this.myrole == 1){      
+    this.myrole = localStorage.getItem("role");
+
+    if (this.myrole == 1) {
       return this.http.getMedicineList().subscribe((data) => {
         this.list = data;
-        console.log("All Medicine",this.list);
+        console.log("All Medicine", this.list);
       });
 
-    }else{
+    } else {
       return this.http.getMedicineUserId().subscribe((data) => {
         console.log(data);
         this.list = data;
-        console.log("user Medicine",this.list);
+        console.log("user Medicine", this.list);
       });
 
     }
-    
-  }
-  
-  medicinetransactions() {
-   
-      return this.http.getMedicineTransection().subscribe((data) => {
-        this.trans = data;
-		
-		
-        console.log("All Medicine trans",this.trans);
-      });
 
-    
+  }
+
+  medicinetransactions() {
+
+    return this.http.getMedicineTransection().subscribe((data) => {
+      this.trans = data;
+
+
+      console.log("All Medicine trans", this.trans);
+    });
+
+
   }
 
   deleteMedicine(id) {
@@ -139,7 +139,14 @@ export class MedicineDashboardComponent implements OnInit {
     let that = this;
     console.log(serial, wholesalerId, transpoterId);
     //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
-
+    this.transection = new Transection(serial, wholesalerId, transpoterId);
+    this.base = this.http.medicineTransection(this.transection);
+    this.call = this.base.subscribe(
+      data => {
+        alert('Request Accepted');
+        let el: HTMLElement = this.completeModal.nativeElement;
+        el.click();
+      });
     // const Metadata = {
     //   "action": "sendToWholesaler",
     //   "payloaddata": {

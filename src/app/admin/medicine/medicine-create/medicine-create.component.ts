@@ -432,6 +432,13 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
     this.createmedicne = new Medicine(serialNo, medicine, MedicineCurrentTempurature, location, weight, '', this.medicineStatus, this.userId, customern, customername, shipton, countrycode, shiptoparty, pharmadeliveryno, salesorderendcustomer, purchaseorderendcustomer, shippedquantity, unit, aproductname, dosageform, packagetype, packagesize, globelmaterialno, plocalmaterialno, batchn, dateofmanufecture, releasedate, expirydate, productionqty, pproductname, pglobelmaterialno, apackagingsite, manufacturinglicense, gmvcertificateno, certificateno, productn, globalmaterialn, localmaterialn, areleasedate, abatchn, amanufacturingsite, amanufacturinglicense, mdate, edate, localmaterialno, barcode
     );
     console.log('createmedicne object => console of data', JSON.stringify(this.createmedicne));
+    this.base = this.httpuser.createmedicine(this.createmedicne);
+                this.call = this.base.subscribe((data) => {
+                  console.log("AT = " + JSON.stringify(data));
+                  this.medicineid = data.MedicineId;
+                  this.medicineserial = data.serial;
+                  alert('Request Accepted');
+                });
     //blockcahin
     // const Metadata = {
 

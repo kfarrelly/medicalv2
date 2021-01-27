@@ -121,7 +121,15 @@ export class MedicineListComponent implements OnInit {
     let that = this;
     console.log(serial, wholesalerId, transpoterId);
     //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
+    this.transection = new Transection(serial, wholesalerId, transpoterId);
+            this.base = this.http.medicineTransection(this.transection);
+            this.call = this.base.subscribe(
+              data => {
+                alert('Request Accepted');
+                let el: HTMLElement = this.completeModal.nativeElement;
+                el.click();
 
+              });
     // const Metadata = {
     //   "action": "sendToWholesaler",
     //   "payloaddata": {

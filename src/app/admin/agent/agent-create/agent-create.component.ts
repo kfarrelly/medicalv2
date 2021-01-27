@@ -51,7 +51,10 @@ export class AgentCreateComponent implements OnInit {
     } else {
 
       console.log('if the role is not 1',fName,lName);
-
+      let data = new register(fName, lName, role, mobile, location, email, pass, pkey, userId, this.itemId);
+                  this.http.saveSignup(data).subscribe((res) => {
+                    alert('Request Accepted');
+                  });
       this.mypublickey = localStorage.getItem("publicKey");
       this.privateKey = localStorage.getItem("privateKey");
       this.submitted = true;

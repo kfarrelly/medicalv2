@@ -98,7 +98,14 @@ getdetails(id,statusid) {
    this.mlist=data;
 
    //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
-			  
+			     this.displayTable=true; 
+   if(statusid == 5) this.medicineStatus = "Rejected by Pharma";
+   this.transporter(this.mlist[0].serial,this.mlist[0].medicine,this.mlist[0].barcode,this.mlist[0].location,this.mlist[0].weight,this.mlist[0].Edate,this.mlist[0].Mdate,
+    this.mlist[0].MedicineId,this.mlist[0].role,this.mlist[0].time,this.mypublickey,this.medicineStatus);
+				if(statusid == 5)
+					alert("Package Returned ");
+				else
+					alert("Package piked ");
 //  const Metadata = {
 //   "action": "recieveFromDistributer",
 //   "payloaddata": {

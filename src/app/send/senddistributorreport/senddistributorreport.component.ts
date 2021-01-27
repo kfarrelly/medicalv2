@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { QrCodeReader } from 'src/app/qr-code-reader.service';
 import { Subscription } from 'rxjs';
@@ -38,12 +38,12 @@ export class SenddistributorreportComponent implements OnInit {
   itemId: any = [];
   mypublickey: any;
   privateKey: any;
-  @ViewChild('completeModal')completeModal: ElementRef;
+  @ViewChild('completeModal') completeModal: ElementRef;
   blockchainUrl: any = this.httpuser.blockchainUrl;
   constructor(private httpuser: AuthService, private qrReader: QrCodeReader, private http: HttpClient) { }
 
   ngOnInit() {
-    this.medicineStatus="Recived to Distributer";
+    this.medicineStatus = "Recived to Distributer";
     this.mypublickey = localStorage.getItem("publicKey");
     this.privateKey = localStorage.getItem("privateKey");
     this.transporterMedicineId(this.mypublickey);
@@ -90,7 +90,10 @@ export class SenddistributorreportComponent implements OnInit {
       this.mlist = data;
 
       //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
-
+      this.displayTable = true;
+      this.transporter(this.mlist[0].serial, this.mlist[0].medicine, this.mlist[0].barcode, this.mlist[0].location, this.mlist[0].weight, this.mlist[0].Edate, this.mlist[0].Mdate,
+        this.mlist[0].MedicineId, this.mlist[0].role, this.mlist[0].time, this.mypublickey, this.medicineStatus);
+      alert("Package piked ");
       // const Metadata = {
       //   "action": "recieveFromWholesaler",
       //   "payloaddata": {
@@ -168,53 +171,50 @@ export class SenddistributorreportComponent implements OnInit {
       console.log(this.tlist);
     });
   }
-  
-  
-  exporttocsv()
-  {
-	  var data = [];
-	  var  datarow = {};
-	
-	if(Array.isArray(this.TMlist))
-			this.meds = this.TMlist;
-		else
-			this.meds = this.TMlist.split(',');
-		
-	  for(var i=0;i<=this.meds.length;i++)
-	  {
-		  console.log("meds==" + this.meds[i]);
-		  if(typeof this.meds[i] != "undefined")
-		  {
-			datarow = {
-			serial:this.meds[i].serial,
-			medicine: this.meds[i].medicine,
-			manufactured: this.meds[i].Mdate,
-			location: this.meds[i].location,
-			weight: this.meds[i].weight
-			};
-			data.push(datarow);
-		  }
-	  }
 
-		var options = {
-		fieldSeparator: ',',
-		quoteStrings: '"',
-		decimalseparator: '.',
-		showLabels: true,
-		showTitle: true,
-		headers: ["Serial Number", "Medicine code", "Manufactured Date","Location","Weight"]
-		};
 
-		new Angular5Csv(data, 'Report1',options);
+  exporttocsv() {
+    var data = [];
+    var datarow = {};
 
-		return true;
+    if (Array.isArray(this.TMlist))
+      this.meds = this.TMlist;
+    else
+      this.meds = this.TMlist.split(',');
+
+    for (var i = 0; i <= this.meds.length; i++) {
+      console.log("meds==" + this.meds[i]);
+      if (typeof this.meds[i] != "undefined") {
+        datarow = {
+          serial: this.meds[i].serial,
+          medicine: this.meds[i].medicine,
+          manufactured: this.meds[i].Mdate,
+          location: this.meds[i].location,
+          weight: this.meds[i].weight
+        };
+        data.push(datarow);
+      }
+    }
+
+    var options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: true,
+      headers: ["Serial Number", "Medicine code", "Manufactured Date", "Location", "Weight"]
+    };
+
+    new Angular5Csv(data, 'Report1', options);
+
+    return true;
   }
 
 
 
 
-  transporter(a, b, c, d, e, f, g, h, i, j, k,l) {
-    this.transporter1 = new Medicine2(a, b, c, d, e, f, g, h, i, j, k,l);
+  transporter(a, b, c, d, e, f, g, h, i, j, k, l) {
+    this.transporter1 = new Medicine2(a, b, c, d, e, f, g, h, i, j, k, l);
     this.base = this.httpuser.transporter(this.transporter1);
     this.call = this.base.subscribe(
       data => {
@@ -233,7 +233,7 @@ export class SenddistributorreportComponent implements OnInit {
 
   mTransection(serial: string, wholesalerId: string, transpoterId: string) {
     let that = this;
-    console.log("ID",wholesalerId);
+    console.log("ID", wholesalerId);
     //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 
     // const Metadata = {
@@ -274,7 +274,7 @@ export class SenddistributorreportComponent implements OnInit {
     //           alert('Request Accepted');
     //           let el: HTMLElement = this.completeModal.nativeElement;
     //          el.click(); 
-              
+
 
     //         });
     //       }
@@ -282,7 +282,7 @@ export class SenddistributorreportComponent implements OnInit {
     //         alert('Request Rejected');
     //         let el: HTMLElement = this.completeModal.nativeElement;
     //          el.click(); 
-              
+
     //       }
     //     } else {
 

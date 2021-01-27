@@ -98,7 +98,13 @@ console.log(this.TMlist);
     this.privateKey =localStorage.getItem("privateKey");  
     this.httpuser.getPackageId(id).subscribe(data => {
    this.mlist=data;
-
+   this.displayTable=true; 
+    if(statusid == 5) this.packageStatus = "Rejected from Distributer";
+		this.transporter(this.mlist[0].serial,this.mlist[0].medicines, this.mlist[0].barcode, this.mlist[0].location, this.mlist[0].level, this.mlist[0].packages, this.mlist[0].PackageId, this.mlist[0].role, this.mlist[0].time, this.mypublickey,this.packageStatus);
+		if(statusid == 5)
+			alert("Package Returned ");
+		else
+			alert("Package piked ");
    //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 			  
 //  const Metadata = {

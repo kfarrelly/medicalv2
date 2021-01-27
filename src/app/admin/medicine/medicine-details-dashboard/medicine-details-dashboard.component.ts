@@ -146,7 +146,15 @@ export class MedicineDetailsDashboardComponent implements OnInit {
     }
 
     let that = this;
-
+    this.mStatus = new Medicine2(serial, me, br, location, we, md, ed, mid, ro, this.now, this.mypublickey, this.updateStatus);
+   
+    this.base = this.http.createmedicine2(this.mStatus);
+            this.call = this.base.subscribe(data => {
+              alert('Status Updated');
+              let el: HTMLElement = this.completeModal.nativeElement;
+              el.click(); 
+              this.medicineStatus2(this.serialNo);
+            });
     //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 
     // const Metadata = {

@@ -74,6 +74,7 @@ blockchainUrl: any = this.http.blockchainUrl;
 			alert('Profile data saved ');
 			this.closeProfile.nativeElement.click()
      });
+
    }
 
     updateuserpassword(email,curpass,pass,confpass,publickey) { 
@@ -109,7 +110,8 @@ blockchainUrl: any = this.http.blockchainUrl;
                  () => {
                 console.log("User Data Checks Out");
           });
-   }
+   }  
+ 
 
 // //     let that = this; 
 //     this.mypublickey = localStorage.getItem("publicKey");

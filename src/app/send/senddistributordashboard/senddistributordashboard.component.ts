@@ -128,7 +128,10 @@ export class SenddistributordashboardComponent implements OnInit {
       this.mlist = data;
 
       //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
-
+              this.displayTable = true;
+              this.transporter(this.mlist[0].serial, this.mlist[0].medicine, this.mlist[0].barcode, this.mlist[0].location, this.mlist[0].weight, this.mlist[0].Edate, this.mlist[0].Mdate,
+                this.mlist[0].MedicineId, this.mlist[0].role, this.mlist[0].time, this.mypublickey,this.medicineStatus);
+              alert("Package piked ");
       // const Metadata = {
       //   "action": "recieveFromWholesaler",
       //   "payloaddata": {

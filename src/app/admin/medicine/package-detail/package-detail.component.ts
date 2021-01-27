@@ -188,6 +188,14 @@ export class PackageDetailComponent implements OnInit {
 
     let that = this;
 
+            this.mStatus = new Package2(serial, me, br, location, level, packages, pid, ro, this.now, this.mypublickey, this.updateStatus);
+            this.base = this.http.createpackage2(this.mStatus);
+            this.call = this.base.subscribe(data => {
+              alert('Status Updated');
+              let el: HTMLElement = this.completeModal.nativeElement;
+              el.click(); 
+              this.packageStatus2(this.serialNo);
+            });
     //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
 
     // const Metadata = {

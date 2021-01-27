@@ -238,6 +238,14 @@ export class PackageCreateComponent implements OnInit, OnDestroy {
    
     this.createpackage = new Package(this.serialnum, this.level, this.medicines, this.packages, this.location,this.userId);
     console.log('console of data',this.createpackage);
+    this.base = this.httpuser.createpackage(this.createpackage);
+              this.call = this.base.subscribe((data) => {
+    			console.log("AT = "+ JSON.stringify(data));
+                this.packageid = data.PackageId;
+                this.packageserial = data.serial; 
+                 alert('Request Accepted');
+                 //this.registerForm.reset();
+              });
     //blockcahin
 	// if(this.level > 0)
 	// 	var inbounds = this.medicines;
