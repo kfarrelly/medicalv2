@@ -75,7 +75,18 @@ function getAddress(key, length = 64) {
 function getUserID(userAddress, uesrRole) { return (PREFIX + "0" + uesrRole + getAddress(userAddress, 62)) }
 function getMedicineID(serialNumber) { return (PREFIX + "06" + getAddress(serialNumber, 62)) }
 
+function toStringObject(o) {
+	Object.keys(o).forEach(k => {
+	  if (typeof o[k] === 'object') {
+		return toString(o[k]);
+	  }
 
+     let objectData= '' + o[k];
+     o[k]= objectData.toString()
+	});
+
+	return o;
+  }
 
 /// generatin public key by private key for verification
 
@@ -247,20 +258,7 @@ app.post("/signup", (req, res) => {
 			if (!result) {
 				myData.save().then( async (item) => {
           console.log(item);
-          let userQldb ;
-          userQldb= {
-            firstName: item.firstName.toString(),
-            lastName: item.lastName.toString(),
-            role: item.role.toString(),
-            mobileNo: item.mobileNo.toString(),
-            location: item.location,
-            email: item.email.toString(),
-            activationKey: item.activationKey.toString(),
-            userId: item._id.toString(),
-          };
 
-
-          let register=await insertDocument('UserRegister',userQldb);
 
 					// var mailOptions = {
 					// 	from: 'root@meditrace.com',
@@ -276,7 +274,7 @@ app.post("/signup", (req, res) => {
 					// 		console.log('Email sent: ' + info.response);
 					// 	}
 					// });
-          console.log(register);
+        //  console.log(register);
 					var message =  {
 						userId:"admin",
 						notification:"A User request "+item.firstName+" "+item.lastName+" has been recieved."
@@ -338,8 +336,12 @@ app.post("/signup2", (req, res) => {
 
 		var myData2 = new Userlogin2(req.body);
 
-		myData2.save().then((item) => {
-			res.status(200).send(JSON.stringify("item saved to database", item));
+		myData2.save().then(async (item) => {
+      let userQldb ;
+      userQldb= JSON.parse(JSON.stringify(item));
+      //userQldb= toStringObject(item);
+      let register= await insertDocument('UserRegister',userQldb);
+			res.status(200).send(JSON.stringify("item saved to database", register));
 		}).catch((err) => {
 			res.status(400).send(JSON.stringify("database not saved", err));
 		});
@@ -685,7 +687,14 @@ app.post('/newuser', (req, res) => {
 		console.log(medicine);
 		console.log("Medicine "+genMedicineId+" has been created successfully.");
 		medicine.MedicineId = genMedicineId;``
-		medicine.save().then((result) => {
+		medicine.save().then(async (result) => {
+      let medicineQldb ;
+
+      medicineQldb= JSON.parse(JSON.stringify(result));
+      //userQldb= toStringObject(item);
+      let medicineQldbDetail= await insertDocument('Medicine',medicineQldb);
+
+
 
 			var message =  {
 				userId:"admin",
@@ -732,7 +741,12 @@ app.post('/newuser', (req, res) => {
 		var genPackageId = getMedicineID(req.body.serial);
 		medicinepackage = new cpackage(req.body);
 		medicinepackage.PackageId = genPackageId;
-		medicinepackage.save().then((result) => {
+		medicinepackage.save().then(async (result) => {
+      let medicinepackageQldb ;
+
+      medicinepackageQldb= JSON.parse(JSON.stringify(result));
+      //userQldb= toStringObject(item);
+      let medicinepackageQldbDetail= await insertDocument('Package',medicinepackageQldb);
 
 			if(Array.isArray(result.medicines))
 				var meds = result.medicines;

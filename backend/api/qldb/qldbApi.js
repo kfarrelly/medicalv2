@@ -60,7 +60,7 @@ let tableExists = false;
 module.exports = {
   insertDocument: async (TableName, documentData) => {
     try {
-      console.log(documentData);
+      console.log('string',documentData);
       let driver;
       driver = await createQldbSession();
 
