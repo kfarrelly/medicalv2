@@ -69,9 +69,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 //import { ZXingScannerModule } from './admin/dashboard/modules/zxing-scanner/zxing-scanner.module';
 
-
-
-
 @NgModule({
     declarations: [
         AppComponent,

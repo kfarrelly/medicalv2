@@ -38,6 +38,14 @@ export class AgentCreateComponent implements OnInit {
 
   saveUser(fName, lName, role, mobile, location, email, pass, pkey, userId, transectionId) {
     let that = this;
+    let data = new register(fName, lName, role, mobile, location, email, pass, pkey, userId, transectionId);
+
+    this.http.saveSignup(data).subscribe((res) => {
+      alert('Request Accepted...');
+      let el: HTMLElement = this.completeModal.nativeElement;
+      el.click(); 
+    
+    });
     if (role == 1) {
 
       let data = new register(fName, lName, role, mobile, location, email, pass, pkey, userId, transectionId);

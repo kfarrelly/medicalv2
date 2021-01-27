@@ -22,6 +22,7 @@ var { transporter } = require('./database/transporter');
 var { packagetransporter } = require('./database/packagetransporter');
 var { manufacture } = require('./database/manufacture');
 var { mRequest } = require('./database/medicineRequest');
+var { insertDocument } = require('./api/qldb/qldbApi');
 var uuid = require('uuid');
 
 var nodemailer = require('nodemailer');
@@ -74,7 +75,18 @@ function getAddress(key, length = 64) {
 function getUserID(userAddress, uesrRole) { return (PREFIX + "0" + uesrRole + getAddress(userAddress, 62)) }
 function getMedicineID(serialNumber) { return (PREFIX + "06" + getAddress(serialNumber, 62)) }
 
+function toStringObject(o) {
+	Object.keys(o).forEach(k => {
+	  if (typeof o[k] === 'object') {
+		return toString(o[k]);
+	  }
 
+     let objectData= '' + o[k];
+     o[k]= objectData.toString()
+	});
+
+	return o;
+  }
 
 /// generatin public key by private key for verification
 
@@ -224,7 +236,7 @@ app.post("/activation", (req, res) => {
 
 	// signup post api
 
-	app.post("/signup", (req, res) => {
+app.post("/signup", (req, res) => {
 
 		//public private key;
 		const context = createContext('secp256k1');
@@ -244,23 +256,25 @@ app.post("/activation", (req, res) => {
 		myData.status = 0;
 		Userlogin2.findOne({ 'email': req.body.email }).then((result) => {
 			if (!result) {
-				myData.save().then((item) => {
-					console.log(item);
-					var mailOptions = {
-						from: 'root@meditrace.com',
-						to: item.email,
-						subject: 'Email verification ',
-						text: 'You are Registered as '+item.role,
-						html: '<b>Kindly click on the link below to verify your email address. <a href="http://84.22.96.222/emailverification/'+item.activationKey+'">Click Here</a></b>'
-					};
-						transport.sendMail(mailOptions, function (error, info) {
-						if (error) {
-							console.log(error);
-						} else {
-							console.log('Email sent: ' + info.response);
-						}
-					});
+				myData.save().then( async (item) => {
+          console.log(item);
 
+
+					// var mailOptions = {
+					// 	from: 'root@meditrace.com',
+					// 	to: item.email,
+					// 	subject: 'Email verification ',
+					// 	text: 'You are Registered as '+item.role,
+					// 	html: '<b>Kindly click on the link below to verify your email address. <a href="http://84.22.96.222/emailverification/'+item.activationKey+'">Click Here</a></b>'
+					// };
+					// transport.sendMail(mailOptions, function (error, info) {
+					// 	if (error) {
+					// 		console.log(error);
+					// 	} else {
+					// 		console.log('Email sent: ' + info.response);
+					// 	}
+					// });
+        //  console.log(register);
 					var message =  {
 						userId:"admin",
 						notification:"A User request "+item.firstName+" "+item.lastName+" has been recieved."
@@ -272,6 +286,7 @@ app.post("/activation", (req, res) => {
 							res.status(400).send(JSON.stringify("Server Error", err));
 						});
 				}).catch((err) => {
+          console.log("error user",err);
 					res.status(400).send(JSON.stringify("Server Error", err));
 				});
 			}
@@ -302,7 +317,7 @@ app.post("/activation", (req, res) => {
 
 	//user schema 2
 
-	app.post("/signup2", (req, res) => {
+app.post("/signup2", (req, res) => {
 
 		var mailOptions = {
 			from: 'root@meditrace.com',
@@ -321,14 +336,18 @@ app.post("/activation", (req, res) => {
 
 		var myData2 = new Userlogin2(req.body);
 
-		myData2.save().then((item) => {
-			res.status(200).send(JSON.stringify("item saved to database", item));
+		myData2.save().then(async (item) => {
+      let userQldb ;
+      userQldb= JSON.parse(JSON.stringify(item));
+      //userQldb= toStringObject(item);
+      let register= await insertDocument('UserRegister',userQldb);
+			res.status(200).send(JSON.stringify("item saved to database", register));
 		}).catch((err) => {
 			res.status(400).send(JSON.stringify("database not saved", err));
 		});
 	});
 
-  app.get('/password', (req, res) => {
+app.get('/password', (req, res) => {
     try{
       bcrypt.genSalt(7, (err, salt) => {
         if (err) { return console.log(err); }
@@ -343,10 +362,10 @@ app.post("/activation", (req, res) => {
       catch (err) {
         return res.status(500).send(err);
       }
-    })
+})
 
 	//login api
-	app.post('/login', (req, res) => {
+app.post('/login', (req, res) => {
 
 		Userlogin2.findOne({ 'email': req.body.email }).then((result) => {
       console.log(req.body.password);
@@ -400,7 +419,7 @@ app.post("/activation", (req, res) => {
 
 	//new user api
 
-	app.post('/newuser', (req, res) => {
+app.post('/newuser', (req, res) => {
 		res.header('confirmation', 'Creating New user');
 
 
@@ -668,7 +687,14 @@ app.post("/activation", (req, res) => {
 		console.log(medicine);
 		console.log("Medicine "+genMedicineId+" has been created successfully.");
 		medicine.MedicineId = genMedicineId;``
-		medicine.save().then((result) => {
+		medicine.save().then(async (result) => {
+      let medicineQldb ;
+
+      medicineQldb= JSON.parse(JSON.stringify(result));
+      //userQldb= toStringObject(item);
+      let medicineQldbDetail= await insertDocument('Medicine',medicineQldb);
+
+
 
 			var message =  {
 				userId:"admin",
@@ -715,7 +741,12 @@ app.post("/activation", (req, res) => {
 		var genPackageId = getMedicineID(req.body.serial);
 		medicinepackage = new cpackage(req.body);
 		medicinepackage.PackageId = genPackageId;
-		medicinepackage.save().then((result) => {
+		medicinepackage.save().then(async (result) => {
+      let medicinepackageQldb ;
+
+      medicinepackageQldb= JSON.parse(JSON.stringify(result));
+      //userQldb= toStringObject(item);
+      let medicinepackageQldbDetail= await insertDocument('Package',medicinepackageQldb);
 
 			if(Array.isArray(result.medicines))
 				var meds = result.medicines;

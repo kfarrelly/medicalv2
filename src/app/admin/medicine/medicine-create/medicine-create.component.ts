@@ -438,7 +438,8 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
                   this.medicineid = data.MedicineId;
                   this.medicineserial = data.serial;
                   alert('Request Accepted');
-                });
+                  //this.registerForm.reset();
+        });
     //blockcahin
     // const Metadata = {
 
