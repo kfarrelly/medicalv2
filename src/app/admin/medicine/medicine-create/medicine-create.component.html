@@ -535,10 +535,37 @@
               </div>
             </div>
           </div>
+          <div class="col">
+            <div class="form-group">
+              <label>Expiry Date:</label>
+              <input #rld type="date" name="ExpiryDate" formControlName="ExpiryDate"
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.ExpiryDate.errors }" class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.ExpiryDate.errors" class="invalid-feedback">
+                <div *ngIf="requirementInfoFormControl.ExpiryDate.errors.required">Expiry Date required</div>
+              </div>
+
+
+            </div>
+          </div>
         </div>
         <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label>Local Material No:</label>
+              <input #rld type="date" name="localmaterialno" formControlName="localmaterialno"
+                [ngClass]="{ 'is-invalid': requirementSubmit && requirementInfoFormControl.localmaterialno.errors }" class="form-control required">
+              <div *ngIf="requirementSubmit && requirementInfoFormControl.localmaterialno.errors" class="invalid-feedback">
+                <div *ngIf="requirementInfoFormControl.localmaterialno.errors.required">localmaterialno required</div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
           <div class="col col d-flex justify-content-end">
-            <button class="btn btn-primary width-100px" type="submit">Create Records</button>
+            <button class="btn btn-primary width-100px" type="submit" >Create Records</button>
           </div>
         </div>
       </form>
