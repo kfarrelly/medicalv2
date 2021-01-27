@@ -2,9 +2,15 @@ const { createQldbWriter, QldbSession, QldbWriter, Result, TransactionExecutor }
 
 const { Reader } = require('ion-js');
 
-const { closeQldbSession, createQldbSession } = require('../custom_resources/QLDBHelpers/ConnectToLedger');
+const { closeQldbSession, createQldbSession } = require('./custom_resources/QLDBHelpers/ConnectToLedger');
 
 var util = require('./util.js');
+
+
+const tableName = "UserRegister";
+const indexes = ["userId"];
+const adLedger = 'dev-medichain';
+
 async function  ensureTable (driver){
   try {
 
@@ -19,16 +25,16 @@ async function  ensureTable (driver){
     });
 
     if (!exists) {
-      await createTableandIndexes();
+      //await createTableandIndexes();
     }
 
   } catch (e) {
     console.error(e);
 
-    await createTableandIndexes();
+    //await createTableandIndexes();
   }
   finally {
-    closeQldbSession(driver);
+    //closeQldbSession(driver);
   }
 }
 
@@ -36,6 +42,7 @@ async function insertDocument(txn,
   tableName,
   documents
 ){
+  console.log("insert",documents)
   const statement = `INSERT INTO ${tableName} ?`;
   const documentsWriter = createQldbWriter();
   util.writeValueAsIon(documents, documentsWriter);
@@ -44,24 +51,32 @@ async function insertDocument(txn,
 }
 
 
-export default {
-  registerUser: async (userData) => {
+let tableExists = false;
+
+module.exports = {
+  insertDocument: async (TableName, documentData) => {
     try {
-      console.log(userData);
+      console.log(documentData);
       let driver;
       driver = await createQldbSession();
 
-      if (!tableExists) {
-        await ensureTable(driver);
-      }
+      // if (!tableExists) {
+      //   await ensureTable(driver);
+      // }
+      let dataArray = [];
+      dataArray.push(documentData);
+      console.log(dataArray);
 
-      let userBody = JSON.parse(req.body);
 
       try {
 
           const txnResponse= await driver.executeLambda(async txn => {
-            txn.execute(`INSERT INTO ${tableName} ?`, userBody);
-          });
+            // txn.execute(`INSERT INTO ${tableName} ?`, userBody);
+            console.log("Inserting multiple documents into the 'User' table...");
+            let  documentIds = await insertDocument(txn, TableName, dataArray);
+            const listOfDocumentIds = documentIds.getResultList();
+              console.log("VehicleRegistration'...", listOfDocumentIds);
+          },() => console.log("Retrying due to OCC conflict..."));
 
          return {
           success: true,
@@ -69,12 +84,22 @@ export default {
           data: txnResponse
         };
 
-      } finally {
-          closeQldbSession(session);
+      }
+      catch (err) {
+        console.log("err'...", err);
+        return {
+          success: false,
+          message: err,
+          data: null
+        };
+      }
+      finally {
+          closeQldbSession(driver);
       }
 
 
     } catch (err) {
+      console.log("err1'...", err);
       return {
         success: false,
         message: err.toString(),

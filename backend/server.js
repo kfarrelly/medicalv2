@@ -22,6 +22,7 @@ var { transporter } = require('./database/transporter');
 var { packagetransporter } = require('./database/packagetransporter');
 var { manufacture } = require('./database/manufacture');
 var { mRequest } = require('./database/medicineRequest');
+var { insertDocument } = require('./api/qldb/qldbApi');
 var uuid = require('uuid');
 
 var nodemailer = require('nodemailer');
@@ -244,23 +245,38 @@ app.post("/signup", (req, res) => {
 		myData.status = 0;
 		Userlogin2.findOne({ 'email': req.body.email }).then((result) => {
 			if (!result) {
-				myData.save().then((item) => {
-					console.log(item);
-					var mailOptions = {
-						from: 'root@meditrace.com',
-						to: item.email,
-						subject: 'Email verification ',
-						text: 'You are Registered as '+item.role,
-						html: '<b>Kindly click on the link below to verify your email address. <a href="http://84.22.96.222/emailverification/'+item.activationKey+'">Click Here</a></b>'
-					};
-						transport.sendMail(mailOptions, function (error, info) {
-						if (error) {
-							console.log(error);
-						} else {
-							console.log('Email sent: ' + info.response);
-						}
-					});
+				myData.save().then( async (item) => {
+          console.log(item);
+          let userQldb ;
+          userQldb= {
+            firstName: item.firstName.toString(),
+            lastName: item.lastName.toString(),
+            role: item.role.toString(),
+            mobileNo: item.mobileNo.toString(),
+            location: item.location,
+            email: item.email.toString(),
+            activationKey: item.activationKey.toString(),
+            userId: item._id.toString(),
+          };
 
+
+          let register=await insertDocument('UserRegister',userQldb);
+
+					// var mailOptions = {
+					// 	from: 'root@meditrace.com',
+					// 	to: item.email,
+					// 	subject: 'Email verification ',
+					// 	text: 'You are Registered as '+item.role,
+					// 	html: '<b>Kindly click on the link below to verify your email address. <a href="http://84.22.96.222/emailverification/'+item.activationKey+'">Click Here</a></b>'
+					// };
+					// transport.sendMail(mailOptions, function (error, info) {
+					// 	if (error) {
+					// 		console.log(error);
+					// 	} else {
+					// 		console.log('Email sent: ' + info.response);
+					// 	}
+					// });
+          console.log(register);
 					var message =  {
 						userId:"admin",
 						notification:"A User request "+item.firstName+" "+item.lastName+" has been recieved."
@@ -272,6 +288,7 @@ app.post("/signup", (req, res) => {
 							res.status(400).send(JSON.stringify("Server Error", err));
 						});
 				}).catch((err) => {
+          console.log("error user",err);
 					res.status(400).send(JSON.stringify("Server Error", err));
 				});
 			}
