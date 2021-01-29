@@ -125,12 +125,13 @@
       margin: 0 auto; }
     header h1 a {
       display: block;
-      height: 26px;
+      height: 40px;
       overflow: hidden;
-      text-indent: -9999px;
+      /* text-indent: -9999px; */
       white-space: nowrap;
       width: 150px;
-      background-image: url("./../../assets/images/logo-inline.png");
+      color: white;
+      /* background-image: url("./../../assets/images/qldb.png");  */
       float: none;
       left: 43px;
       position: absolute;
@@ -162,7 +163,7 @@
       }
       @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
         header h1 a {
-          background-image: url("./../../assets/images/logo-inline.png");
+          background-image: url("./../../assets/images/qldb.png");
           -webkit-background-size: 150px 26px;
           -moz-background-size: 150px 26px;
           -o-background-size: 150px 26px;
