@@ -230,7 +230,11 @@ transporter(a,b,c,d,e,f,g,h,i,j,k,l){
 mTransection(serial:string,distributerId:string,transpoterId:string) {  
   let that = this; 
   //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
-			  
+	  this.transection = new Transection(serial,distributerId,transpoterId);
+    this.base = this.httpuser.medicineTransection(this.transection);
+    this.call = this.base.subscribe(data => {              
+             alert('Request Accepted');          
+     });		  
 //  const Metadata = {
 // 			  "action": "sendToDistributer",
 //     "payloaddata": {

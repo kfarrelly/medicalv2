@@ -495,14 +495,10 @@ export class MedicineCreateComponent implements OnInit, OnDestroy {
                   this.medicineid = data.MedicineId;
                   this.medicineserial = data.serial;
                   alert('Request Accepted');
-<<<<<<< HEAD
-                  this.registerForm.reset();
-=======
                   let el: HTMLElement = this.completeModal.nativeElement;
                   el.click();
                  
                   //this.registerForm.reset();
->>>>>>> 939f06b95029bb6ce4272f4e8973a5f71a11a9cd
         });
     //blockcahin
     // const Metadata = {

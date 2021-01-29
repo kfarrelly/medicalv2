@@ -1,5 +1,8 @@
 const express = require("express");
+var dotenv = require('dotenv');
 const app = express();
+dotenv.config();
+
 var { Smodel } = require('./database/signup');
 var { notification } = require('./database/notification');
 var { Userlogin2 } = require('./database/login')
@@ -35,8 +38,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.listen(10000, () => {
-	console.log("server is running on port 10000");
+app.listen(process.env.port || 10000, () => {
+	console.log("server is running on port "+ process.env.Port);
 });
 
 /**********************************************email************************************************/
@@ -634,7 +637,14 @@ app.post('/newuser', (req, res) => {
 				res.status(400).send("Field Already Exits");
 			} else {
 				createtrans = new packagetransporter(req.body);
-				createtrans.save().then((result) => {
+				createtrans.save().then(async (result) => {
+
+          let packagetransporterQldb ;
+          packagetransporterQldb= JSON.parse(JSON.stringify(item));
+          //userQldb= toStringObject(item);
+          let packagetransporterQldbDetail= await insertDocument('PackageTransporter',packagetransporterQldb);
+
+
 					console.log('my result 2',result);
 					res.status(200).send(JSON.stringify("User created", result));
 				}).catch((err) => {
@@ -895,10 +905,14 @@ app.post('/newuser', (req, res) => {
 		console.log('transection', req.body);
 		res.header('confirmation', 'new transection');
 		mTrans = new mTransection(req.body);
-		mTrans.save().then((result) => {
+		mTrans.save().then(async (result) => {
 			console.log('transection result', result);
 			//res.status(200).send(JSON.stringify(result));
+      let transectionQldb ;
 
+      transectionQldb= JSON.parse(JSON.stringify(result));
+      //userQldb= toStringObject(item);
+      let transectionQldbDetail= await insertDocument('SupplyTransection',transectionQldb);
 
 			var message =  {
 				userId:result.wholesalerId,
@@ -1052,7 +1066,7 @@ app.post('/newuser', (req, res) => {
 		});
 	});
 
-		app.post('/getPkgMedicineUserId',(req,res)=>{
+	app.post('/getPkgMedicineUserId',(req,res)=>{
 		console.log(req.params);
 		console.log(req.body);
 		console.log(req.query);
@@ -1082,8 +1096,6 @@ app.post('/newuser', (req, res) => {
 			res.status(400).send(err);
 		});
 	});
-
-
 
 	app.get('/getnotification', (req, res) => {
 		notification.find({}).then((result) => {
@@ -1209,7 +1221,6 @@ app.post('/newuser', (req, res) => {
 		});
 	});
 
-
 	app.get('/getdistributerlist', (req, res) => {
 		distrubuter.find({}).then((result) => {
 			res.status(200).send(result);
@@ -1217,7 +1228,6 @@ app.post('/newuser', (req, res) => {
 			res.status(400).send(err);
 		});
 	});
-
 
 	app.get('/getmanufacturelist', (req, res) => {
 		manufacture.find({}).then((result) => {
@@ -1521,12 +1531,6 @@ app.post('/newuser', (req, res) => {
 			function (err, doc) { }
 		);
 	});
-
-
-
-
-
-
 
 	//---Logout
 	app.post('/logOut', (req, res) => {

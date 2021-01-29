@@ -14,9 +14,9 @@ const pooledQldbDriver = createQldbDriver();
 function createQldbDriver(
   ledgerName = process.env.LEDGER_NAME || 'dev-medichain',
   serviceConfigurationOptions = {
-      accessKey: 'AKIAIWFI4OEFQNUIDQ2A',
-      secretKey: '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',
-      region: 'eu-west-1',
+      accessKey: process.env.AccessKey,
+      secretKey: process.env.SecretKey,
+      region: process.env.Region,
     }
 ) {
   const qldbDriver = new PooledQldbDriver(ledgerName, serviceConfigurationOptions);

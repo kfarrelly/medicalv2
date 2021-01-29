@@ -10,13 +10,18 @@
   "private": true,
   "dependencies": {
     "Buffer": "0.0.0",
+    "amazon-qldb-driver-nodejs": "0.1.0-preview.2",
+    "aws-sdk": "^2.596.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.2.1",
+    "cfn-response-promise": "^1.0.1",
     "core-js": "^2.5.4",
     "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
+    "ion-js": "^3.1.2",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "lsof": "^0.1.0",
@@ -26,11 +31,7 @@
     "sawtooth-sdk": "^1.0.5",
     "tslib": "^1.9.0",
     "uuid": "^3.3.2",
-    "zone.js": "~0.8.26",
-    "amazon-qldb-driver-nodejs": "0.1.0-preview.2",
-    "aws-sdk": "^2.596.0",
-    "cfn-response-promise": "^1.0.1",
-    "ion-js": "^3.1.2"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@types/node": "~8.9.4",

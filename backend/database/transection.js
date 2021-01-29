@@ -1,10 +1,9 @@
 var mongoose = require('mongoose');
 
 medicineTransection = mongoose.Schema({
-
 	serial: {
 		type:String,
-		required:true,	
+		required:true,
 		trim:true
 	},
 	wholesalerId: {

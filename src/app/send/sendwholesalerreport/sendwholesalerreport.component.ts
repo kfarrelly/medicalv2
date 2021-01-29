@@ -273,11 +273,11 @@ mTransection(serial:string,distributerId:string,transpoterId:string) {
 //   this.statusValue = this.status.data[0].status;
 //   this.itemId = this.status.data[0].id;
 //   if (this.statusValue == 'COMMITTED') {
-//     this.transection = new Transection(serial,distributerId,transpoterId);
-//     this.base = this.httpuser.medicineTransection(this.transection);
-//     this.call = this.base.subscribe(data => {        
-//         alert('Request Accepted');       
-//       });
+    this.transection = new Transection(serial,distributerId,transpoterId);
+    this.base = this.httpuser.medicineTransection(this.transection);
+    this.call = this.base.subscribe(data => {        
+        alert('Request Accepted');       
+      });
 //     }
 //     else {
 //       alert('Request Rejected');
