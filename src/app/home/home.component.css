@@ -1064,7 +1064,7 @@
       overflow: hidden;
       text-indent: -9999px;
       white-space: nowrap;
-      width: 72px;
+      width: 72px; 
       background-image: url("./../../assets/images/medicine-icon.png"); }
       @media only screen and (-webkit-min-device-pixel-ratio: 2),
       only screen and (-moz-min-device-pixel-ratio: 2),

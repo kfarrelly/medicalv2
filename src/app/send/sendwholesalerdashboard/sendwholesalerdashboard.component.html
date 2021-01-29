@@ -72,7 +72,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let list of TMlist">
-              <td><a [routerLink]="['/medicinedetailsdashboard',list.serial]" style="color:blue">{{list.serial}}</a></td>
+              <td><a [routerLink]="['/medicinedetailsdashboard',list.serial]" style="color:black">{{list.serial}}</a></td>
               <!-- <td>{{list.medicine}}</td>
               <td>{{list.Mdate}}</td>
               <td>{{list.location}}</td>
@@ -105,7 +105,7 @@
       <tbody>
           <ng-container *ngFor="let tr of trans; let i = index" >
         <tr *ngIf="tr.serial">
-          <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:blue"> {{tr.serial}} </a></td>
+          <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:black"> {{tr.serial}} </a></td>
 		  <td><p *ngFor="let u of dlist;"><span *ngIf="u.userId==tr.wholesalerId || u.publicKey==tr.wholesalerId ">{{u.firstName}} {{u.lastName}}</span></p></td>
 		   <td><p *ngFor="let t of tlist;"><span *ngIf="t.userId==tr.transporterId  || t.publicKey==tr.wholesalerId 	">{{t.firstName}} {{t.lastName}}</span></p></td>
 		   <td><span *ngIf="tr.edate">{{tr.edate | date: 'dd/MM/yyyy h:mm:ss a'}}</span></td>
@@ -138,7 +138,7 @@
       <tbody>
           <ng-container *ngFor="let tr of recievedtrans; let i = index" >
         <tr *ngIf="tr.serial">
-          <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:blue"> {{tr.serial}} </a></td>
+          <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:black"> {{tr.serial}} </a></td>
 		  <td><p *ngFor="let u of malist;"><span *ngIf="u.userId==tr.senderId || u.publicKey==tr.wholesalerId ">{{u.firstName}} {{u.lastName}}</span></p></td>
 		   <td><p *ngFor="let t of tlist;"><span *ngIf="t.userId==tr.transporterId  || t.publicKey==tr.wholesalerId 	">{{t.firstName}} {{t.lastName}}</span></p></td>
 		   <td><span *ngIf="tr.edate">{{tr.edate | date: 'dd/MM/yyyy h:mm:ss a'}}</span></td>

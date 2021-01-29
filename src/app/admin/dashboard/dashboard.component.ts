@@ -205,8 +205,8 @@ export class DashboardComponent implements OnInit, DoCheck, OnDestroy {
 				  this.mypublickey = localStorage.getItem("publicKey");
 				  //alert(this.mypublickey+"======"+this.primerykeyinput);
 				  if (this.primerykeyinput == this.mypublickey) {
-					  this.newpublickey = localStorage.setItem('privateKey', 'privateKey');
-					  this.newpublickey = localStorage.setItem('generatedPublickey', 'privateKey');
+					  this.newpublickey = localStorage.setItem('privateKey', this.primerykeyinput);
+					  this.newpublickey = localStorage.setItem('generatedPublickey', this.primerykeyinput);
 					  this.button1 = "hide";
 					  this.popuptask = false;
 				  }
