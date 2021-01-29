@@ -26,7 +26,7 @@
         <ng-container *ngIf=" list && list.length > 0">
         <tr *ngFor="let x of list; let i = index">
 		      <ng-container *ngIf="((x.parent==0 || !x.parent) && x.serial)">
-            <td><a [routerLink]="['/medicine/details',x.serial]" style="color:white">{{x.serial}}</a></td>
+            <td><a [routerLink]="['/medicine/details',x.serial]" style="color:blue">{{x.serial}}</a></td>
             <td>{{x.medicine}}</td>
             <td>{{x.Mdate}}</td>
             <td>{{x.location}}</td>
