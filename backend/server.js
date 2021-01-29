@@ -120,22 +120,22 @@ app.post('/sendResetMail', (req, res) => {
 			var update = {'activationKey': actkey};
 					var options = { new: false };
 					Userlogin2.findOneAndUpdate({_id:result._id.toString()}, update, options).then(( doc) =>{
-						var mailOptions = {
-								from: 'root@meditrace.com',
-								to: req.body.email,
-								subject: 'Forgot/Reset Password',
-								text: 'Here is the link to reset your password..',
-								html: '<b>click to reset password:</b> <a href="http://84.22.96.222/wholesalerqr/'+actkey+'"> click here to reset </a>'
-							};
-							transport.sendMail(mailOptions, function (error, info) {
-								if (error) {
-									console.log(error);
-									res.status(200).send(JSON.stringify('Reset Password Link not sent'));
-								} else {
-									console.log('Email sent: ' + info.response);
-									res.status(200).send(JSON.stringify('Reset Password Link send on your EmailId'));
-								}
-							});
+						// var mailOptions = {
+						// 		from: 'root@meditrace.com',
+						// 		to: req.body.email,
+						// 		subject: 'Forgot/Reset Password',
+						// 		text: 'Here is the link to reset your password..',
+						// 		html: '<b>click to reset password:</b> <a href="http://84.22.96.222/wholesalerqr/'+actkey+'"> click here to reset </a>'
+						// 	};
+						// 	transport.sendMail(mailOptions, function (error, info) {
+						// 		if (error) {
+						// 			console.log(error);
+						// 			res.status(200).send(JSON.stringify('Reset Password Link not sent'));
+						// 		} else {
+						// 			console.log('Email sent: ' + info.response);
+						// 			res.status(200).send(JSON.stringify('Reset Password Link send on your EmailId'));
+						// 		}
+						// 	});
 						console.log('responser',doc);
 					}).catch((err) => {
 						res.status(400).send(err);
@@ -177,22 +177,22 @@ app.post('/resetPassword', (req, res) => {
 					}
 					else
 					{
-				var mailOptions = {
-						from: 'root@meditrace.com',
-						to: req.query.email,
-						subject: 'Email verification',
-						text: 'You are Registered',
-						html: '<b>Password Reset</b>'
-					};
-						transport.sendMail(mailOptions, function (error, info) {
-						if (error) {
-							console.log(error);
-							res.status(200).send(JSON.stringify('Password Update'));
-						} else {
-							console.log('Email sent: ' + info.response);
-							res.status(200).send(JSON.stringify('Password Update'));
-						}
-					});
+				// var mailOptions = {
+				// 		from: 'root@meditrace.com',
+				// 		to: req.query.email,
+				// 		subject: 'Email verification',
+				// 		text: 'You are Registered',
+				// 		html: '<b>Password Reset</b>'
+				// 	};
+				// 		transport.sendMail(mailOptions, function (error, info) {
+				// 		if (error) {
+				// 			console.log(error);
+				// 			res.status(200).send(JSON.stringify('Password Update'));
+				// 		} else {
+				// 			console.log('Email sent: ' + info.response);
+				// 			res.status(200).send(JSON.stringify('Password Update'));
+				// 		}
+				// 	});
 					}
 
 
@@ -322,20 +322,20 @@ app.post("/signup", (req, res) => {
 
 app.post("/signup2", (req, res) => {
 
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.body.email,
-			subject: 'Email verification',
-			text: 'You are Registered',
-			html: '<b>Welcome to Medicine Site</b><br> You can Login now <br> Use your valid private Key <br><b> Your TransectionId </b> =' + req.body.transectionId
-		};
-		transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.body.email,
+		// 	subject: 'Email verification',
+		// 	text: 'You are Registered',
+		// 	html: '<b>Welcome to Medicine Site</b><br> You can Login now <br> Use your valid private Key <br><b> Your TransectionId </b> =' + req.body.transectionId
+		// };
+		// transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 
 		var myData2 = new Userlogin2(req.body);
 
@@ -464,20 +464,20 @@ app.post('/newuser', (req, res) => {
 			res.status(400).send(JSON.stringify("User not created", err));
 		});
 
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Email verification ',
-			text: 'You are Registered',
-			html: '<b>Wholesaler Registered</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Email verification ',
+		// 	text: 'You are Registered',
+		// 	html: '<b>Wholesaler Registered</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 	});
 
 	//wholesaler api end
@@ -524,20 +524,20 @@ app.post('/newuser', (req, res) => {
 		}).catch((err) => {
 			res.status(400).send(JSON.stringify("Not Valid Data"));
 		});
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Email verification ',
-			text: 'You are Registered',
-			html: '<b>Manufacture Registered</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Email verification ',
+		// 	text: 'You are Registered',
+		// 	html: '<b>Manufacture Registered</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log('Email sent: ' + info.response);
+    //     }
+	  // 	});
 	});
 
 	app.post('/medicinerequest', (req, res) =>{
@@ -571,20 +571,20 @@ app.post('/newuser', (req, res) => {
 		}).catch((err) => {
 			res.status(400).send(JSON.stringify("User not created", err));
 		});
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Email verification ',
-			text: 'You are Registered',
-			html: '<b>Pharma Registered</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Email verification ',
+		// 	text: 'You are Registered',
+		// 	html: '<b>Pharma Registered</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 	});
 	//Distributor Api End
 
@@ -608,20 +608,20 @@ app.post('/newuser', (req, res) => {
 				});
 			}
 		});
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Email verification ',
-			text: 'You are Registered',
-			html: '<b>Transporter Registered</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Email verification ',
+		// 	text: 'You are Registered',
+		// 	html: '<b>Transporter Registered</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 	});
 	//transporter Api End
 
@@ -652,20 +652,20 @@ app.post('/newuser', (req, res) => {
 				});
 			}
 		});
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Email verification ',
-			text: 'You are Registered',
-			html: '<b>Package Transporter  Registered</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Email verification ',
+		// 	text: 'You are Registered',
+		// 	html: '<b>Package Transporter  Registered</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 	});
 	//transporter Api End
 
@@ -676,20 +676,20 @@ app.post('/newuser', (req, res) => {
 		//console.log(req.query);
 		res.header('confirmation', 'Creating New Medicine');
 
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Medicine',
-			text: 'You have regsitered new medicine',
-			html: '<b>Medicine created</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Medicine',
+		// 	text: 'You have regsitered new medicine',
+		// 	html: '<b>Medicine created</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 
 		var genMedicineId = getMedicineID(req.body.serial);
 		medicine = new cmedicine(req.body);
@@ -733,20 +733,20 @@ app.post('/newuser', (req, res) => {
 		console.log(req.query);
 		res.header('confirmation', 'Creating New Package');
 
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Medicine',
-			text: 'You have regsitered new package',
-			html: '<b>Package created</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Medicine',
+		// 	text: 'You have regsitered new package',
+		// 	html: '<b>Package created</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 
 		var genPackageId = getMedicineID(req.body.serial);
 		medicinepackage = new cpackage(req.body);
@@ -841,20 +841,20 @@ app.post('/newuser', (req, res) => {
 			res.status(400).send(JSON.stringify(err));
 		});
 
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Email verification ',
-			text: 'You are Registered',
-			html: '<b>Medicine Status Updated</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Email verification ',
+		// 	text: 'You are Registered',
+		// 	html: '<b>Medicine Status Updated</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 
 	});
 
@@ -943,20 +943,20 @@ app.post('/newuser', (req, res) => {
 			res.status(400).send(JSON.stringify(err));
 		});
 
-		var mailOptions = {
-			from: 'root@meditrace.com',
-			to: req.query.email,
-			subject: 'Email verification ',
-			text: 'You are Registered',
-			html: '<b>Transection completed</b>'
-		};
-			transport.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log('Email sent: ' + info.response);
-			}
-		});
+		// var mailOptions = {
+		// 	from: 'root@meditrace.com',
+		// 	to: req.query.email,
+		// 	subject: 'Email verification ',
+		// 	text: 'You are Registered',
+		// 	html: '<b>Transection completed</b>'
+		// };
+		// 	transport.sendMail(mailOptions, function (error, info) {
+		// 	if (error) {
+		// 		console.log(error);
+		// 	} else {
+		// 		console.log('Email sent: ' + info.response);
+		// 	}
+		// });
 
 	});
 
