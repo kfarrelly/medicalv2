@@ -38,7 +38,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.listen(process.env.port || 10000, () => {
+app.listen(process.env.Port || 10000, () => {
 	console.log("server is running on port "+ process.env.Port);
 });
 
