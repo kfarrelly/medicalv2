@@ -52,8 +52,7 @@
         <a [routerLink]="'/profile'" class="nav-link navItemNew">PROFILE </a>
       </li>
 
-      <button (click)="logout()" class="btn btn-outline-primary my-2 my-sm-0 logoutBtn" *ngIf="flayg"
-        type="submit">LOGOUT</button>
+
 
 
 
@@ -110,8 +109,7 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/package/report" routerLinkActive="active">Package Report</a>
       </li>
-      <button (click)="logout()" class="btn btn-outline-primary my-2 my-sm-0 logoutBtn" *ngIf="flayg"
-        type="submit">LOGOUT</button>
+
     </ul>
     <ul *ngIf="Wrolevalue" class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -133,8 +131,7 @@
         <a class="nav-link bellicon" routerLink="/notification" routerLinkActive="active">View
           Notifications<span>{{list.length}}</span></a>
       </li>
-      <button (click)="logout()" class="btn btn-outline-primary my-2 my-sm-0 logoutBtn" *ngIf="flayg"
-        type="submit">LOGOUT</button>
+
     </ul>
     <ul *ngIf="Drolevalue" class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -158,9 +155,9 @@
         <a class="nav-link bellicon" routerLink="/notification" routerLinkActive="active">View
           Notifications<span>{{list.length}}</span></a>
       </li>
-      <button (click)="logout()" class="btn btn-outline-primary my-2 my-sm-0 logoutBtn" *ngIf="flayg"
-        type="submit">LOGOUT</button>
+     
     </ul>
+
     <ul *ngIf="Prolevalue" class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/sendpharma" routerLinkActive="active">Pharma</a>
@@ -178,9 +175,9 @@
         <a class="nav-link bellicon" routerLink="/notification" routerLinkActive="active">View
           Notifications<span>{{list.length}}</span></a>
       </li>
-      <button (click)="logout()" class="btn btn-outline-primary my-2 my-sm-0 logoutBtn" *ngIf="flayg"
-        type="submit">LOGOUT</button>
+      
     </ul>
+
     <ul *ngIf="Trolevalue" class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" routerLink="/transporter" routerLinkActive="active">Transporter</a>
@@ -192,10 +189,10 @@
         <a class="nav-link bellicon" routerLink="/notification" routerLinkActive="active">View
           Notifications<span>5</span></a>
       </li>
-      <button (click)="logout()" class="btn btn-outline-primary my-2 my-sm-0 logoutBtn" *ngIf="flayg"
-        type="submit">LOGOUT</button>
+     
     </ul>
-
+    <button (click)="logout()" class="btn btn-outline-primary my-2 my-sm-0 logoutBtn" *ngIf="flayg"
+    type="submit">LOGOUT</button>
 
   </div>
 

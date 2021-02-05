@@ -1,7 +1,7 @@
 <app-dashboard></app-dashboard>
 
     
-<div class="container" style=" width: 100%; padding: 2%;" >
+<div class="container" style="padding: 2%;" >
   <div class="row">
     <!--br table-responsive  -->
 	<div class="col-xs-6 col-md-4 col-sm-4">
@@ -67,7 +67,7 @@
           <ng-container *ngFor="let tr of trans; let i = index" >
             <!-- <tr *ngIf="tr.serial"> -->
             <tr>
-              <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:white"> {{tr.serial}} </a></td>
+              <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" > {{tr.serial}} </a></td>
               <td><p *ngFor="let u of wlist;"><span *ngIf="u.userId==tr.wholesalerId || u.publicKey==tr.wholesalerId ">{{u.firstName}} {{u.lastName}}</span></p></td>
               <td><p *ngFor="let t of tlist;"><span *ngIf="t.userId==tr.transporterId  || t.publicKey==tr.wholesalerId 	">{{t.firstName}} {{t.lastName}}</span></p></td>
               <td><span *ngIf="tr.edate">{{tr.edate | date: 'dd/MM/yyyy h:mm:ss a'}}</span></td>
