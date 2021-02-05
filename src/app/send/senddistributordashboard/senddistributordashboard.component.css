@@ -5,20 +5,20 @@ table {
 
  
 #heading{
-    background-color: rgb(18, 50, 190); 
+    background-color:#007bff; 
     color:white;
 }
 .pd{
-  background: navy;
+  background: #007bff;
 }
 td a {
   display:block;
   width:100%;
   background-clip: padding-box; 
   border-radius: 5px;
-  background-color: blue;
+  background-color: #007bff;
   color: white;
-  border: 2px solid green;
+  border: 2px solid #007bff;
 }
 a {
   text-decoration: none !important;
