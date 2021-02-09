@@ -101,7 +101,7 @@
       <tbody>
           <ng-container *ngFor="let tr of trans; let i = index" >
         <tr *ngIf="tr.serial">
-          <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:white"> {{tr.serial}} </a></td>
+          <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:black"> {{tr.serial}} </a></td>
 		  <td><p *ngFor="let u of dlist;"><span *ngIf="u.userId==tr.wholesalerId || u.publicKey==tr.wholesalerId ">{{u.firstName}} {{u.lastName}}</span></p></td>
 		   <td><p *ngFor="let t of tlist;"><span *ngIf="t.userId==tr.transporterId  || t.publicKey==tr.wholesalerId 	">{{t.firstName}} {{t.lastName}}</span></p></td>
 		   <td><span *ngIf="tr.edate">{{tr.edate | date: 'dd/MM/yyyy h:mm:ss a'}}</span></td>
@@ -134,7 +134,7 @@
       <tbody>
           <ng-container *ngFor="let tr of recievedtrans; let i = index" >
         <tr *ngIf="tr.serial">
-          <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:white"> {{tr.serial}} </a></td>
+          <td><a [routerLink]="['/medicinedetailsdashboard',tr.serial]" style="color:black"> {{tr.serial}} </a></td>
 		  <td><p *ngFor="let u of wlist;"><span *ngIf="u.userId==tr.senderId || u.publicKey==tr.wholesalerId ">{{u.firstName}} {{u.lastName}}</span></p></td>
 		   <td><p *ngFor="let t of tlist;"><span *ngIf="t.userId==tr.transporterId  || t.publicKey==tr.wholesalerId 	">{{t.firstName}} {{t.lastName}}</span></p></td>
 		   <td><span *ngIf="tr.edate">{{tr.edate | date: 'dd/MM/yyyy h:mm:ss a'}}</span></td>
@@ -169,7 +169,7 @@
           </div>   
            <div class="row">          
                 <div class="col"><div class="form-group">
-                  <label>DistributerId</label>
+                  <label>PharmaId</label>
            <select [(ngModel)]="wId1" class="form-control" >
                 <option    *ngFor="let wid of dlist" [value]="wid.publicKey">{{wid.firstName}}</option>
                             </select>   

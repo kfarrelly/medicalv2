@@ -218,180 +218,238 @@ transporter(a, b, c, d, e, f, g, h, i, j, k) {
    this.mlist=data;
 
    //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
-			  
- const Metadata = {
-  "action": "openPackage",
-  "payloaddata": {
-      "serialNumber": this.mlist[0].serial,
-      "userRole": this.myrole,
-      "admin": false,
-	  "level":this.levelvalue
-  },
-  "private":this.privateKey,
-  "public": this.mypublickey
-    }	    
+   this.displayTable=true; 
+   	  //this.openpackagecall(id,this.mypublickey);
+   		/*Transfer child packages to user account*/
+   			if(Array.isArray(this.mlist[0].packages))
+   				var meds = this.mlist[0].packages;
+   			else
+   				var meds = this.mlist[0].packages.split(',');
+         
+   			if(meds.length>0)
+   			{
+   				for(var j=0;j < meds.length; j++)
+   				{
+   					this.httpuser.getPackageStatus3(meds[j]).subscribe((pdata) =>{
+               
+   						  this.httpuser.getPackageId(id).subscribe(packagedata => {
+   								this.plist=packagedata;
+                   
+   								this.transporter(this.plist[0].serial,this.plist[0].medicines, this.plist[0].barcode, this.plist[0].location, this.plist[0].level, this.plist[0].packages, this.plist[0].PackageId, this.plist[0].role, this.plist[0].time, this.mypublickey,this.packageStatus);
+                   
+                   
+   						});		
+   
+   						//this.getByPackageId(pdata.PackageId,'4');
+               
+   					});
+   				}
+   			}
+         
+   			/*Transfer child medicines to user account*/
+         
+   			if(Array.isArray(this.mlist[0].medicines))
+   				var meds = this.mlist[0].medicines;
+   			else
+   				var meds = this.mlist[0].medicines.split(',');
+         
+   			if(meds.length>0)
+   			{
+   				for(var j=0;j < meds.length; j++)
+   				{
+   					this.httpuser.getMedicineStatus3(meds[j]).subscribe((mdata) =>{
+               
+   							this.httpuser.getMedicineId(id).subscribe(medicinedata => {
+   								this.medlist=medicinedata;
+                   
+   								 this.medicineTransporter(this.medlist[0].serial,this.medlist[0].medicine,this.medlist[0].barcode,this.medlist[0].location,this.medlist[0].weight,this.medlist[0].Edate,this.medlist[0].Mdate,this.medlist[0].MedicineId,this.medlist[0].role,this.medlist[0].time,this.mypublickey,this.medicineStatus);
+                   
+                   
+   						});
+             
+   							//this.medicinedetails.push(mdata);
+               
+   					});
+   				}
+   			}
+   			this.httpuser.deletePackageTransport(id,this.mypublickey).subscribe(res => {
+   
+   				alert("Package Opened ");
+   
+   			 });
+//  const Metadata = {
+//   "action": "openPackage",
+//   "payloaddata": {
+//       "serialNumber": this.mlist[0].serial,
+//       "userRole": this.myrole,
+//       "admin": false,
+// 	  "level":this.levelvalue
+//   },
+//   "private":this.privateKey,
+//   "public": this.mypublickey
+//     }	    
 
-const httpOptions = {
-headers: new HttpHeaders({
-  'Content-Type': 'application/json'
-})
-}
+// const httpOptions = {
+// headers: new HttpHeaders({
+//   'Content-Type': 'application/json'
+// })
+// }
 
-    return this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
- (val) => {	
+//     return this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
+//  (val) => {	
 
-  console.log("POST call successful value returned in body", val);
-  this.blockchain = val;
-  if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
-    JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
+//   console.log("POST call successful value returned in body", val);
+//   this.blockchain = val;
+//   if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
+//     JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-    this.status = JSON.parse(this.blockchain.response.body);            
-    this.statusValue = this.status.data[0].status;
-    this.itemId = this.status.data[0].id;
-    if (this.statusValue == 'COMMITTED') {   
-	   this.displayTable=true; 
-	  //this.openpackagecall(id,this.mypublickey);
-		/*Transfer child packages to user account*/
-			if(Array.isArray(this.mlist[0].packages))
-				var meds = this.mlist[0].packages;
-			else
-				var meds = this.mlist[0].packages.split(',');
+//     this.status = JSON.parse(this.blockchain.response.body);            
+//     this.statusValue = this.status.data[0].status;
+//     this.itemId = this.status.data[0].id;
+//     if (this.statusValue == 'COMMITTED') {   
+// 	   this.displayTable=true; 
+// 	  //this.openpackagecall(id,this.mypublickey);
+// 		/*Transfer child packages to user account*/
+// 			if(Array.isArray(this.mlist[0].packages))
+// 				var meds = this.mlist[0].packages;
+// 			else
+// 				var meds = this.mlist[0].packages.split(',');
 			
-			if(meds.length>0)
-			{
-				for(var j=0;j < meds.length; j++)
-				{
-					this.httpuser.getPackageStatus3(meds[j]).subscribe((pdata) =>{
+// 			if(meds.length>0)
+// 			{
+// 				for(var j=0;j < meds.length; j++)
+// 				{
+// 					this.httpuser.getPackageStatus3(meds[j]).subscribe((pdata) =>{
 						
-						  this.httpuser.getPackageId(id).subscribe(packagedata => {
-								this.plist=packagedata;
+// 						  this.httpuser.getPackageId(id).subscribe(packagedata => {
+// 								this.plist=packagedata;
 								
-								this.transporter(this.plist[0].serial,this.plist[0].medicines, this.plist[0].barcode, this.plist[0].location, this.plist[0].level, this.plist[0].packages, this.plist[0].PackageId, this.plist[0].role, this.plist[0].time, this.mypublickey,this.packageStatus);
+// 								this.transporter(this.plist[0].serial,this.plist[0].medicines, this.plist[0].barcode, this.plist[0].location, this.plist[0].level, this.plist[0].packages, this.plist[0].PackageId, this.plist[0].role, this.plist[0].time, this.mypublickey,this.packageStatus);
 								
 								
-						});		
+// 						});		
 
-						//this.getByPackageId(pdata.PackageId,'4');
+// 						//this.getByPackageId(pdata.PackageId,'4');
 						
-					});
-				}
-			}
+// 					});
+// 				}
+// 			}
 			
-			/*Transfer child medicines to user account*/
+// 			/*Transfer child medicines to user account*/
 			
-			if(Array.isArray(this.mlist[0].medicines))
-				var meds = this.mlist[0].medicines;
-			else
-				var meds = this.mlist[0].medicines.split(',');
+// 			if(Array.isArray(this.mlist[0].medicines))
+// 				var meds = this.mlist[0].medicines;
+// 			else
+// 				var meds = this.mlist[0].medicines.split(',');
 			
-			if(meds.length>0)
-			{
-				for(var j=0;j < meds.length; j++)
-				{
-					this.httpuser.getMedicineStatus3(meds[j]).subscribe((mdata) =>{
+// 			if(meds.length>0)
+// 			{
+// 				for(var j=0;j < meds.length; j++)
+// 				{
+// 					this.httpuser.getMedicineStatus3(meds[j]).subscribe((mdata) =>{
 						
-							this.httpuser.getMedicineId(id).subscribe(medicinedata => {
-								this.medlist=medicinedata;
+// 							this.httpuser.getMedicineId(id).subscribe(medicinedata => {
+// 								this.medlist=medicinedata;
 								
-								 this.medicineTransporter(this.medlist[0].serial,this.medlist[0].medicine,this.medlist[0].barcode,this.medlist[0].location,this.medlist[0].weight,this.medlist[0].Edate,this.medlist[0].Mdate,this.medlist[0].MedicineId,this.medlist[0].role,this.medlist[0].time,this.mypublickey,this.medicineStatus);
+// 								 this.medicineTransporter(this.medlist[0].serial,this.medlist[0].medicine,this.medlist[0].barcode,this.medlist[0].location,this.medlist[0].weight,this.medlist[0].Edate,this.medlist[0].Mdate,this.medlist[0].MedicineId,this.medlist[0].role,this.medlist[0].time,this.mypublickey,this.medicineStatus);
 								
 								
-						});
+// 						});
 					
-							//this.medicinedetails.push(mdata);
+// 							//this.medicinedetails.push(mdata);
 						
-					});
-				}
-			}
-			this.httpuser.deletePackageTransport(id,this.mypublickey).subscribe(res => {
+// 					});
+// 				}
+// 			}
+// 			this.httpuser.deletePackageTransport(id,this.mypublickey).subscribe(res => {
 
-				alert("Package Opened ");
+// 				alert("Package Opened ");
 
-			 });
-			//alert("Package Opened ");
-  }
-  else{
-	  alert("Process not completed");
-  }
-  }
-  else {
+// 			 });
+// 			//alert("Package Opened ");
+//   }
+//   else{
+// 	  alert("Process not completed");
+//   }
+//   }
+//   else {
 
-    that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-      this.blockchain2 =val
-      if (that.httpuser.IsJsonString(this.blockchain2.body)) {
-        this.status = JSON.parse(this.blockchain2.body);
-        console.log('json value2', this.status.data[0].status);
-        this.statusValue = this.status.data[0].status;
-        this.itemId = this.status.data[0].id;
-        if (this.statusValue == 'COMMITTED') {
-				/*Transfer child packages to user account*/
-			if(Array.isArray(this.mlist[0].packages))
-				var meds = this.mlist[0].packages;
-			else
-				var meds = this.mlist[0].packages.split(',');
+//     that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+//       this.blockchain2 =val
+//       if (that.httpuser.IsJsonString(this.blockchain2.body)) {
+//         this.status = JSON.parse(this.blockchain2.body);
+//         console.log('json value2', this.status.data[0].status);
+//         this.statusValue = this.status.data[0].status;
+//         this.itemId = this.status.data[0].id;
+//         if (this.statusValue == 'COMMITTED') {
+// 				/*Transfer child packages to user account*/
+// 			if(Array.isArray(this.mlist[0].packages))
+// 				var meds = this.mlist[0].packages;
+// 			else
+// 				var meds = this.mlist[0].packages.split(',');
 			
-			if(meds.length>0)
-			{
-				for(var j=0;j < meds.length; j++)
-				{
-					this.httpuser.getPackageStatus3(meds[j]).subscribe((pdata) =>{
+// 			if(meds.length>0)
+// 			{
+// 				for(var j=0;j < meds.length; j++)
+// 				{
+// 					this.httpuser.getPackageStatus3(meds[j]).subscribe((pdata) =>{
 						
-						  this.httpuser.getPackageId(id).subscribe(packagedata => {
-								this.plist=packagedata;
+// 						  this.httpuser.getPackageId(id).subscribe(packagedata => {
+// 								this.plist=packagedata;
 								
-								this.transporter(this.plist[0].serial,this.plist[0].medicines, this.plist[0].barcode, this.plist[0].location, this.plist[0].level, this.plist[0].packages, this.plist[0].PackageId, this.plist[0].role, this.plist[0].time, this.mypublickey,this.packageStatus);
+// 								this.transporter(this.plist[0].serial,this.plist[0].medicines, this.plist[0].barcode, this.plist[0].location, this.plist[0].level, this.plist[0].packages, this.plist[0].PackageId, this.plist[0].role, this.plist[0].time, this.mypublickey,this.packageStatus);
 								
 								
-						});		
+// 						});		
 
-						//this.getByPackageId(pdata.PackageId,'4');
+// 						//this.getByPackageId(pdata.PackageId,'4');
 						
-					});
-				}
-			}
+// 					});
+// 				}
+// 			}
 			
-			/*Transfer child medicines to user account*/
+// 			/*Transfer child medicines to user account*/
 			
-			if(Array.isArray(this.mlist[0].medicines))
-				var meds = this.mlist[0].medicines;
-			else
-				var meds = this.mlist[0].medicines.split(',');
+// 			if(Array.isArray(this.mlist[0].medicines))
+// 				var meds = this.mlist[0].medicines;
+// 			else
+// 				var meds = this.mlist[0].medicines.split(',');
 			
-			if(meds.length>0)
-			{
-				for(var j=0;j < meds.length; j++)
-				{
-					this.httpuser.getMedicineStatus3(meds[j]).subscribe((mdata) =>{
+// 			if(meds.length>0)
+// 			{
+// 				for(var j=0;j < meds.length; j++)
+// 				{
+// 					this.httpuser.getMedicineStatus3(meds[j]).subscribe((mdata) =>{
 						
-							this.httpuser.getMedicineId(id).subscribe(medicinedata => {
-								this.medlist=medicinedata;
+// 							this.httpuser.getMedicineId(id).subscribe(medicinedata => {
+// 								this.medlist=medicinedata;
 								
-								 this.medicineTransporter(this.medlist[0].serial,this.medlist[0].medicine,this.medlist[0].barcode,this.medlist[0].location,this.medlist[0].weight,this.medlist[0].Edate,this.medlist[0].Mdate,this.medlist[0].MedicineId,this.medlist[0].role,this.medlist[0].time,this.mypublickey,this.medicineStatus);
+// 								 this.medicineTransporter(this.medlist[0].serial,this.medlist[0].medicine,this.medlist[0].barcode,this.medlist[0].location,this.medlist[0].weight,this.medlist[0].Edate,this.medlist[0].Mdate,this.medlist[0].MedicineId,this.medlist[0].role,this.medlist[0].time,this.mypublickey,this.medicineStatus);
 								
 								
-						});
+// 						});
 					
-							//this.medicinedetails.push(mdata);
+// 							//this.medicinedetails.push(mdata);
 						
-					});
-				}
-			}
+// 					});
+// 				}
+// 			}
 		
-				this.httpuser.deletePackageTransport(id,this.mypublickey).subscribe(res => {
+// 				this.httpuser.deletePackageTransport(id,this.mypublickey).subscribe(res => {
 
-				alert("Package Opened ");
+// 				alert("Package Opened ");
 
-			 });
-        }
-        else {
-          alert('Request Rejected');
-        }
-      }
-    })
-  }
-// }).catch(function (err) {
-//   console.log(err.message);
-});
+// 			 });
+//         }
+//         else {
+//           alert('Request Rejected');
+//         }
+//       }
+//     })
+//   }
+// // }).catch(function (err) {
+// //   console.log(err.message);
+// });
 });
 }
 
@@ -457,73 +515,77 @@ medicineTransporter(a,b,c,d,e,f,g,h,i,j,k,l){
 mTransection(serial:string,distributerId:string,transpoterId:string) {  
   let that = this; 
   //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
-			  
- const Metadata = {
-			  "action": "sendToDistributer",
-    "payloaddata": {
-        "serialNumber": serial,
-        "distributer": {
-            "address": distributerId,
-            "comment": "In Transaction"
-        },
-        "transporterid": transpoterId,
-		"level":this.levelvalue
-    },
-				"private":this.privateKey,
-				"public": this.mypublickey
-					}	    
-	
-	const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-	
-            var x = this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
-       (val) => {	
-	  
-console.log("POST call successful value returned in body", val);
-this.blockchain = val;
-if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
-  JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
-
-  this.status = JSON.parse(this.blockchain.response.body);            
-  this.statusValue = this.status.data[0].status;
-  this.itemId = this.status.data[0].id;
-  if (this.statusValue == 'COMMITTED') {
-    this.transection = new Transection(serial,distributerId,transpoterId);
+			      this.transection = new Transection(serial,distributerId,transpoterId);
     this.base = this.httpuser.medicineTransection(this.transection);
     this.call = this.base.subscribe(data => {        
         alert('Request Accepted');       
       });
-    }
-    else {
-      alert('Request Rejected');
-    }
-  } else {
+//  const Metadata = {
+// 			  "action": "sendToDistributer",
+//     "payloaddata": {
+//         "serialNumber": serial,
+//         "distributer": {
+//             "address": distributerId,
+//             "comment": "In Transaction"
+//         },
+//         "transporterid": transpoterId,
+// 		"level":this.levelvalue
+//     },
+// 				"private":this.privateKey,
+// 				"public": this.mypublickey
+// 					}	    
+	
+// 	const httpOptions = {
+//       headers: new HttpHeaders({
+//         'Content-Type': 'application/json'
+//       })
+//     };
+	
+//             var x = this.http.post(this.blockchainUrl, Metadata,httpOptions).subscribe(
+//        (val) => {	
+	  
+// console.log("POST call successful value returned in body", val);
+// this.blockchain = val;
+// if (that.httpuser.IsJsonString(this.blockchain.response.body)) {
+//   JSON.parse(this.blockchain.response.body).hasOwnProperty("data");
 
-    that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
-      this.blockchain2 =val
-      if (that.httpuser.IsJsonString(this.blockchain2.body)) {
-        this.status = JSON.parse(this.blockchain2.body);
-        console.log('json value2', this.status.data[0].status);
-        this.statusValue = this.status.data[0].status;
-        this.itemId = this.status.data[0].id;
-        if (this.statusValue == 'COMMITTED') {
-          this.transection = new Transection(serial,distributerId,transpoterId);
-          this.base = this.httpuser.medicineTransection(this.transection);
-          this.call = this.base.subscribe(data => {              
-             alert('Request Accepted');            
-          });
-        }
-        else {
-          alert('Request Rejected');
-        }
-      }
-    })
-  }
+//   this.status = JSON.parse(this.blockchain.response.body);            
+//   this.statusValue = this.status.data[0].status;
+//   this.itemId = this.status.data[0].id;
+//   if (this.statusValue == 'COMMITTED') {
+//     this.transection = new Transection(serial,distributerId,transpoterId);
+//     this.base = this.httpuser.medicineTransection(this.transection);
+//     this.call = this.base.subscribe(data => {        
+//         alert('Request Accepted');       
+//       });
+//     }
+//     else {
+//       alert('Request Rejected');
+//     }
+//   } else {
+
+//     that.http.get(this.httpuser.batchUrl +"/batch_statuses?" + this.blockchain.id + "&wait").subscribe((val) => {
+//       this.blockchain2 =val
+//       if (that.httpuser.IsJsonString(this.blockchain2.body)) {
+//         this.status = JSON.parse(this.blockchain2.body);
+//         console.log('json value2', this.status.data[0].status);
+//         this.statusValue = this.status.data[0].status;
+//         this.itemId = this.status.data[0].id;
+//         if (this.statusValue == 'COMMITTED') {
+//           this.transection = new Transection(serial,distributerId,transpoterId);
+//           this.base = this.httpuser.medicineTransection(this.transection);
+//           this.call = this.base.subscribe(data => {              
+//              alert('Request Accepted');            
+//           });
+//         }
+//         else {
+//           alert('Request Rejected');
+//         }
+//       }
+//     })
+//   }
 // }).catch(function (err) {
 //   console.log(err.message);
-});
+//});
 }
 }

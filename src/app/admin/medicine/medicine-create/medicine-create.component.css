@@ -1,14 +1,14 @@
 .container{
     margin-top:50px;
-    color: navy;
+    color: #007bff ;
 }
 
 h4{
-color: navy;
+color: #007bff;
     margin-left: 20px;
 }
 body{
-    color: navy;
+    color: #007bff;
 }
 .cen{
     text-align: center;

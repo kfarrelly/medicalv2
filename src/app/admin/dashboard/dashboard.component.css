@@ -13,7 +13,7 @@
     /* padding-top: 3vh; */
     padding-top: 1.5vh;
     padding-bottom: 1.5vh;
-    padding-left: 35%;
+    /* padding-left: 35%; */
 }
 
 /* body{
@@ -50,6 +50,7 @@ a:hover{
     height: 35px;
     width: 80px;
     margin: 5px;
+    float: right;
 }
 
 button:hover{

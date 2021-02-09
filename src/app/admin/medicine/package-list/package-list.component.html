@@ -19,7 +19,7 @@
       <tbody>
         <tr *ngFor="let x of list; let i = index">
 		<ng-container *ngIf="(x.parent==0 || !x.parent)">
-          <td><a [routerLink]="['/package/details',x.serial]" style="color:white">{{x.serial}}</a></td>
+          <td><a [routerLink]="['/package/details',x.serial]" style="color:black">{{x.serial}}</a></td>
           <td>{{x.location}}</td>
           <td>{{x.level}}</td>
           <td><button type="button" *ngIf="myrole>1" (click)="deletePackage(x._id)" class="btn btn-danger">Delete</button></td>
