@@ -119,7 +119,6 @@ export class RecievepackagedistributorComponent implements OnInit {
 			
           
       //Register User on Blockchain ==>> if "COMMITED" :: register in db else Mail (ERROR Message)	
-
       // const Metadata = {
       //   "action": "recieveFromWholesaler",
       //   "payloaddata": {

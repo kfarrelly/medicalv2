@@ -164,12 +164,12 @@ export class AuthService {
       createtransporter,{params:{email:this.usereamil}}
     );
   }
-
+packagetransporter
   //transporter End
   
   
   //transporter Start
-  packagetransporter(createtransporter: Package2) {
+  (createtransporter: Package2) {
     this.usereamil = localStorage.getItem("email");
     console.log(createtransporter);
     return this.http.post(
