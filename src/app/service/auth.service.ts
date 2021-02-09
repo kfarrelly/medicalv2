@@ -166,8 +166,6 @@ export class AuthService {
   }
 packagetransporter
   //transporter End
-  
-  
   //transporter Start
   (createtransporter: Package2) {
     this.usereamil = localStorage.getItem("email");
