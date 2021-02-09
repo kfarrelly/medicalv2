@@ -600,7 +600,12 @@ app.post('/newuser', (req, res) => {
 				res.status(400).send("Field Already Exits");
 			} else {
 				createtrans = new transporter(req.body);
-				createtrans.save().then((result) => {
+				createtrans.save().then(async (result) => {
+            let packagetransporterQldb ;
+          packagetransporterQldb= JSON.parse(JSON.stringify(result));
+          //userQldb= toStringObject(item);
+          let packagetransporterQldbDetail= await insertDocument('Transporter',packagetransporterQldb);
+
 					console.log('my result 2',result);
 					res.status(200).send(JSON.stringify("User created", result));
 				}).catch((err) => {
@@ -640,7 +645,7 @@ app.post('/newuser', (req, res) => {
 				createtrans.save().then(async (result) => {
 
           let packagetransporterQldb ;
-          packagetransporterQldb= JSON.parse(JSON.stringify(item));
+          packagetransporterQldb= JSON.parse(JSON.stringify(result));
           //userQldb= toStringObject(item);
           let packagetransporterQldbDetail= await insertDocument('PackageTransporter',packagetransporterQldb);
 
@@ -648,6 +653,7 @@ app.post('/newuser', (req, res) => {
 					console.log('my result 2',result);
 					res.status(200).send(JSON.stringify("User created", result));
 				}).catch((err) => {
+          console.log(err);
 					res.status(400).send(JSON.stringify("User not created", err));
 				});
 			}
