@@ -56,6 +56,6 @@ schema2.pre('save', function(next){
 	// 	});
 	// };
 
-var Userlogin2=mongoose.model('users1',schema2);
+var Userlogin2=mongoose.model('users',schema2);
 //console.log(Smodel);
 module.exports={Userlogin2};

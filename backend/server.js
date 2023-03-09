@@ -206,10 +206,10 @@ app.post('/resetPassword', (req, res) => {
 });
 
 app.post("/activation", (req, res) => {
-
+  console.log('1');
 	var code = req.body.activation.code;
 	console.log("code == "+code);
-	Smodel.find({activationKey:code.toString()}).then((result) => {
+	Userlogin2.findOne({activationKey:code.toString()}).then((result) => {
 		console.log("result == "+result);
 			if (!result)
 			{
@@ -217,19 +217,21 @@ app.post("/activation", (req, res) => {
 			}
 			else
 			{
-				//res.status(200).send(result);
+				// res.status(200).send(result);
 					var update = {'activationKey':'','status':1};
 					var options = { new: false };
-					Smodel.findOneAndUpdate({_id:result._id.toString()}, update, options).then(( doc) =>{
+          console.log("id === ", result._id);
+					Userlogin2.findOneAndUpdate({_id:result._id}, update, options).then(( doc) =>{
 						res.status(200).send(doc);
 						console.log('responser',doc);
 					}).catch((err) => {
+            console.log('responser error',err);
 						res.status(400).send(err);
-						console.log('responser error',err);
 					});
 
 			}
 		}).catch((err) => {
+      console.log('err', err);
 			res.status(400).send(err);
 	});
 
@@ -250,7 +252,7 @@ app.post("/signup", (req, res) => {
 		//generation userid
 		var genUserid = getUserID(publicKey, req.body.role);
 
-		var myData = new Smodel(req.body);
+		var myData = new Userlogin2(req.body);
 
 		myData.publicKey = publicKey;
 		myData.privateKey = finalPprivateKey;
@@ -371,10 +373,11 @@ app.get('/password', (req, res) => {
 app.post('/login', (req, res) => {
 
 		Userlogin2.findOne({ 'email': req.body.email }).then((result) => {
-      console.log(req.body.password);
-        console.log(result.password);
+      console.log('req.body.password', req.body.password);
+        console.log('result.password', result.password);
 			if (!result) { return res.status(404).send("not authorised"); }
 			bcrypt.compare(req.body.password, result.password, (er, reslt) => {
+        console.log('result === ', reslt);
 				if (reslt) {
 					var nwToken = jwt.sign({ _id: result._id }, 'meKey').toString();
 					result.token = nwToken;
@@ -386,6 +389,7 @@ app.post('/login', (req, res) => {
 				else { res.status(400).send(er); }
 			});
 		}).catch((err) => {
+      console.log('error,', err);
 			res.status(400).send(err);
 		});
 
@@ -408,7 +412,7 @@ app.post('/login', (req, res) => {
 
 
 	// app.post('/login', (req, res) => {
-	// 	Smodel.findOne({'email':req.body.email}).then( (result) => {
+	// 	Userlogin2.findOne({'email':req.body.email}).then( (result) => {
 	// 		res.status(200).send(result);
 	// 	}).catch( (err) => {
 	// 		res.status(400).send(err);
@@ -979,7 +983,7 @@ app.post('/newuser', (req, res) => {
 	});
 
 	app.get('/allUser', (req, res) => {
-		Smodel.find({}).then((result) => {
+		Userlogin2.find({}).then((result) => {
 
 			res.status(200).send(result);
 		}).catch((err) => {
@@ -1296,7 +1300,6 @@ app.post('/newuser', (req, res) => {
 			/* var update = {
 			userId: req.body.userId
 		}; */
-
 		var update = { $or:[ {userId: req.body.userId}, {publicKey: req.body.userId} ] };
 
 		Userlogin2.find(update).then((result) => {
@@ -1307,7 +1310,7 @@ app.post('/newuser', (req, res) => {
 	});
 	/*****************************delete api ************************/
 	app.get('/deleteUser/:id', (req, res) => {
-		Smodel.findByIdAndRemove({ _id: req.params.id }).then((result) => {
+		Userlogin2.findByIdAndRemove({ _id: req.params.id }).then((result) => {
 			res.status(200).send(result);
 		}).catch((err) => {
 			res.status(400).send(err);
