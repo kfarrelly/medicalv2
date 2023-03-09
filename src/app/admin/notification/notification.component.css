@@ -1,0 +1,32 @@
+table {
+    width: 100%;
+    background-color: white;
+
+  }
+
+ 
+#heading{
+    background-color: rgb(18, 50,190); 
+    color:white;
+}
+
+td {
+  background: none;
+  border-bottom-color: #b5b3b3;
+  border-color: #454d55 !important;
+  
+}
+
+ 
+th{
+  border: none !important;
+  background-color: #3d6d79; 
+  color:White;
+  font-family: Muli,Helvetica Neue,Arial,sans-serif;
+  font-weight: 600;
+}
+
+button:hover{
+  border: 1px #454d55;
+  
+}

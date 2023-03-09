@@ -1,0 +1,28 @@
+.form-control {
+    margin-top: 10px;
+    margin-left: 8%;
+    margin-right: 15%;
+    display: block;
+    width: 87%;
+}
+
+table {
+    width: 100%;
+    background-color: white;   
+  } 
+
+
+td {
+  background: none;
+  border-bottom-color: #b5b3b3;
+  border-color: #454d55 !important;
+}
+
+  
+th{
+  border: none !important;
+  background-color: #3d6d79; 
+  color:White;
+  font-family: Muli,Helvetica Neue,Arial,sans-serif;
+  font-weight: 600;
+}

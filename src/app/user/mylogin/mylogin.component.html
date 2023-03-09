@@ -1,0 +1,52 @@
+<!-- main app container -->
+<div class="container">
+    <div class="row w-100">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 loginBox">
+            <div class="form-group loginLogo">
+
+            </div>
+            <h3>LOGIN TO YOUR ACCOUNT</h3>
+            <form [formGroup]="signinform" (ngSubmit)="onSubmit(email.value,password.value)">
+                <div class="form-group">
+                    <!-- <label>Email</label> -->
+                    <input #email type="text" placeholder="Email" formControlName="email"
+                        class="form-control custom-input" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!-- <label>Password</label> -->
+                    <input #password type="password" placeholder="Password" formControlName="password"
+                        class="form-control custom-input"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <button
+                        class="btn btn-primary gradient-btn align-items-center btn btn-primary d-flex gradient-btn justify-content-center">
+                        <div class="text mr-2 ml-2" *ngIf="!loading">
+                            Login
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="loading">
+                            <div class="spinner-border text-secondary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <div class="text mr-2 ml-2">
+                                Loading...
+                            </div>
+                        </div>
+                    </button>
+                    <p><a [routerLink]="'/distributorqr'" class="link">Forget Password</a></p>
+                </div>
+            </form>
+            <p class="col-md-12"> Click Here to <a [routerLink]="'/signup'" class="link">Sign up</a></p>
+
+        </div>
+    </div>
+</div>

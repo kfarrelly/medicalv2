@@ -1,0 +1,42 @@
+.container{
+    margin-top:50px;
+}
+
+#privatekey { 
+	-webkit-text-security: disc; 
+}
+
+p{
+	word-break: break-all;
+}
+
+table {
+    width: 100%;
+    background-color: white;   
+  }
+
+td {
+	background: none;
+}
+ 
+button{
+	width: 132px;
+    background: #F4A018;
+    border: 2px solid #F4A018;
+    color: white;
+    height: 35px;
+    border-radius: 7px;
+}
+
+button:hover{
+	border: 1px solid #3d6d79;
+	background-color:#f4a018a8;
+}
+
+th{
+	border: none !important;
+	background-color: #3d6d79; 
+	color:White;
+	font-family: Muli,Helvetica Neue,Arial,sans-serif;
+	font-weight: 600;
+}

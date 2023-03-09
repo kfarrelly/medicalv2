@@ -1,0 +1,57 @@
+<div class="container">
+	<div class="row w-100">
+		<div class="col-md-4"></div>
+		<div class="col-md-4 forgot-password-box">
+			<div class="form-group forgot-password-logo">
+			</div>
+			<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+				<div class="form-group">
+
+					<label style="color: white">Email-Id</label><br>
+
+					<input #br type="email" placeholder="Enter Your Email Id"
+						class="form-control required custom-input">
+					<br>
+
+					<div class="error-message"
+						*ngIf="registrationForm.get('emailval').touched && registrationForm.get('email').hasError('required')">
+						The email is required.
+					</div>
+					<!-- <div class="error-message" *ngIf="registrationForm.get('emailval').touched && registrationForm.get('email').hasError('pattern')">  
+							The email format should be <i>['@domain.com']</i>  </div> -->
+					<div class="form-group mt-4 text-center">
+						<button (click)="sendRequest(br.value)" (click)="validateform()"
+							class="btn btn-primary gradient-btn align-items-center btn btn-primary d-flex gradient-btn justify-content-center">
+							<div class="text mr-2 ml-2" *ngIf="!loading">
+								Submit
+							</div>
+							<div class="d-flex align-items-center" *ngIf="loading">
+								<div class="spinner-border text-secondary" role="status">
+									<span class="sr-only">Loading...</span>
+								</div>
+								<div class="text mr-2 ml-2">
+									Loading...
+								</div>
+							</div>
+						</button>
+					</div>
+					<p class="text-center">
+						<a [routerLink]="'/login'" class="link " style="margin-left:10px"> Click here to Login</a>
+					</p>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<!-- <div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6 ">
+		
+		</div>
+	</div>
+</div>
+ </div> -->
